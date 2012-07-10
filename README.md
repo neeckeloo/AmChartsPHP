@@ -1,16 +1,16 @@
-AmCharts-PHP, a library to create AmCharts HTML5 charts.
+AmChartsPHP, a library to create AmCharts HTML5 charts.
 ========================================================
 
-AmCharts-PHP is a library of PHP classes to generate AmCharts HTML5 charts.
+AmChartsPHP is a library of PHP classes to generate AmCharts HTML5 charts.
 
-AmCharts-PHP provide an API to create easily different charts in your application from your data.
+AmChartsPHP provide an API to create easily different charts in your application from your data.
 
-[![Build Status](https://secure.travis-ci.org/neeckeloo/amcharts-php.png?branch=master)](http://travis-ci.org/neeckeloo/amcharts-php)
+[![Build Status](https://secure.travis-ci.org/neeckeloo/AmChartsPHP.png?branch=master)](http://travis-ci.org/neeckeloo/AmChartsPHP)
 
 Requirements
 ------------
 
-AmCharts-PHP works with PHP 5.3 or later.
+AmChartsPHP works with PHP 5.3 or later.
 
 Usage
 -----
