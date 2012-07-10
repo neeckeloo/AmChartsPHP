@@ -5,7 +5,8 @@
  */
 namespace AmCharts\Chart\Axis;
 
-use AmCharts\Chart\Setting;
+use AmCharts\Chart\Setting,
+    AmCharts\Exception;
 
 /**
  * @category   AmCharts
@@ -82,6 +83,14 @@ abstract class AbstractAxis
      */
     public function setLabelRotation($angle)
     {
+        if (!is_int($angle)) {
+            throw new Exception\InvalidArgumentException("The label rotation value must be an integer.");
+        }
+        
+        if (!($angle > -360 && $angle < 360)) {
+            throw new Exception\UnexpectedValueException("'$angle' is not a valid angle.");
+        }
+        
         $this->labelRotation = (int) $angle;
         
         return $this;

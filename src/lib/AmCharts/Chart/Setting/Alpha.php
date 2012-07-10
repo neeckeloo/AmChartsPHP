@@ -42,7 +42,7 @@ class Alpha
             throw new Exception\UnexpectedValueException("'$opacity' is not between 0 and 100.");
         }
         
-        $this->opacity = $opacity;
+        $this->opacity = (int) $opacity;
         
         return $this;
     }

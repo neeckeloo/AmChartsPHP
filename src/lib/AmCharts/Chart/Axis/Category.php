@@ -5,12 +5,18 @@
  */
 namespace AmCharts\Chart\Axis;
 
+use AmCharts\Exception;
+
 /**
  * @category   AmCharts
  * @package    Chart
  */
 class Category extends AbstractAxis
 {    
+    const POSITION_START = 'start';
+    
+    const POSITION_MIDDLE = 'middle';
+    
     /**
      * @var string 
      */
@@ -20,13 +26,15 @@ class Category extends AbstractAxis
      * Sets grid position
      * 
      * @param type $position
-     * @return \AmCharts\Chart\Axis\Category 
+     * @return Category 
      */
     public function setGridPosition($position)
     {
-        if ($position == 'start' || $position == 'middle') {
-            $this->gridPosition = (string) $position;
+        if ($position != self::POSITION_START && $position != self::POSITION_MIDDLE) {
+            throw new Exception\InvalidArgumentException('The grid position provided is not valid.');
         }
+        
+        $this->gridPosition = (string) $position;
         
         return $this;
     }

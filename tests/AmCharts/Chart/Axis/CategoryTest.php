@@ -2,7 +2,7 @@
 
 namespace AmCharts\Chart\Axis;
 
-class ValueTest extends \PHPUnit_Framework_TestCase
+class CategoryTest extends \PHPUnit_Framework_TestCase
 {   
     /**
      * @var Value
@@ -11,13 +11,21 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->axis = new Value;
+        $this->axis = new Category;
     }
     
-    public function testSetLabelsEnabled()
+    public function testSetGridPosition()
     {
-        $this->axis->setLabelsEnabled(true);
-        $this->assertTrue($this->axis->isLabelsEnabled());
+        $this->axis->setGridPosition(Category::POSITION_MIDDLE);
+        $this->assertEquals(Category::POSITION_MIDDLE, $this->axis->getGridPosition());
+    }
+    
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetGridPositionWithWrongValue()
+    {
+        $this->axis->setGridPosition('foo');
     }
     
     public function testToArray()
