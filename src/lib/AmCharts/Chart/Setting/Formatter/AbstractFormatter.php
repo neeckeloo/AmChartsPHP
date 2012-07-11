@@ -59,28 +59,28 @@ class AbstractFormatter
     }
     
     /**
-     * Sets precison
+     * Sets precision
      * 
-     * @param string $precison
+     * @param string $precision
      * @return AbstractFormatter 
      */
     public function setPrecision($precision)
     {
-        $this->precison = (integer) $precision;
+        $this->precision = (integer) $precision;
     }
     
     /**
-     * Returns precison
+     * Returns precision
      * 
      * @return string 
      */
-    public function getPrecison()
+    public function getPrecision()
     {
         return $this->precision;
     }
     
     /**
-     * Sets decimals separator
+     * Sets decimal separator
      * 
      * @param string $separator
      * @return AbstractFormatter 

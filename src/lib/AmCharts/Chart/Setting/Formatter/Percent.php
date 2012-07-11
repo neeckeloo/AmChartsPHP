@@ -16,5 +16,5 @@ class Percent extends AbstractFormatter
     /**
      * @var integer 
      */
-    protected $precision = -1;
+    protected $precision = 2;
 }
