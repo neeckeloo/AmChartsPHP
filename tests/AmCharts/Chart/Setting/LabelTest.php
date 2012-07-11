@@ -62,7 +62,8 @@ class LabelTest extends \PHPUnit_Framework_TestCase
             'align' => Text::ALIGN_CENTER,
             'fontSize' => 12,
             'color' => '#ff0000',
-            'text' => 'foo'
+            'text' => 'foo',
+            'foo' => 123
         );        
         $this->label->text()->setParams($params);        
         

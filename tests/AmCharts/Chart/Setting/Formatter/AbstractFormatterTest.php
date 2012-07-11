@@ -19,7 +19,8 @@ class AbstractFormatterTest extends \PHPUnit_Framework_TestCase
     {
         $this->formatter->setParams(array(
             'precision' => 2,
-            'decimalSeparator' => ','
+            'decimalSeparator' => ',',
+            'foo' => 123
         ));
         $this->assertEquals(2, $this->formatter->getPrecision());
         $this->assertEquals(',', $this->formatter->getDecimalSeparator());

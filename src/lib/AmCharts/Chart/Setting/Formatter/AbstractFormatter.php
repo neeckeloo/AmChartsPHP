@@ -44,7 +44,7 @@ class AbstractFormatter
      * @param array $params
      * @return AbstractFormatter
      */
-    public function setParams(array$params = array())
+    public function setParams(array $params = array())
     {
         foreach ($params as $name => $value) {
             $method = 'set' . ucfirst($name);

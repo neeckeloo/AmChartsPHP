@@ -5,7 +5,7 @@ namespace AmCharts\Chart;
 class PieTest extends \PHPUnit_Framework_TestCase
 {   
     /**
-     * @var AmCharts\Chart\Pie
+     * @var Pie
      */
     protected $chart;
     
