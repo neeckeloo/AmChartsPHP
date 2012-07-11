@@ -142,7 +142,7 @@ abstract class AbstractChart
     public function text($params = array())
     {
         if (!isset($this->text)) {
-            $this->text = new Text();
+            $this->text = new Setting\Text();
         }
         
         $this->text->setParams($params);
@@ -224,7 +224,7 @@ abstract class AbstractChart
      * @param array $params
      * @return Setting\Formatter\Number
      */
-    public function numberFormatter($params)
+    public function numberFormatter($params = array())
     {
         if (!isset($this->numberFormatter)) {
             $this->numberFormatter = new Setting\Formatter\Number();
@@ -241,7 +241,7 @@ abstract class AbstractChart
      * @param array $params
      * @return Setting\Formatter\Percent
      */
-    public function percentFormatter($params)
+    public function percentFormatter($params = array())
     {
         if (!isset($this->percentFormatter)) {
             $this->percentFormatter = new Setting\Formatter\Percent();

@@ -24,7 +24,16 @@ class BorderTest extends \PHPUnit_Framework_TestCase
     public function testSetColor()
     {
         $color = '#ff0000';
+        
         $this->border->color($color);
-        $this->assertEquals($color, $this->border->color()->toString());
+        $this->assertInstanceOf('AmCharts\Chart\Setting\color', $this->border->color());
+        
+        $this->border->color(new Color($color));
+        $this->assertInstanceOf('AmCharts\Chart\Setting\color', $this->border->color());
+    }
+    
+    public function testToArray()
+    {
+        $this->assertCount(2, $this->border->toArray());
     }
 }
