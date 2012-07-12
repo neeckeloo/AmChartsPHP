@@ -22,6 +22,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     
     public function testToArray()
     {
-        $this->assertCount(2, $this->axis->toArray());
+        $this->assertCount(6, $this->axis->toArray());
     } 
 }
