@@ -62,7 +62,7 @@ abstract class AbstractAxis
     /**
      * @var integer 
      */
-    protected $labelRotation;
+    protected $labelRotation = 0;
     
     /**
      * Length of the tick marks.
@@ -377,36 +377,17 @@ abstract class AbstractAxis
      */
     public function toArray()
     {
-        $options = array(
-            'labelRotation' => $this->labelRotation,
-            'axisThickness' => $this->axisThickness,
-            'gridThickness' => $this->gridThickness,
-            'dashLength'    => $this->dashLength,
-            'tickLength'    => $this->tickLength
-        );
+        $options = array();
         
-        if (isset($this->axisAlpha)) {
-            $options['axisAlpha'] = $this->axisAlpha->getValue();
-        }
-        
-        if (isset($this->axisColor)) {
-            $options['axisColor'] = $this->axisColor;
-        }
-        
-        if (isset($this->fillAlpha)) {
-            $options['fillAlpha'] = $this->fillAlpha->getValue();
-        }
-        
-        if (isset($this->fillColor)) {
-            $options['fillColor'] = $this->fillColor;
-        }
-        
-        if (isset($this->gridAlpha)) {
-            $options['gridAlpha'] = $this->gridAlpha->getValue();
-        }
-        
-        if (isset($this->gridColor)) {
-            $options['gridColor'] = $this->gridColor;
+        $fields = array_keys(get_object_vars($this));
+        foreach ($fields as $field) {
+            if (isset($this->{$field})) {
+                if (false !== strpos($field, 'Alpha')) {
+                    $options[$field] = $this->{$field}->getValue();
+                } else {
+                    $options[$field] = $this->{$field};
+                }
+            }
         }
         
         return $options;
