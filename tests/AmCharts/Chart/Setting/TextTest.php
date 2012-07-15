@@ -61,6 +61,12 @@ class TextTest extends \PHPUnit_Framework_TestCase
     
     public function testToArray()
     {
-        $this->assertCount(5, $this->text->toArray());
+        $this->assertCount(0, $this->text->toArray());
+        
+        $this->text->setAlign(Text::ALIGN_LEFT);
+        $this->assertCount(1, $this->text->toArray());
+        
+        $this->text->setFontSize(12);
+        $this->assertCount(2, $this->text->toArray());
     }
 }

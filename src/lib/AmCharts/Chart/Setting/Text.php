@@ -194,18 +194,26 @@ class Text
     }
     
     /**
-     * Returns legend as array
+     * Returns object properties as array
      * 
      * @return array 
      */
     public function toArray()
     {
-        return array(
-            'text' => $this->value,
-            'fontFamily' => $this->fontFamily,
-            'fontSize' => $this->fontSize,
-            'color' => $this->color,
-            'align' => $this->align
-        );
+        $options = array();
+        
+        $fields = array_keys(get_object_vars($this));
+        foreach ($fields as $field) {
+            if (isset($this->{$field})) {
+                if ($field == 'value') {
+                    $options['text'] = $this->{$field};
+                }
+                else {
+                    $options[$field] = $this->{$field};
+                }
+            }
+        }
+        
+        return $options;
     }
 }

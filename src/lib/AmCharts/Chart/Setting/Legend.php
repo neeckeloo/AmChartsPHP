@@ -68,9 +68,7 @@ class Legend
      */
     public function toArray()
     {
-        $params = array(
-            //'markerType' => $this->markerType
-        );
+        $params = array();
         
         if (isset($this->text)) {
             $params = $params + $this->text->toArray();
