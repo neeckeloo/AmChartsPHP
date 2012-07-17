@@ -52,3 +52,8 @@ Running tests
 -------------
 
 The tests use PHPUnit
+
+AmCharts original documentation
+-------------------------------
+
+[http://www.amcharts.com/docs/v.2/javascript_reference](http://www.amcharts.com/docs/v.2/javascript_reference)
