@@ -15,9 +15,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
     }
     
     public function testSetSequencedAnimation()
-    {
-        $this->assertTrue($this->chart->isSequencedAnimation());
-        
+    {        
         $this->chart->setSequencedAnimation(false);
         $this->assertFalse($this->chart->isSequencedAnimation());
     }

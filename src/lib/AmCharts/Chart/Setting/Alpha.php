@@ -39,7 +39,7 @@ class Alpha
         }
         
         if (!($opacity >= 0 && $opacity <= 100)) {
-            throw new Exception\UnexpectedValueException("'$opacity' is not between 0 and 100.");
+            throw new Exception\InvalidArgumentException("'$opacity' is not between 0 and 100.");
         }
         
         $this->opacity = (int) $opacity;

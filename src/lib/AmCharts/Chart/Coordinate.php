@@ -6,8 +6,7 @@
 namespace AmCharts\Chart;
 
 use AmCharts\Graph,
-    AmCharts\Chart\Setting,
-    AmCharts\Exception;
+    AmCharts\Chart\Setting;
 
 /**
  * @category   AmCharts
@@ -15,6 +14,9 @@ use AmCharts\Graph,
  */
 abstract class Coordinate extends AbstractChart
 {    
+    const EFFECT_ELASTIC = 'elastic';
+    const EFFECT_BOUNCE = 'bounce';
+    
     /**
      * @var array
      */
@@ -34,23 +36,37 @@ abstract class Coordinate extends AbstractChart
      * 
      * @var boolean 
      */
-    protected $sequencedAnimation = true;
+    protected $sequencedAnimation;
     
     /**
      * The initial opacity of column/line.
      * 
      * If you set startDuration to a value higher than 0, the columns/lines will fade in from startAlpha.
      * 
-     * @var \AmCharts\Chart\Setting\Alpha 
+     * @var Setting\Alpha 
      */
     protected $startAlpha;
     
     /**
-     * Duration of the animation in seconds
+     * Duration of the animation in seconds.
      * 
      * @var integer 
      */
-    protected $startDuration = 0;
+    protected $startDuration;
+    
+    /**
+     * Animation effect.
+     * 
+     * @var string 
+     */
+    protected $startEffect;
+    
+    /**
+     * Target of url.
+     * 
+     * @var string 
+     */
+    protected $urlTarget;
     
     /**
      * Axis\Value
@@ -134,9 +150,9 @@ abstract class Coordinate extends AbstractChart
      * @param integer $start
      * @return Coordinate
      */
-    public function setStartDuration($start)
+    public function setStartDuration($duration)
     {
-        $this->startDuration = (int) $start;
+        $this->startDuration = (int) $duration;
         
         return $this;
     }
@@ -150,7 +166,56 @@ abstract class Coordinate extends AbstractChart
     {
         return $this->startDuration;
     }
-
+    
+    /**
+     * Sets start effect
+     * 
+     * @param integer $start
+     * @return Coordinate
+     */
+    public function setStartEffect($effect)
+    {
+        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+            throw new Exception\InvalidArgumentException('The start effect provided is not valid.');
+        }
+        
+        $this->startEffect = (string) $effect;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns start effect
+     * 
+     * @return integer 
+     */
+    public function getStartEffect()
+    {
+        return $this->startEffect;
+    }
+    
+    /**
+     * Sets url target
+     * 
+     * @param string $target
+     * @return Coordinate
+     */
+    public function setUrlTarget($target)
+    {
+        $this->urlTarget = (int) $target;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns url target
+     * 
+     * @return string 
+     */
+    public function getUrlTarget()
+    {
+        return $this->urlTarget;
+    }
 
     /**
      * Sets and returns value axis
@@ -166,4 +231,24 @@ abstract class Coordinate extends AbstractChart
         return $this->valueAxis;
     }
     
+    /**
+     * Returns params
+     * 
+     * @return array 
+     */
+    protected function getParams()
+    {
+        $params = parent::getParams();
+        
+        $params = $params + array(
+            'colors'             => $this->colors,
+            'sequencedAnimation' => $this->sequencedAnimation,
+            'startAlpha'         => $this->startAlpha->getValue(),
+            'startDuration'      => $this->startDuration,
+            'startEffect'        => $this->startEffect,
+            'urlTarget'          => $this->urlTarget
+        );
+        
+        return $params;
+    }
 }

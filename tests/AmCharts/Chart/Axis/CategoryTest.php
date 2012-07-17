@@ -30,6 +30,6 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
     
     public function testToArray()
     {
-        $this->assertCount(6, $this->axis->toArray());
+        $this->assertCount(1, $this->axis->toArray());
     } 
 }

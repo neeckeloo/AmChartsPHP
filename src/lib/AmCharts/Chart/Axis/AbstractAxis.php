@@ -27,12 +27,12 @@ abstract class AbstractAxis
     /**
      * @var integer 
      */
-    protected $axisThickness = 1;
+    protected $axisThickness;
     
     /**
      * @var integer 
      */
-    protected $dashLength = 0;
+    protected $dashLength;
     
     /**
      * @var Setting\Alpha 
@@ -57,19 +57,19 @@ abstract class AbstractAxis
     /**
      * @var integer 
      */
-    protected $gridThickness = 1;
+    protected $gridThickness;
     
     /**
      * @var integer 
      */
-    protected $labelRotation = 0;
+    protected $labelRotation;
     
     /**
      * Length of the tick marks.
      * 
      * @var integer 
      */
-    protected $tickLength = 5;
+    protected $tickLength;
     
     /**
      * Sets axis alpha
@@ -314,7 +314,7 @@ abstract class AbstractAxis
      * Sets label rotation
      * 
      * @param integer $angle
-     * @return \AmCharts\Chart\Axis\AbstractAxis 
+     * @return AbstractAxis 
      */
     public function setLabelRotation($angle)
     {
@@ -323,7 +323,7 @@ abstract class AbstractAxis
         }
         
         if (!($angle > -360 && $angle < 360)) {
-            throw new Exception\UnexpectedValueException("'$angle' is not a valid angle.");
+            throw new Exception\InvalidArgumentException("'$angle' is not a valid angle.");
         }
         
         $this->labelRotation = (int) $angle;

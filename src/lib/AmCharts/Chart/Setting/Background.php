@@ -4,8 +4,6 @@
  */
 namespace AmCharts\Chart\Setting;
 
-use AmCharts\Exception;
-
 /**
  * @category   AmCharts
  */

@@ -98,7 +98,7 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setLabelRotationWithWrongValueProvider
-     * @expectedException AmCharts\Exception\UnexpectedValueException 
+     * @expectedException AmCharts\Exception\InvalidArgumentException 
      */
     public function testSetLabelRotationWithWrongValue($angle)
     {
@@ -107,6 +107,6 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
     
     public function testToArray()
     {
-        $this->assertCount(5, $this->axis->toArray());
+        $this->assertCount(0, $this->axis->toArray());
     }
 }
