@@ -19,14 +19,19 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     
     public function testSetDataProvider()
     {
-        $provider = array(
+        $data = array(
             'foo' => 1,
             'bar' => 2,
             'baz' => 3
-        );
+        );        
+        $this->chart->setDataProvider($data);
         
-        $this->chart->setDataProvider($provider);
-        $this->assertCount(3, $this->chart->getDataProvider());
+        $dataProvider = $this->chart->getDataProvider();
+        $this->assertInstanceOf(
+            'AmCharts\Chart\DataProvider',
+            $dataProvider
+        );
+        $this->assertCount(3, $dataProvider->getData());
     }
     
     public function testSetText()

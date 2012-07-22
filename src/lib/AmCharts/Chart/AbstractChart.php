@@ -1,11 +1,19 @@
 <?php
+/**
+ * @category   AmCharts
+ * @package    Chart
+ */
 namespace AmCharts\Chart;
 
 use AmCharts\Manager,
-    AmCharts\Chart\Setting;
+    AmCharts\Chart\Setting,
+    AmCharts\Exception;
 
 /**
  * Base class for amChart PHP-Library
+ * 
+ * @category   AmCharts
+ * @package    Chart
  */
 abstract class AbstractChart
 {
@@ -65,7 +73,7 @@ abstract class AbstractChart
     protected $percentFormatter;
     
     /**
-     * @var array 
+     * @var DataProvider
      */
     protected $dataProvider;
 
@@ -255,12 +263,22 @@ abstract class AbstractChart
     /**
      * Sets data provider
      * 
-     * @param array $provider 
+     * @param array|DataProvider $provider 
      * @return AbstractChart
      */
-    public function setDataProvider(array $provider)
+    public function setDataProvider($provider)
     {
-        $this->dataProvider = (array) $provider;
+        if (is_array($provider)) {
+            $provider = new DataProvider($provider);
+        }
+        else if (!($provider instanceof DataProvider)) {
+            throw new Exception\InvalidArgumentException(
+                'Data provider must be an instance of '
+                . 'AmCharts\Chart\DataProvider.'
+            );
+        }
+        
+        $this->dataProvider = $provider;
 
         return $this;
     }
@@ -282,9 +300,12 @@ abstract class AbstractChart
      */
     protected function getParams()
     {
-        $params = array(
-            'dataProvider' => json_encode($this->dataProvider)
-        );
+        $params = array();
+        
+        $dataProvider = $this->getDataProvider();
+        if (null !== $dataProvider) {
+            $params['dataProvider'] = json_encode($dataProvider->getData());
+        }
         
         return $params;
     }
