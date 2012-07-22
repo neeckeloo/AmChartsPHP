@@ -65,7 +65,7 @@ class Color
             return false;
         }
         
-        if (preg_match('/^#(?:(?:[a-f\d]{3}){1,2})$/', $color)) {
+        if (preg_match('/^#(?:(?:[a-fA-F\d]{3}){1,2})$/', $color)) {
             return true;
         }
         
