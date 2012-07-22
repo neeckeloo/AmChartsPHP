@@ -55,6 +55,6 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
     public function testToArray()
     {
         $options = $this->graph->toArray();
-        $this->assertCount(2, $options);
+        $this->assertCount(6, $options);
     }
 }

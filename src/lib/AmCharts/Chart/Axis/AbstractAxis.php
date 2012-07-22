@@ -72,6 +72,11 @@ abstract class AbstractAxis
     protected $tickLength;
     
     /**
+     * @var Setting\Text 
+     */
+    protected $title;
+    
+    /**
      * Sets axis alpha
      * 
      * @param integer $alpha 
@@ -369,6 +374,23 @@ abstract class AbstractAxis
     {
         return $this->tickLength;
     }
+        
+    /**
+     * Sets and returns text object
+     *
+     * @param array $params
+     * @return Setting\Text
+     */
+    public function title($params = array())
+    {
+        if (!isset($this->title)) {
+            $this->title = new Setting\Text();
+        }
+        
+        $this->title->setParams($params);
+
+        return $this->title;
+    }
     
     /**
      * Returns object properties as array
@@ -382,8 +404,16 @@ abstract class AbstractAxis
         $fields = array_keys(get_object_vars($this));
         foreach ($fields as $field) {
             if (isset($this->{$field})) {
-                if (false !== strpos($field, 'Alpha')) {
+                if ($this->{$field} instanceof Setting\Alpha) {
                     $options[$field] = $this->{$field}->getValue();
+                } elseif ($this->{$field} instanceof Setting\Text) {
+                    $titleOptions = $this->{$field}->toArray();
+                    
+                    $options = $options + array(
+                        'title'         => $titleOptions['text'],
+                        'titleColor'    => $titleOptions['color'],
+                        'titleFontSize' => $titleOptions['fontSize']
+                    );
                 } else {
                     $options[$field] = $this->{$field};
                 }

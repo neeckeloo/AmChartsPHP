@@ -21,6 +21,11 @@ abstract class AbstractGraph
     protected $fields;
     
     /**
+     * @var string 
+     */
+    protected $balloonText = '[[value]]';
+    
+    /**
      * Opacity of fill. Plural form is used to keep the same property names as our Flex charts'.
      * Flex charts can accept array of numbers to generate gradients.
      * Although you can set array here, only first value of this array will be used.
@@ -35,6 +40,21 @@ abstract class AbstractGraph
      * @var array 
      */
     protected $fillColors;
+    
+    /**
+     * @var Setting\Alpha 
+     */
+    protected $lineAlpha;
+    
+    /**
+     * @var Setting\Color 
+     */
+    protected $lineColor;
+    
+    /**
+     * @var integer 
+     */
+    protected $lineThickness;
     
     /**
      * Sets type
@@ -100,6 +120,29 @@ abstract class AbstractGraph
     }
     
     /**
+     * Sets balloon text
+     * 
+     * @param string $text
+     * @return Pie
+     */
+    public function setBalloonText($text)
+    {
+        $this->balloonText = (string) $text;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns balloon text
+     * 
+     * @return string 
+     */
+    public function getBalloonText()
+    {
+        return $this->balloonText;
+    }
+    
+    /**
      * Sets fill alphas
      * 
      * @param integer $alpha
@@ -158,6 +201,85 @@ abstract class AbstractGraph
     }
     
     /**
+     * Sets line alpha
+     * 
+     * @param integer $alpha 
+     * @return AbstractGraph
+     */
+    public function setLineAlpha($alpha)
+    {
+        $this->lineAlpha = new Setting\Alpha($alpha);
+        
+        return $this;
+    }
+    
+    /**
+     * Returns line alpha
+     * 
+     * @return integer 
+     */
+    public function getLineAlpha()
+    {
+        return $this->lineAlpha->getOpacity();
+    }
+    
+    /**
+     * Sets line color
+     *
+     * @param string|array|Color $color
+     * @return AbstractGraph
+     */
+    public function setLineColor($color = null)
+    {
+        if (null !== $color) {
+            if ($color instanceof Setting\Color) {
+                $this->lineColor = $color;
+            } else {
+                $this->lineColor = new Setting\Color($color);
+            }
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Returns line color
+     * 
+     * @return string 
+     */
+    public function getLineColor()
+    {
+        return $this->lineColor;
+    }
+    
+    /**
+     * Sets line thickness
+     * 
+     * @param integer $thickness 
+     * @return AbstractGraph
+     */
+    public function setLineThickness($thickness)
+    {
+        if ($thickness < 0) {
+            throw new Exception\InvalidArgumentException('The thickness value must be positive.');
+        }
+        
+        $this->lineThickness = (int) $thickness;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns line thickness
+     * 
+     * @return integer 
+     */
+    public function getLineThickness()
+    {
+        return $this->lineThickness;
+    }
+    
+    /**
      * Returns object properties as array
      * 
      * @return array 
@@ -165,14 +287,22 @@ abstract class AbstractGraph
     public function toArray()
     {
         $options = array(
-            'type'       => $this->type,
-            'fillColors' => $this->fillColors
+            'type'          => $this->type,
+            'balloonText'   => $this->balloonText,
+            'fillColors'    => $this->fillColors,
+            'lineColor'     => $this->lineColor,
+            'lineThickness' => $this->lineThickness,
+            'title'         => $this->title
         );
         
         $options = $options + $this->fields()->toArray();
         
         if (isset($this->fillAlphas)) {
             $options['fillAlphas'] = $this->fillAlphas->getValue();
+        }
+        
+        if (isset($this->lineAlpha)) {
+            $options['lineAlpha'] = $this->lineAlpha->getValue();
         }
         
         return $options;
