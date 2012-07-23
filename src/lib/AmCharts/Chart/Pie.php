@@ -30,9 +30,25 @@ class Pie extends AbstractChart
     protected $valueField;
     
     /**
+     * The angle of the 3D part of plot area.
+     * This creates a 3D effect (if the "depth3D" is > 0).
+     * 
+     * @var integer 
+     */
+    protected $angle;
+    
+    /**
      * @var string 
      */
-    protected $balloonText = '[[title]]: [[percents]]% ([[value]])\n[[description]]';
+    protected $balloonText = '[[title]]: [[percents]]% ([[value]])\n[[description]]'; 
+    
+    /**
+     * The depth of the 3D part of plot area.
+     * This creates a 3D effect (if the "angle" is > 0).
+     * 
+     * @var integer 
+     */
+    protected $depth3D;
     
     /**
      * @var integer 
@@ -43,6 +59,21 @@ class Pie extends AbstractChart
      * @var string 
      */
     protected $labelText = '[[title]]: [[percents]]%';
+    
+    /**
+     * @var Setting\Alpha 
+     */
+    protected $outlineAlpha;
+    
+    /**
+     * @var Setting\Color 
+     */
+    protected $outlineColor;
+    
+    /**
+     * @var integer 
+     */
+    protected $outlineThickness;
     
     /**
      * @var Setting\Color 
@@ -112,6 +143,29 @@ class Pie extends AbstractChart
     public function getValueField()
     {
         return $this->valueField;
+    }
+    
+    /**
+     * Sets 3D part of plot area
+     * 
+     * @param integer $angle
+     * @param integer $depth
+     * @return Rectangular 
+     */
+    public function set3D($angle, $depth)
+    {
+        if (!is_int($angle)) {
+            throw new Exception\InvalidArgumentException("The angle value must be an integer.");
+        }
+        
+        if (!($angle > -360 && $angle < 360)) {
+            throw new Exception\InvalidArgumentException("'$angle' is not a valid angle.");
+        }
+        
+        $this->angle = (integer) $angle;
+        $this->depth3D = (integer) $depth;
+        
+        return $this;
     }
     
     /**
@@ -186,6 +240,85 @@ class Pie extends AbstractChart
     {
         return $this->labelText;
     }
+    
+    /**
+     * Sets outline alpha
+     * 
+     * @param integer $alpha 
+     * @return AbstractAxis
+     */
+    public function setOutlineAlpha($alpha)
+    {
+        $this->outlineAlpha = new Setting\Alpha($alpha);
+        
+        return $this;
+    }
+    
+    /**
+     * Returns outline alpha
+     * 
+     * @return integer 
+     */
+    public function getOutlineAlpha()
+    {
+        return $this->outlineAlpha->getOpacity();
+    }
+    
+    /**
+     * Sets outline color
+     *
+     * @param string|array|Color $color
+     * @return AbstractAxis
+     */
+    public function setOutlineColor($color = null)
+    {
+        if (null !== $color) {
+            if ($color instanceof Setting\Color) {
+                $this->outlineColor = $color;
+            } else {
+                $this->outlineColor = new Setting\Color($color);
+            }
+        }
+
+        return $this;
+    }
+    
+    /**
+     * Returns outline color
+     * 
+     * @return string 
+     */
+    public function getOutlineColor()
+    {
+        return $this->outlineColor;
+    }
+    
+    /**
+     * Sets outline thickness
+     * 
+     * @param integer $thickness 
+     * @return AbstractAxis
+     */
+    public function setOutlineThickness($thickness)
+    {
+        if ($thickness < 0) {
+            throw new Exception\InvalidArgumentException('The thickness value must be positive.');
+        }
+        
+        $this->outlineThickness = (int) $thickness;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns outline thickness
+     * 
+     * @return integer 
+     */
+    public function getOutlineThickness()
+    {
+        return $this->outlineThickness;
+    }
         
     /**
      * Sets and returns pie base color
@@ -245,9 +378,14 @@ class Pie extends AbstractChart
         $params = $params + array(
             'titleField'        => $this->titleField,
             'valueField'        => $this->valueField,
+            'angle'             => $this->angle,
+            'depth3D'           => $this->depth3D,
             'balloonText'       => $this->balloonText,
             'groupPercent'      => $this->groupPercent,
             'labelText'         => $this->labelText,
+            'outlineAlpha'      => $this->outlineAlpha->getValue(),
+            'outlineColor'      => $this->outlineColor,
+            'outlineThickness'  => $this->outlineThickness,
             'pieBaseColor'      => $this->pieBaseColor,
             'pieBrightnessStep' => $this->pieBrightnessStep
         );
