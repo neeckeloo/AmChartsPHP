@@ -383,12 +383,15 @@ class Pie extends AbstractChart
             'balloonText'       => $this->balloonText,
             'groupPercent'      => $this->groupPercent,
             'labelText'         => $this->labelText,
-            'outlineAlpha'      => $this->outlineAlpha->getValue(),
             'outlineColor'      => $this->outlineColor,
             'outlineThickness'  => $this->outlineThickness,
             'pieBaseColor'      => $this->pieBaseColor,
             'pieBrightnessStep' => $this->pieBrightnessStep
         );
+        
+        if (isset($this->outlineAlpha)) {
+            $params['outlineAlpha'] = $this->outlineAlpha->getValue();
+        }
         
         return $params;
     }
