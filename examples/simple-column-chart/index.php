@@ -18,22 +18,13 @@ $serial->setCategoryField('country')
 
 $serial->categoryAxis()
     ->setGridPosition('start')
-    ->setLabelRotation(45)
-    ->setGridAlpha(0)
-    ->setFillAlpha(100)
-    ->setFillColor('#FAFAFA');
-
-$serial->valueAxis()
-    ->setDashLength(5)
-    ->setAxisAlpha(0)
-    ->title()->setValue('Visitors from country');
+    ->setLabelRotation(90);
 
 $graph = new Graph\Column();
 $graph->fields()
-    ->setValueField('visits')
-    ->setColorField('color');
+    ->setValueField('visits');
 
-$graph->setFillAlphas(100)
+$graph->setFillAlphas(80)
     ->setLineAlpha(0)
     ->setBalloonText('[[category]]: [[value]]');
 $serial->addGraph($graph);

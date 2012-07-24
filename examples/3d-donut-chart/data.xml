@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <root>
     <item>
-        <country>Lithuania</country>
-        <value>260</value>
+        <country>United States</country>
+        <value>9252</value>
     </item>
     <item>
-        <country>Ireland</country>
-        <value>201</value>
+        <country>China</country>
+        <value>1882</value>
+    </item>
+    <item>
+        <country>Japan</country>
+        <value>1809</value>
     </item>
     <item>
         <country>Germany</country>
-        <value>65</value>
+        <value>1322</value>
     </item>
     <item>
-        <country>Australia</country>
-        <value>39</value>
+        <country>United Kingdom</country>
+        <value>1122</value>
     </item>
     <item>
-        <country>UK</country>
-        <value>19</value>
+        <country>France</country>
+        <value>1114</value>
     </item>
     <item>
-        <country>Latvia</country>
-        <value>10</value>
+        <country>India</country>
+        <value>984</value>
+    </item>
+    <item>
+        <country>Spain</country>
+        <value>711</value>
     </item>
 </root>

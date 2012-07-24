@@ -15,9 +15,11 @@ $pie->setDataProvider($dataProvider);
 
 $pie->setTitleField('country')
     ->setValueField('value')
-    ->setOutlineColor('#ffffff')
-    ->setOutlineAlpha(80)
-    ->setOutlineThickness(2)
-    ->set3D(30, 15);
+    ->setSequencedAnimation(true)
+    ->setStartEffect(Chart\Pie::EFFECT_ELASTIC)
+    ->setStartDuration(2)
+    ->setInnerRadius(30)
+    ->setLabelRadius(15)
+    ->set3D(15, 10);
 
 echo $pie->render();
