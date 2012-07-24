@@ -246,7 +246,7 @@ abstract class Coordinate extends AbstractChart
             'startAlpha'         => $this->startAlpha->getValue(),
             'startDuration'      => $this->startDuration,
             'startEffect'        => $this->startEffect,
-            'urlTarget'          => $this->urlTarget
+            'urlTarget'          => $this->urlTarget,
         );
         
         return $params;

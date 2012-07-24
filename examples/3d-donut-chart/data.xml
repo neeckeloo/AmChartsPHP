@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <item>
+        <country>Lithuania</country>
+        <value>260</value>
+    </item>
+    <item>
+        <country>Ireland</country>
+        <value>201</value>
+    </item>
+    <item>
+        <country>Germany</country>
+        <value>65</value>
+    </item>
+    <item>
+        <country>Australia</country>
+        <value>39</value>
+    </item>
+    <item>
+        <country>UK</country>
+        <value>19</value>
+    </item>
+    <item>
+        <country>Latvia</country>
+        <value>10</value>
+    </item>
+</root>

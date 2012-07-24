@@ -14,6 +14,9 @@ use AmCharts\Chart\Setting,
  */
 class Pie extends AbstractChart
 {
+    const EFFECT_ELASTIC = 'elastic';
+    const EFFECT_BOUNCE = 'bounce';
+    
     /**
      * @var string 
      */
@@ -56,6 +59,22 @@ class Pie extends AbstractChart
     protected $groupPercent;
     
     /**
+     * Inner radius of the pie, in pixels or percents.
+     * 
+     * @var integer 
+     */
+    protected $innerRadius;
+    
+    /**
+     * The distance between the label and the slice, in pixels.
+     * 
+     * You can use negative valeus to put the label on the slice.
+     * 
+     * @var integer 
+     */
+    protected $labelRadius;
+    
+    /**
      * @var string 
      */
     protected $labelText = '[[title]]: [[percents]]%';
@@ -88,6 +107,43 @@ class Pie extends AbstractChart
      * @var integer 
      */
     protected $pieBrightnessStep = 30;
+    
+    /**
+     * Specifies whether the animation should de sequenced or all objects should appear at once.
+     * 
+     * @var boolean 
+     */
+    protected $sequencedAnimation;
+    
+    /**
+     * Initial opacity of all slices.
+     * 
+     * If you set startDuration to a value higher than 0, slices will fade in from startAlpha.
+     * 
+     * @var Setting\Alpha 
+     */
+    protected $startAlpha;
+    
+    /**
+     * Duration of the animation in seconds.
+     * 
+     * @var integer 
+     */
+    protected $startDuration;
+    
+    /**
+     * Animation effect.
+     * 
+     * @var string 
+     */
+    protected $startEffect;
+    
+    /**
+     * Target of url.
+     * 
+     * @var string 
+     */
+    protected $urlTarget;
     
     /**
      * @var array
@@ -198,12 +254,12 @@ class Pie extends AbstractChart
      * those slices will be grouped together into one slice.
      * This is the "other" slice. It will always be the last slice in a pie.
      * 
-     * @param integer $value
+     * @param integer $percent
      * @return Pie
      */
-    public function setGroupPercent($value)
+    public function setGroupPercent($percent)
     {
-        $this->groupPercent = (integer) $value;
+        $this->groupPercent = (integer) $percent;
         
         return $this;
     }
@@ -216,6 +272,52 @@ class Pie extends AbstractChart
     public function getGroupPercent()
     {
         return $this->groupPercent;
+    }
+    
+    /**
+     * Sets inner radius
+     * 
+     * @param integer $radius
+     * @return Pie
+     */
+    public function setInnerRadius($radius)
+    {
+        $this->innerRadius = (integer) $radius;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns inner radius
+     * 
+     * @return integer 
+     */
+    public function getInnerRadius()
+    {
+        return $this->innerRadius;
+    }
+    
+    /**
+     * Sets label radius
+     * 
+     * @param integer $radius
+     * @return Pie
+     */
+    public function setLabelRadius($radius)
+    {
+        $this->labelRadius = (integer) $radius;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns inner radius
+     * 
+     * @return integer 
+     */
+    public function getLabelRadius()
+    {
+        return $this->labelRadius;
     }
     
     /**
@@ -367,6 +469,125 @@ class Pie extends AbstractChart
     }
     
     /**
+     * Sets true if animation is sequenced
+     * 
+     * @param boolean $sequenced
+     * @return Pie 
+     */
+    public function setSequencedAnimation($sequenced = true)
+    {
+        $this->sequencedAnimation = (bool) $sequenced;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns true if animation is sequenced
+     * 
+     * @return boolean 
+     */
+    public function isSequencedAnimation()
+    {
+        return $this->sequencedAnimation;
+    }
+    
+    /**
+     * Sets start alpha
+     * 
+     * @param integer $alpha
+     * @return Pie
+     */
+    public function setStartAlpha($alpha)
+    {
+        $this->startAlpha = new Setting\Alpha($alpha);
+        
+        return $this;
+    }
+    
+    /**
+     * Returns start alpha
+     * 
+     * @return integer 
+     */
+    public function getStartAlpha()
+    {
+        return $this->startAlpha->getOpacity();
+    }
+    
+    /**
+     * Sets start duration
+     * 
+     * @param integer $start
+     * @return Pie
+     */
+    public function setStartDuration($duration)
+    {
+        $this->startDuration = (int) $duration;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns start duration
+     * 
+     * @return integer 
+     */
+    public function getStartDuration()
+    {
+        return $this->startDuration;
+    }
+    
+    /**
+     * Sets start effect
+     * 
+     * @param integer $start
+     * @return Pie
+     */
+    public function setStartEffect($effect)
+    {
+        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+            throw new Exception\InvalidArgumentException('The start effect provided is not valid.');
+        }
+        
+        $this->startEffect = (string) $effect;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns start effect
+     * 
+     * @return integer 
+     */
+    public function getStartEffect()
+    {
+        return $this->startEffect;
+    }
+    
+    /**
+     * Sets url target
+     * 
+     * @param string $target
+     * @return Pie
+     */
+    public function setUrlTarget($target)
+    {
+        $this->urlTarget = (int) $target;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns url target
+     * 
+     * @return string 
+     */
+    public function getUrlTarget()
+    {
+        return $this->urlTarget;
+    }
+    
+    /**
      * Returns params
      * 
      * @return array 
@@ -376,17 +597,23 @@ class Pie extends AbstractChart
         $params = parent::getParams();
         
         $params = $params + array(
-            'titleField'        => $this->titleField,
-            'valueField'        => $this->valueField,
-            'angle'             => $this->angle,
-            'depth3D'           => $this->depth3D,
-            'balloonText'       => $this->balloonText,
-            'groupPercent'      => $this->groupPercent,
-            'labelText'         => $this->labelText,
-            'outlineColor'      => $this->outlineColor,
-            'outlineThickness'  => $this->outlineThickness,
-            'pieBaseColor'      => $this->pieBaseColor,
-            'pieBrightnessStep' => $this->pieBrightnessStep
+            'titleField'         => $this->titleField,
+            'valueField'         => $this->valueField,
+            'angle'              => $this->angle,
+            'depth3D'            => $this->depth3D,
+            'balloonText'        => $this->balloonText,
+            'groupPercent'       => $this->groupPercent,
+            'innerRadius'        => $this->innerRadius,
+            'labelRadius'        => $this->labelRadius,
+            'labelText'          => $this->labelText,
+            'outlineColor'       => $this->outlineColor,
+            'outlineThickness'   => $this->outlineThickness,
+            'pieBaseColor'       => $this->pieBaseColor,
+            'pieBrightnessStep'  => $this->pieBrightnessStep,
+            'sequencedAnimation' => $this->sequencedAnimation,
+            'startDuration'      => $this->startDuration,
+            'startEffect'        => $this->startEffect,
+            'urlTarget'          => $this->urlTarget,
         );
         
         if (isset($this->outlineAlpha)) {
