@@ -1,6 +1,7 @@
 <?php
 /**
  * @category   AmCharts
+ * @package    Exception
  */
 
 /**
@@ -9,11 +10,10 @@
 namespace AmCharts\Exception;
 
 /**
- * @uses       AmCharts\Exception
- * @uses       \RuntimeException
  * @category   AmCharts
+ * @package    Exception
  */
 class RuntimeException 
     extends \RuntimeException
-    implements \AmCharts\Exception
+    implements ExceptionInterface
 {}

@@ -1,15 +1,17 @@
 <?php
 /**
  * @category   AmCharts
+ * @package    Exception
  */
 
 /**
  * @namespace
  */
-namespace AmCharts;
+namespace AmCharts\Exception;
 
 /**
  * @category   AmCharts
+ * @package    Exception
  */
-interface Exception
+interface ExceptionInterface
 {}

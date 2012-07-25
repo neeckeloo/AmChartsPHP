@@ -1,6 +1,7 @@
 <?php
 /**
  * @category   AmCharts
+ * @package    Exception
  */
 
 /**
@@ -9,11 +10,10 @@
 namespace AmCharts\Exception;
 
 /**
- * @uses       AmCharts\Exception
- * @uses       \InvalidArgumentException
  * @category   AmCharts
+ * @package    Exception
  */
 class InvalidArgumentException 
     extends \InvalidArgumentException
-    implements \AmCharts\Exception
+    implements ExceptionInterface
 {}
