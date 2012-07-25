@@ -17,5 +17,11 @@
         "psr-0": {
             "AmCharts": "src/lib/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        }
+    ]
 }
