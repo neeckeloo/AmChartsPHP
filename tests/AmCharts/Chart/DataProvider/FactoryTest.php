@@ -17,8 +17,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testGetReaderManager()
     {
         $this->assertInstanceOf(
-            'AmCharts\Chart\DataProvider\ReaderManager',
-            $this->object->getReaderManager()
+            'AmCharts\Chart\DataProvider\ReaderPluginManager',
+            $this->object->getReaderPluginManager()
         );
     }
 }

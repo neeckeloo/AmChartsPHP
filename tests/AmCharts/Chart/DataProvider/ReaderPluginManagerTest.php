@@ -11,7 +11,7 @@ class ReaderManagerTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->object = new ReaderManager;
+        $this->object = new ReaderPluginManager;
     }
     
     public function testHasReader()
