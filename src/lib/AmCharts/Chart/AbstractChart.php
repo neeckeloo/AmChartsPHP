@@ -43,7 +43,7 @@ abstract class AbstractChart
     protected $height = '400px';
     
     /**
-     * @var Text 
+     * @var Setting\Text 
      */
     protected $text;
     
@@ -145,7 +145,7 @@ abstract class AbstractChart
      * Sets and returns text object
      *
      * @param array $params
-     * @return Text
+     * @return Setting\Text
      */
     public function text($params = array())
     {
@@ -331,10 +331,8 @@ abstract class AbstractChart
             $manager->setJsIncluded(true);
         }
         
-        $instructions = $this->id . ' = new AmCharts.Am' . ucfirst($this->type) . 'Chart();' . "\n";
-        
-        $params = $this->getParams();
-        $instructions .= $this->formatScriptVarProperties($this->id, $params);
+        $instructions = $this->id . ' = new AmCharts.Am' . ucfirst($this->type) . 'Chart();' . "\n";        
+        $instructions .= $this->formatScriptVarProperties($this->id, $this->getParams());
         
         if (isset($this->legend)) {
             $instructions .= 'legend = new AmCharts.AmLegend();' . "\n";
@@ -363,12 +361,9 @@ abstract class AbstractChart
             . '%2$s'
             . '%1$s.write("%1$s");' . "\n"
             . '});' . "\n"
-            . '</script>';
-        $code .= sprintf($tpl, $this->id, $instructions);
-        
-        $code .= '<div id="' . $this->id
-            . '" style="width:' . $this->width
-            . ';height:' . $this->height . ';"></div>';
+            . '</script>' . "\n"
+            . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
+        $code .= sprintf($tpl, $this->id, $instructions, $this->width, $this->height);
 
         return $code;
     }
@@ -378,7 +373,7 @@ abstract class AbstractChart
      * 
      * @param string $var
      * @param array $params
-     * @return type 
+     * @return string 
      */
     protected function formatScriptVarProperties($var, array $params)
     {
