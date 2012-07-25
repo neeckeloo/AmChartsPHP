@@ -19,7 +19,7 @@ class Factory
     /**
      * Plugin manager for loading readers.
      * 
-     * @var null|ReaderManager 
+     * @var null|ReaderPluginManager 
      */
     public static $readers = null;
     
@@ -64,7 +64,7 @@ class Factory
         } else if (isset(self::$extensions[$extension])) {
             $reader = self::$extensions[$extension];
             if (!($reader instanceof Reader\ReaderInterface)) {
-                $reader = self::getReaderManager()->get($reader);
+                $reader = self::getReaderPluginManager()->get($reader);
                 self::$extensions[$extension] = $reader;
             }
             
@@ -80,24 +80,24 @@ class Factory
     }
 
     /**
-     * Set reader manager
+     * Set reader plugin manager
      *
-     * @param ReaderManager $readers
+     * @param ReaderPluginManager $readers
      */
-    public static function setReaderManager(ReaderManager $readers)
+    public static function setReaderPluginManager(ReaderPluginManager $readers)
     {
         self::$readers = $readers;
     }
 
     /**
-     * Get the reader manager
+     * Get the reader plugin manager
      *
-     * @return ReaderManager
+     * @return ReaderPluginManager
      */
-    public static function getReaderManager()
+    public static function getReaderPluginManager()
     {
         if (static::$readers === null) {
-            static::$readers = new ReaderManager();
+            static::$readers = new ReaderPluginManager();
         }
         
         return static::$readers;

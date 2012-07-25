@@ -6,14 +6,15 @@
  */
 namespace AmCharts\Chart\DataProvider;
 
-use AmCharts\Exception;
+use AmCharts\Exception,
+    Zend\ServiceManager\AbstractPluginManager;
 
 /**
  * @category   AmCharts
  * @package    Chart
  * @subpackage DataProvider
  */
-class ReaderManager
+class ReaderPluginManager extends AbstractPluginManager
 {   
     /**
      * Default set of readers
@@ -26,100 +27,21 @@ class ReaderManager
     );
     
     /**
-     * Reader instances
-     * 
-     * @var array 
-     */
-    protected $instances = array();
-    
-    /**
-     * Sets invokable class
-     * 
-     * @param string $name
-     * @param string $invokableClass 
-     * @return ReaderManager
-     */
-    public function setInvokableClass($name, $invokableClass)
-    {
-        if (!$this->has($name)) {
-            $this->invokableClasses[$name] = $invokableClass;
-        }
-        
-        return $this;
-    }
-    
-    /**
-     * Canonicalize name
-     * 
-     * @param string $name
-     * @return string 
-     */
-    protected function canonicalizeName($name)
-    {
-        return strtolower(str_replace(array('-', '_', ' ', '\\', '/'), '', $name));
-    }
-    
-    /**
-     * Returns true if reader plugin manager has reader
-     * 
-     * @param string $name
-     * @return boolean
-     */
-    public function has($name)
-    {
-        $name = $this->canonicalizeName($name);
-        if (isset($this->invokableClasses[$name])) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * Retreive a reader instance
-     * 
-     * @param string $name
-     * @return Reader\ReaderInterface
-     */
-    public function get($name)
-    {
-        if (!$this->has($name) && class_exists($name)) {
-            $this->setInvokableClass($name, $name);
-        }
-        
-        $name = $this->canonicalizeName($name);
-        
-        $instance = null;
-        
-        if (isset($this->instances[$name])) {
-            $instance = $this->instances[$name];
-        }
-        
-        if (!$instance) {
-            $instance = new $this->invokableClasses[$name]();
-        }
-        
-        $this->validateReader($instance);        
-        
-        return $instance;
-    }
-    
-    /**
-     * Validate reader
+     * Validate the plugin
      * Checks that the reader loaded is an instance of Reader\ReaderInterface.
      * 
-     * @param Reader\ReaderInterface $reader
+     * @param Reader\ReaderInterface $plugin
      * @return void
      */
-    protected function validateReader($reader)
+    public function validatePlugin($plugin)
     {
-        if ($reader instanceof Reader\ReaderInterface) {
+        if ($plugin instanceof Reader\ReaderInterface) {
             return;
         }
         
         throw new Exception\RuntimeException(sprintf(
             'Reader of type "%s" is invalid; must implement %s\Reader\ReaderInterface',
-            (is_object($reader) ? get_class($reader) : gettype($reader)),
+            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
             __NAMESPACE__
         ));        
     }
