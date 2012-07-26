@@ -596,25 +596,15 @@ class Pie extends AbstractChart
     {
         $params = parent::getParams();
         
-        $params = $params + array(
-            'titleField'         => $this->titleField,
-            'valueField'         => $this->valueField,
-            'angle'              => $this->angle,
-            'depth3D'            => $this->depth3D,
-            'balloonText'        => $this->balloonText,
-            'groupPercent'       => $this->groupPercent,
-            'innerRadius'        => $this->innerRadius,
-            'labelRadius'        => $this->labelRadius,
-            'labelText'          => $this->labelText,
-            'outlineColor'       => $this->outlineColor,
-            'outlineThickness'   => $this->outlineThickness,
-            'pieBaseColor'       => $this->pieBaseColor,
-            'pieBrightnessStep'  => $this->pieBrightnessStep,
-            'sequencedAnimation' => $this->sequencedAnimation,
-            'startDuration'      => $this->startDuration,
-            'startEffect'        => $this->startEffect,
-            'urlTarget'          => $this->urlTarget,
+        $paramKeys = array(
+            'titleField', 'valueField', 'angle', 'depth3D', 'balloonText', 'groupPercent',
+            'innerRadius', 'labelRadius', 'labelText', 'outlineColor', 'outlineThickness',
+            'pieBaseColor', 'pieBrightnessStep', 'sequencedAnimation', 'startDuration',
+            'startEffect', 'urlTarget'
         );
+        foreach ($paramKeys as $key) {
+            $params[$key] = $this->{$key};
+        }
         
         if (isset($this->outlineAlpha)) {
             $params['outlineAlpha'] = $this->outlineAlpha->getValue();

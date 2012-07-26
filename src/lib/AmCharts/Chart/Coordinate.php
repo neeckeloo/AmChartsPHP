@@ -240,14 +240,17 @@ abstract class Coordinate extends AbstractChart
     {
         $params = parent::getParams();
         
-        $params = $params + array(
-            'colors'             => $this->colors,
-            'sequencedAnimation' => $this->sequencedAnimation,
-            'startAlpha'         => $this->startAlpha->getValue(),
-            'startDuration'      => $this->startDuration,
-            'startEffect'        => $this->startEffect,
-            'urlTarget'          => $this->urlTarget,
+        $paramKeys = array(
+            'colors', 'sequencedAnimation', 'startAlpha', 'startDuration', 'startEffect',
+            'urlTarget'
         );
+        foreach ($paramKeys as $key) {
+            if ($this->{$key} instanceof Setting\Alpha) {
+                $params[$key] = $this->{$key}->getValue();
+            } else {
+                $params[$key] = $this->{$key};
+            }
+        }
         
         return $params;
     }

@@ -216,14 +216,13 @@ abstract class Rectangular extends Coordinate
     {
         $params = parent::getParams();
         
-        $params = $params + array(
-            'angle'         => $this->angle,
-            'depth3D'       => $this->depth3D,
-            'marginTop'     => $this->marginTop,
-            'marginBottom'  => $this->marginBottom,
-            'marginLeft'    => $this->marginLeft,
-            'marginRight'   => $this->marginRight
+        $paramKeys = array(
+            'angle', 'depth3D', 'marginTop', 'marginBottom', 'marginLeft',
+            'marginRight'
         );
+        foreach ($paramKeys as $key) {
+            $params[$key] = $this->{$key};
+        }
         
         return $params;
     }
