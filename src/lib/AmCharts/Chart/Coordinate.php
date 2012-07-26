@@ -1,17 +1,15 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart;
 
 use AmCharts\Graph,
     AmCharts\Chart\Setting;
 
-/**
- * @category   AmCharts
- * @package    Chart
- */
 abstract class Coordinate extends AbstractChart
 {    
     const EFFECT_ELASTIC = 'elastic';

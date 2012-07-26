@@ -1,4 +1,11 @@
 <?php
+/**
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
+ */
+
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
 use AmCharts\Chart,

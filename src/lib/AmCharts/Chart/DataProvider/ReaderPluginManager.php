@@ -1,19 +1,15 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
- * @subpackage DataProvider
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart\DataProvider;
 
 use AmCharts\Exception,
     Zend\ServiceManager\AbstractPluginManager;
 
-/**
- * @category   AmCharts
- * @package    Chart
- * @subpackage DataProvider
- */
 class ReaderPluginManager extends AbstractPluginManager
 {   
     /**

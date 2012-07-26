@@ -1,16 +1,14 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart\Axis;
 
 use AmCharts\Exception;
 
-/**
- * @category   AmCharts
- * @package    Chart
- */
 class Category extends AbstractAxis
 {    
     const POSITION_START = 'start';

@@ -1,16 +1,12 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
- * @subpackage DataProvider
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart;
 
-/**
- * @category   AmCharts
- * @package    Chart
- * @subpackage DataProvider
- */
 class DataProvider
 {    
     /**

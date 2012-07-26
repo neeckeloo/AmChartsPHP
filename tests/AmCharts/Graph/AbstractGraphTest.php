@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
+ */
 namespace AmCharts\Graph;
 
 class AbstractGraphTest extends \PHPUnit_Framework_TestCase

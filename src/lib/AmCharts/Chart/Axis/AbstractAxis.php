@@ -1,17 +1,15 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart\Axis;
 
 use AmCharts\Chart\Setting,
     AmCharts\Exception;
 
-/**
- * @category   AmCharts
- * @package    Chart
- */
 abstract class AbstractAxis
 {    
     /**

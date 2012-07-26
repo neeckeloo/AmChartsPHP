@@ -1,14 +1,14 @@
 <?php
 /**
- * @category   AmCharts
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart\Setting;
 
 use AmCharts\Exception;
 
-/**
- * @category   AmCharts
- */
 class Text
 {    
     const ALIGN_LEFT = 'left';

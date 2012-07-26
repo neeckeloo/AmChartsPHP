@@ -1,7 +1,9 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Chart
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart;
 
@@ -9,12 +11,6 @@ use AmCharts\Manager,
     AmCharts\Chart\Setting,
     AmCharts\Exception;
 
-/**
- * Base class for amChart PHP-Library
- * 
- * @category   AmCharts
- * @package    Chart
- */
 abstract class AbstractChart
 {
     /**
@@ -274,7 +270,7 @@ abstract class AbstractChart
         else if (!($provider instanceof DataProvider)) {
             throw new Exception\InvalidArgumentException(
                 'Data provider must be an instance of '
-                . 'AmCharts\Chart\DataProvider.'
+                . 'AmCharts\Chart\DataProvider class.'
             );
         }
         

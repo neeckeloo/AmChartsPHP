@@ -1,18 +1,12 @@
 <?php
 /**
- * @category   AmCharts
- * @package    Exception
- */
-
-/**
- * @namespace
+ * AmChartsPHP
+ * 
+ * @link      http://github.com/neeckeloo/AmChartsPHP
+ * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Exception;
 
-/**
- * @category   AmCharts
- * @package    Exception
- */
 class RuntimeException 
     extends \RuntimeException
     implements ExceptionInterface
