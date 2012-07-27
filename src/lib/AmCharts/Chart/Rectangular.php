@@ -12,6 +12,13 @@ use AmCharts\Exception;
 abstract class Rectangular extends Coordinate
 {
     /**
+     * Chart cursor
+     * 
+     * @var Cursor 
+     */
+    protected $cursor;
+    
+    /**
      * The angle of the 3D part of plot area.
      * This creates a 3D effect (if the "depth3D" is > 0).
      * 
@@ -62,6 +69,23 @@ abstract class Rectangular extends Coordinate
      * @var integer 
      */
     protected $marginRight;
+    
+    /**
+     * Sets and returns chart cursor 
+     * 
+     * @param array $params
+     * @return Cursor 
+     */
+    public function cursor($params = array())
+    {
+        if (!isset($this->cursor)) {
+            $this->cursor = new Cursor();
+        }
+        
+        $this->cursor->setParams($params);
+
+        return $this->cursor;
+    }
     
     /**
      * Sets 3D part of plot area
@@ -219,7 +243,13 @@ abstract class Rectangular extends Coordinate
             'marginRight'
         );
         foreach ($paramKeys as $key) {
-            $params[$key] = $this->{$key};
+            if (isset($this->{$key})) {
+                if ($this->{$key} instanceof Setting\Alpha) {
+                    $params[$key] = $this->{$key}->getValue();
+                } else {
+                    $params[$key] = $this->{$key};
+                }
+            }
         }
         
         return $params;

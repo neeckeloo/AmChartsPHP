@@ -52,6 +52,12 @@ class Renderer
             $instructions .= $chartId . '.addValueAxis(valueAxis)' . "\n";
         }
         
+        if (isset($attributes['cursor'])) {
+            $instructions .= 'var chartCursor = new AmCharts.ChartCursor();' . "\n";
+            $instructions .= $this->formatScriptVarProperties('chartCursor', $attributes['cursor']->toArray());
+            $instructions .= $chartId . '.addChartCursor(chartCursor)' . "\n";
+        }
+        
         if (isset($attributes['graphs']) && count($attributes['graphs']) > 0) {
             foreach ($attributes['graphs'] as $key => $graph) {
                 $graphId = 'graph' . $key;
