@@ -97,9 +97,29 @@ abstract class AbstractChart
     {
         
     }
+    
+    /**
+     * Returns chart id
+     * 
+     * @return string 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    /**
+     * Returns chart type
+     * 
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
     /**
-     * Sets title
+     * Sets chart title
      * 
      * @param string $title 
      * @return AbstractChart
@@ -109,6 +129,16 @@ abstract class AbstractChart
         $this->title = $title;
 
         return $this;
+    }
+    
+    /**
+     * Returns chart title
+     * 
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -123,6 +153,16 @@ abstract class AbstractChart
 
         return $this;
     }
+    
+    /**
+     * Returns width
+     * 
+     * @return string 
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
 
     /**
      * Sets height
@@ -135,6 +175,16 @@ abstract class AbstractChart
         $this->height = $height;
 
         return $this;
+    }
+    
+    /**
+     * Returns height
+     * 
+     * @return string
+     */
+    public function getHeight()
+    {
+        return $this->height;
     }
         
     /**
@@ -305,109 +355,35 @@ abstract class AbstractChart
         
         return $params;
     }
+    
+    /**
+     * Returns attributes
+     * 
+     * @return array 
+     */
+    protected function getAttributes()
+    {        
+        $attribProperties = array('legend', 'valueAxis', 'graphs');
+        
+        $attributes = array();
+        foreach ($attribProperties as $property) {
+            if (isset($this->{$property})) {
+                $attributes[$property] = $this->{$property};
+            }
+        }
+        
+        return $attributes;
+    }
 
     /**
-     * Returns the HTML Code to insert on the page
+     * Returns the HTML code to insert on the page
      *
      * @return	string
      */
     public function render()
     {
-        $code = '';
+        $renderer = new Renderer();
         
-        $manager = Manager::getInstance();
-
-        if (!$manager->hasIncludedJs()) {
-            $code .= $this->renderScriptTag($manager->getAmChartsPath()) . "\n";
-            
-            if ($manager->isLoadingJQuery()) {
-                $code .= $this->renderScriptTag($manager->getJQueryPath()) . "\n";
-            }
-            
-            $manager->setJsIncluded(true);
-        }
-        
-        $instructions = $this->id . ' = new AmCharts.Am' . ucfirst($this->type) . 'Chart();' . "\n";        
-        $instructions .= $this->formatScriptVarProperties($this->id, $this->getParams());
-        
-        if (isset($this->legend)) {
-            $instructions .= 'legend = new AmCharts.AmLegend();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('legend', $this->legend->toArray());
-            $instructions .= $this->id . '.addLegend(legend)' . "\n";
-        }
-        
-        if (isset($this->valueAxis)) {
-            $instructions .= 'valueAxis = new AmCharts.ValueAxis();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('valueAxis', $this->valueAxis->toArray());
-            $instructions .= $this->id . '.addValueAxis(valueAxis)' . "\n";
-        }
-        
-        if (isset($this->graphs) && count($this->graphs) > 0) {
-            foreach ($this->graphs as $key => $graph) {
-                $id = 'graph' . $key;
-                $instructions .= $id . ' = new AmCharts.AmGraph();' . "\n";
-                $instructions .= $this->formatScriptVarProperties($id, $graph->toArray());
-                $instructions .= $this->id . '.addGraph(' . $id . ')' . "\n";
-            }
-        }
-        
-        $tpl = '<script type="text/javascript">' . "\n"
-            . 'var %1$s;' . "\n"
-            . 'AmCharts.ready(function () {' . "\n"
-            . '%2$s'
-            . '%1$s.write("%1$s");' . "\n"
-            . '});' . "\n"
-            . '</script>' . "\n"
-            . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
-        $code .= sprintf($tpl, $this->id, $instructions, $this->width, $this->height);
-
-        return $code;
-    }
-    
-    /**
-     * Format object properties of script
-     * 
-     * @param string $var
-     * @param array $params
-     * @return string 
-     */
-    protected function formatScriptVarProperties($var, array $params)
-    {
-        $output = '';
-        $tpl = '%s.%s = %s;' . "\n";
-                
-        foreach ($params as $name => $value) {
-            if (is_null($value)) {
-                continue;
-            }
-            
-            if (is_array($value)) {
-                array_walk($value, function (&$val, $key) {
-                    if (!is_numeric($val)) {
-                        $val = "'" . $val . "'";
-                    }
-                });
-                $value = '[' . implode(',', $value) . ']';
-            } elseif (is_bool($value)) {
-                $value = true === $value ? 'true' : 'false';
-            } elseif (!is_numeric($value) && $name != 'dataProvider') {
-                $value = "'" . $value . "'";
-            }
-            
-            $output .= sprintf($tpl, $var, $name, $value);
-        }
-        
-        return $output;
-    }
-    
-    /**
-     * Render script tag
-     * 
-     * @param string $source
-     * @return string 
-     */
-    protected function renderScriptTag($source)
-    {        
-        return sprintf('<script type="text/javascript" src="%s"></script>', $source);
+        return $renderer->render($this, $this->getParams(), $this->getAttributes());
     }
 }
