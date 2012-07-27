@@ -243,10 +243,12 @@ abstract class Coordinate extends AbstractChart
             'urlTarget'
         );
         foreach ($paramKeys as $key) {
-            if ($this->{$key} instanceof Setting\Alpha) {
-                $params[$key] = $this->{$key}->getValue();
-            } else {
-                $params[$key] = $this->{$key};
+            if (isset($this->{$key})) {
+                if ($this->{$key} instanceof Setting\Alpha) {
+                    $params[$key] = $this->{$key}->getValue();
+                } else {
+                    $params[$key] = $this->{$key};
+                }
             }
         }
         

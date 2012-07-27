@@ -601,11 +601,13 @@ class Pie extends AbstractChart
             'startEffect', 'urlTarget'
         );
         foreach ($paramKeys as $key) {
-            $params[$key] = $this->{$key};
-        }
-        
-        if (isset($this->outlineAlpha)) {
-            $params['outlineAlpha'] = $this->outlineAlpha->getValue();
+            if (isset($this->{$key})) {
+                if ($this->{$key} instanceof Setting\Alpha) {
+                    $params[$key] = $this->{$key}->getValue();
+                } else {
+                    $params[$key] = $this->{$key};
+                }
+            }
         }
         
         return $params;
