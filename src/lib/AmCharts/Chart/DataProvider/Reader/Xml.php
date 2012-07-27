@@ -38,7 +38,6 @@ class Xml extends AbstractReader
      *
      * @param  string $string
      * @return array
-     * @throws Exception\RuntimeException
      */
     public function fromString($string)
     {

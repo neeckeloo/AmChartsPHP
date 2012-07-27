@@ -10,7 +10,7 @@ namespace AmCharts\Chart;
 class XY extends Rectangular
 {
     /**
-     * @var string 
+     * @var string
      */
     protected $type = 'xy';
 }
