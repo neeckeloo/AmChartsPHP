@@ -35,29 +35,29 @@ class Renderer
             $manager->setJsIncluded(true);
         }
         
-        $id = $chart->getId();
+        $chartId = $chart->getId();
         
-        $instructions = $id . ' = new AmCharts.Am' . ucfirst($chart->getType()) . 'Chart();' . "\n";        
-        $instructions .= $this->formatScriptVarProperties($id, $params);
+        $instructions = $chartId . ' = new AmCharts.Am' . ucfirst($chart->getType()) . 'Chart();' . "\n";        
+        $instructions .= $this->formatScriptVarProperties($chartId, $params);
         
         if (isset($attributes['legend'])) {
-            $instructions .= 'legend = new AmCharts.AmLegend();' . "\n";
+            $instructions .= 'var legend = new AmCharts.AmLegend();' . "\n";
             $instructions .= $this->formatScriptVarProperties('legend', $attributes['legend']->toArray());
-            $instructions .= $id . '.addLegend(legend)' . "\n";
+            $instructions .= $chartId . '.addLegend(legend)' . "\n";
         }
         
         if (isset($attributes['valueAxis'])) {
-            $instructions .= 'valueAxis = new AmCharts.ValueAxis();' . "\n";
+            $instructions .= 'var valueAxis = new AmCharts.ValueAxis();' . "\n";
             $instructions .= $this->formatScriptVarProperties('valueAxis', $attributes['valueAxis']->toArray());
-            $instructions .= $id . '.addValueAxis(valueAxis)' . "\n";
+            $instructions .= $chartId . '.addValueAxis(valueAxis)' . "\n";
         }
         
         if (isset($attributes['graphs']) && count($attributes['graphs']) > 0) {
             foreach ($attributes['graphs'] as $key => $graph) {
-                $id = 'graph' . $key;
-                $instructions .= $id . ' = new AmCharts.AmGraph();' . "\n";
-                $instructions .= $this->formatScriptVarProperties($id, $graph->toArray());
-                $instructions .= $id . '.addGraph(' . $id . ')' . "\n";
+                $graphId = 'graph' . $key;
+                $instructions .= 'var ' . $graphId . ' = new AmCharts.AmGraph();' . "\n";
+                $instructions .= $this->formatScriptVarProperties($graphId, $graph->toArray());
+                $instructions .= $chartId . '.addGraph(' . $graphId . ');' . "\n";
             }
         }
         
@@ -69,7 +69,7 @@ class Renderer
             . '});' . "\n"
             . '</script>' . "\n"
             . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
-        $code .= sprintf($tpl, $id, $instructions, $chart->getWidth(), $chart->getHeight());
+        $code .= sprintf($tpl, $chartId, $instructions, $chart->getWidth(), $chart->getHeight());
 
         return $code;
     }
