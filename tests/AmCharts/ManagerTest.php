@@ -35,6 +35,13 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($path, $this->manager->getAmChartsPath());
     }
     
+    public function testSetImagesPath()
+    {
+        $path = './images';
+        $this->manager->setImagesPath($path);
+        $this->assertEquals($path, $this->manager->getImagesPath());
+    }
+    
     public function testSetLoadJQuery()
     {
         $this->assertEquals(false, $this->manager->isLoadingJQuery());

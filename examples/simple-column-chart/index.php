@@ -13,7 +13,8 @@ use AmCharts\Chart,
     AmCharts\Manager as ChartManager;
 
 $manager = ChartManager::getInstance();
-$manager->setAmChartsPath('./amcharts.js');
+$manager->setAmChartsPath('./amcharts.js')
+    ->setImagesPath('./images/');
 
 $serial = new Chart\Serial();
         

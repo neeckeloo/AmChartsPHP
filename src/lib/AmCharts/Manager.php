@@ -18,6 +18,11 @@ class Manager
      * @var string
      */
     protected $amChartsPath = 'amcharts.js';
+    
+    /**
+     * @var string 
+     */
+    protected $imagesPath;
 
     /**
      * @var boolean
@@ -32,7 +37,7 @@ class Manager
     /**
      * Singleton instance
      *
-     * @var AmCharts\Manager
+     * @var Manager
      */
     protected static $instance = null;
 
@@ -49,7 +54,7 @@ class Manager
     /**
      * Singleton instance
      *
-     * @return AmCharts\Manager
+     * @return Manager
      */
     public static function getInstance()
     {
@@ -64,7 +69,7 @@ class Manager
      * Set jQuery path
      * 
      * @param string $path
-     * @return AmCharts\Manager
+     * @return Manager
      */
     public function setJQueryPath($path)
     {
@@ -87,7 +92,7 @@ class Manager
      * Set AmCharts Path
      * 
      * @param string $path
-     * @return AmCharts\Manager
+     * @return Manager
      */
     public function setAmChartsPath($path)
     {
@@ -107,10 +112,33 @@ class Manager
     }
     
     /**
+     * Set images path
+     * 
+     * @param string $path
+     * @return Manager
+     */
+    public function setImagesPath($path)
+    {
+        $this->imagesPath = (string) $path;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns images path
+     * 
+     * @return string
+     */
+    public function getImagesPath()
+    {
+        return $this->imagesPath;
+    }
+    
+    /**
      * Set true if jQuery library must be loaded
      * 
      * @param boolean $load
-     * @return AmCharts\Manager
+     * @return Manager
      */
     public function setLoadJQuery($load = false)
     {
@@ -133,7 +161,7 @@ class Manager
      * Set true if javascript library must be loaded
      * 
      * @param boolean $include
-     * @return AmCharts\Manager
+     * @return Manager
      */
     public function setJsIncluded($include = false)
     {

@@ -19,6 +19,13 @@ abstract class Rectangular extends Coordinate
     protected $cursor;
     
     /**
+     * Chart scrollbar
+     * 
+     * @var Scrollbar 
+     */
+    protected $scrollbar;
+    
+    /**
      * The angle of the 3D part of plot area.
      * This creates a 3D effect (if the "depth3D" is > 0).
      * 
@@ -85,6 +92,23 @@ abstract class Rectangular extends Coordinate
         $this->cursor->setParams($params);
 
         return $this->cursor;
+    }
+    
+    /**
+     * Sets and returns chart scrollbar 
+     * 
+     * @param array $params
+     * @return Scrollbar 
+     */
+    public function scrollbar($params = array())
+    {
+        if (!isset($this->scrollbar)) {
+            $this->scrollbar = new Scrollbar();
+        }
+        
+        $this->scrollbar->setParams($params);
+
+        return $this->scrollbar;
     }
     
     /**

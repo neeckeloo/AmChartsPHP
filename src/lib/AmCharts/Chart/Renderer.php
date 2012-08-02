@@ -24,6 +24,11 @@ class Renderer
         $code = '';
         
         $manager = Manager::getInstance();
+        
+        $imagesPath = $manager->getImagesPath();
+        if ($imagesPath) {
+            $params['pathToImages'] = $imagesPath;
+        }
 
         if (!$manager->hasIncludedJs()) {
             $code .= $this->renderScriptTag($manager->getAmChartsPath()) . "\n";
@@ -56,6 +61,12 @@ class Renderer
             $instructions .= 'var chartCursor = new AmCharts.ChartCursor();' . "\n";
             $instructions .= $this->formatScriptVarProperties('chartCursor', $attributes['cursor']->toArray());
             $instructions .= $chartId . '.addChartCursor(chartCursor)' . "\n";
+        }
+        
+        if (isset($attributes['scrollbar'])) {
+            $instructions .= 'var chartScrollbar = new AmCharts.ChartScrollbar();' . "\n";
+            $instructions .= $this->formatScriptVarProperties('chartScrollbar', $attributes['scrollbar']->toArray());
+            $instructions .= $chartId . '.addChartScrollbar(chartScrollbar)' . "\n";
         }
         
         if (isset($attributes['graphs']) && count($attributes['graphs']) > 0) {
