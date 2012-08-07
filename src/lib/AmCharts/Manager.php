@@ -43,8 +43,6 @@ class Manager
 
     /**
      * Constructor
-     *
-     * @return void
      */
     protected function __construct()
     {

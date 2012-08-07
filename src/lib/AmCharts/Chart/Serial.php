@@ -7,6 +7,8 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Exception;
+
 class Serial extends Rectangular
 {
     /**
@@ -106,11 +108,13 @@ class Serial extends Rectangular
      */
     public function setColumnWidth($width)
     {
-        if (!is_int($width)) {
+        $width = (float) $width;
+        
+        if ($width < 0 || $width > 1) {
             throw new Exception\InvalidArgumentException("Column width must be between 0 and 1.");
         }
         
-        $this->columnWidth = (float) $width;
+        $this->columnWidth = $width;
        
         return $this;
     }

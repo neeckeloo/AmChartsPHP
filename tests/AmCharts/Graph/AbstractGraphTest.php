@@ -37,6 +37,12 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AmCharts\Graph\Fields', $this->graph->fields());
     }
     
+    public function testSetBalloonText()
+    {
+        $this->graph->setBalloonText('Foo');
+        $this->assertEquals('Foo', $this->graph->getBalloonText());
+    }
+    
     public function testSetFillAlphas()
     {
         $this->graph->setFillAlphas(50);        
@@ -55,6 +61,28 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
         $fillColors = $this->graph->getFillColors();
         $this->assertCount(1, $fillColors);
         $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $fillColors[0]);
+    }
+    
+    public function testSetLineAlpha()
+    {
+        $this->graph->setLineAlpha(50);        
+        $this->assertEquals(50, $this->graph->getLineAlpha());
+    }
+    
+    public function testLineColor()
+    {
+        $color = $this->graph->getLineColor();
+        $this->assertNull($color);
+        
+        $this->graph->setLineColor('#ff0000');
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->graph->getLineColor());
+    }
+    
+    public function testSetLineThickness()
+    {
+        $thickness = 20;
+        $this->graph->setLineThickness($thickness);
+        $this->assertEquals($thickness, $this->graph->getLineThickness());
     }
     
     public function testToArray()

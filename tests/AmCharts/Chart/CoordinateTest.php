@@ -41,6 +41,28 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($duration, $this->chart->getStartDuration());
     }
     
+    public function testSetStartEffect()
+    {
+        $effect = Coordinate::EFFECT_ELASTIC;
+        $this->chart->setStartEffect($effect);
+        $this->assertEquals($effect, $this->chart->getStartEffect());
+    }
+    
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     */
+    public function testSetStartEffectWithInvalidParam()
+    {
+        $this->chart->setStartEffect('foo');
+    }
+    
+    public function testSetUrlTarget()
+    {
+        $url = 'foo';
+        $this->chart->setUrlTarget($url);
+        $this->assertEquals($url, $this->chart->getUrlTarget());
+    }
+    
     public function testGetValueAxis()
     {
         $valueAxis = $this->chart->valueAxis();

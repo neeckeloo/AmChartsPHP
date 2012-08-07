@@ -22,6 +22,75 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
         $this->chart = $this->getMockForAbstractClass($class);
     }
     
+    public function testGetId()
+    {
+        $this->assertContains('chart_', $this->chart->getId());
+    }
+    
+    public function testGetType()
+    {
+        $this->assertNull($this->chart->getType());
+    }
+    
+    public function testSetTitle()
+    {
+        $title = 'foo';
+        $this->chart->setTitle($title);
+        $this->assertEquals($title, $this->chart->getTitle());
+    }
+    
+    public function setWidthAndHeightProvider()
+    {
+        return array(
+            array(10, '10px'),
+            array('10px', '10px'),
+            array('10%', '10%'),
+        );
+    }
+    
+    /**
+     * @dataProvider setWidthAndHeightProvider
+     */
+    public function testSetWidth($provided, $expected)
+    {
+        $this->chart->setWidth($provided);
+        $this->assertEquals($expected, $this->chart->getWidth());
+    }
+    
+    /**
+     * @dataProvider setWidthAndHeightProvider
+     */
+    public function testSetHeight($provided, $expected)
+    {
+        $this->chart->setHeight($provided);
+        $this->assertEquals($expected, $this->chart->getHeight());
+    }
+    
+    public function setWidthAndHeightWithInvalidParamProvider()
+    {
+        return array(
+            array('foo')
+        );
+    }
+    
+    /**
+     * @dataProvider setWidthAndHeightWithInvalidParamProvider
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetWidthWithInvalidParam($provided)
+    {
+        $this->chart->setWidth($provided);
+    }
+    
+    /**
+     * @dataProvider setWidthAndHeightWithInvalidParamProvider
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetHeightWithInvalidParam($provided)
+    {
+        $this->chart->setHeight($provided);
+    }
+    
     public function testSetDataProvider()
     {
         $data = array(

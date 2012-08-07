@@ -43,10 +43,55 @@ class PieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(123, $this->chart->getGroupPercent());
     }
     
+    public function testSetInnerRadius()
+    {
+        $radius = 50;
+        $this->chart->setInnerRadius($radius);
+        $this->assertEquals($radius, $this->chart->getInnerRadius());
+    }
+    
+    public function testSetLabelRadius()
+    {
+        $radius = 50;
+        $this->chart->setLabelRadius($radius);
+        $this->assertEquals($radius, $this->chart->getLabelRadius());
+    }
+    
     public function testSetLabelText()
     {
         $this->chart->setLabelText('foo');
         $this->assertEquals('foo', $this->chart->getLabelText());
+    }
+    
+    public function testSetOutlineAlpha()
+    {
+        $alpha = 20;
+        $this->chart->setOutlineAlpha($alpha);
+        $this->assertEquals($alpha, $this->chart->getOutlineAlpha());
+    }
+    
+    public function testOutlineColor()
+    {
+        $color = $this->chart->getOutlineColor();
+        $this->assertNull($color);
+        
+        $this->chart->setOutlineColor('#ff0000');
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->chart->getOutlineColor());
+    }
+    
+    public function testSetOutlineThickness()
+    {
+        $thickness = 20;
+        $this->chart->setOutlineThickness($thickness);
+        $this->assertEquals($thickness, $this->chart->getOutlineThickness());
+    }
+    
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     */
+    public function testSetOutlineThicknessWithNegativeParam()
+    {
+        $this->chart->setOutlineThickness(-10);
     }
     
     public function testPieBaseColor()
@@ -88,6 +133,50 @@ class PieTest extends \PHPUnit_Framework_TestCase
     public function testSetPieBrightnessStepWithWrongParam($brightness)
     {
         $this->chart->setPieBrightnessStep($brightness);
+    }
+    
+    public function testSetSequencedAnimation()
+    {        
+        $this->chart->setSequencedAnimation(false);
+        $this->assertFalse($this->chart->isSequencedAnimation());
+    }
+    
+    public function testSetStartAlpha()
+    {
+        $this->assertEquals(100, $this->chart->getStartAlpha());
+        
+        $alpha = 20;
+        $this->chart->setStartAlpha($alpha);
+        $this->assertEquals($alpha, $this->chart->getStartAlpha());
+    }
+    
+    public function testSetStartDuration()
+    {
+        $duration = 20;
+        $this->chart->setStartDuration($duration);
+        $this->assertEquals($duration, $this->chart->getStartDuration());
+    }
+    
+    public function testSetStartEffect()
+    {
+        $effect = Coordinate::EFFECT_ELASTIC;
+        $this->chart->setStartEffect($effect);
+        $this->assertEquals($effect, $this->chart->getStartEffect());
+    }
+    
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     */
+    public function testSetStartEffectWithInvalidParam()
+    {
+        $this->chart->setStartEffect('foo');
+    }
+    
+    public function testSetUrlTarget()
+    {
+        $url = 'foo';
+        $this->chart->setUrlTarget($url);
+        $this->assertEquals($url, $this->chart->getUrlTarget());
     }
     
     public function testRender()

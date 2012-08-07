@@ -154,6 +154,18 @@ class Pie extends AbstractChart
     );
     
     /**
+     * Constructor
+     *
+     * @param string $id
+     */
+    public function __construct($id = null)
+    {
+        parent::__construct($id);
+        
+        $this->startAlpha = new Setting\Alpha(100);
+    }
+    
+    /**
      * Sets title field
      * 
      * @param string $field
@@ -280,7 +292,7 @@ class Pie extends AbstractChart
      */
     public function setInnerRadius($radius)
     {
-        $this->innerRadius = (integer) $radius;
+        $this->innerRadius = (int) $radius;
         
         return $this;
     }
@@ -303,7 +315,7 @@ class Pie extends AbstractChart
      */
     public function setLabelRadius($radius)
     {
-        $this->labelRadius = (integer) $radius;
+        $this->labelRadius = (int) $radius;
         
         return $this;
     }
@@ -570,7 +582,7 @@ class Pie extends AbstractChart
      */
     public function setUrlTarget($target)
     {
-        $this->urlTarget = (int) $target;
+        $this->urlTarget = (string) $target;
         
         return $this;
     }

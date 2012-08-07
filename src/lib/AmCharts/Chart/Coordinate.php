@@ -8,7 +8,8 @@
 namespace AmCharts\Chart;
 
 use AmCharts\Graph,
-    AmCharts\Chart\Setting;
+    AmCharts\Chart\Setting,
+    AmCharts\Exception;
 
 abstract class Coordinate extends AbstractChart
 {    
@@ -200,7 +201,7 @@ abstract class Coordinate extends AbstractChart
      */
     public function setUrlTarget($target)
     {
-        $this->urlTarget = (int) $target;
+        $this->urlTarget = (string) $target;
         
         return $this;
     }

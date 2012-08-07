@@ -129,7 +129,7 @@ abstract class AbstractGraph
      * Sets balloon text
      * 
      * @param string $text
-     * @return Pie
+     * @return AbstractGraph
      */
     public function setBalloonText($text)
     {

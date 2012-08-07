@@ -26,7 +26,32 @@ class SerialTest extends \PHPUnit_Framework_TestCase
     
     public function testSetCategoryField()
     {
-        $this->chart->setCategoryField('foo');
-        $this->assertEquals('foo', $this->chart->getCategoryField());
+        $value = 'foo';
+        $this->chart->setCategoryField($value);
+        $this->assertEquals($value, $this->chart->getCategoryField());
+    }
+    
+    public function testSetColumnSpacing()
+    {
+        $spacing = 10;
+        $this->chart->setColumnSpacing($spacing);
+        $this->assertEquals($spacing, $this->chart->getColumnSpacing());
+    }
+    
+    public function testSetColumnWidth()
+    {
+        $width = 0.6;
+        $this->chart->setColumnWidth($width);
+        $this->assertEquals($width, $this->chart->getColumnWidth());
+    }
+    
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     */
+    public function testSetColumnWidthWithInvalidParam()
+    {
+        $width = 10;
+        $this->chart->setColumnWidth($width);
+        $this->assertEquals($width, $this->chart->getColumnWidth());
     }
 }

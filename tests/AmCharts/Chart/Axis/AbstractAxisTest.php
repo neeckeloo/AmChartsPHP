@@ -80,12 +80,6 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(30, $this->axis->getLabelRotation());
     }
     
-    public function testSetTickLength()
-    {
-        $this->axis->setTickLength(30);
-        $this->assertEquals(30, $this->axis->getTickLength());
-    }
-    
     /**
      * @expectedException AmCharts\Exception\InvalidArgumentException 
      */
@@ -108,6 +102,12 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
     public function testSetLabelRotationWithWrongValue($angle)
     {
         $this->axis->setLabelRotation($angle);
+    }
+    
+    public function testSetTickLength()
+    {
+        $this->axis->setTickLength(30);
+        $this->assertEquals(30, $this->axis->getTickLength());
     }
     
     public function testToArray()

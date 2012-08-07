@@ -126,7 +126,7 @@ abstract class AbstractChart
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = (string) $title;
 
         return $this;
     }
@@ -149,7 +149,16 @@ abstract class AbstractChart
      */
     public function setWidth($width)
     {
-        $this->width = $width;
+        if (is_numeric($width)) {
+            $width .= 'px';
+        } elseif (!preg_match('/([\d].*)(px|\%)/', $width)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
+                $width
+            ));
+        }
+        
+        $this->width = (string) $width;
 
         return $this;
     }
@@ -172,7 +181,16 @@ abstract class AbstractChart
      */
     public function setHeight($height)
     {
-        $this->height = $height;
+        if (is_numeric($height)) {
+            $height .= 'px';
+        } elseif (!preg_match('/([\d].*)(px|\%)/', $height)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
+                $height
+            ));
+        }
+        
+        $this->height = (string) $height;
 
         return $this;
     }
