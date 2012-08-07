@@ -18,4 +18,9 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     {
         $this->scrollbar = new Scrollbar;
     }
+    
+    public function testToArray()
+    {
+        $this->assertTrue(is_array($this->scrollbar->toArray()));
+    }
 }
