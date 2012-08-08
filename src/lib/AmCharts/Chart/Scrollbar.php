@@ -10,7 +10,21 @@ namespace AmCharts\Chart;
 use AmCharts\Exception;
 
 class Scrollbar
-{
+{    
+    /**
+     * Specifies whether scrollbar has a resize feature.
+     * 
+     * @var boolean 
+     */
+    protected $resizeEnabled = true;
+    
+    /**
+     * Height of scrollbar
+     * 
+     * @var integer
+     */
+    protected $height;
+    
     /**
      * Constructor
      * 
@@ -19,6 +33,61 @@ class Scrollbar
     public function __construct($params = array())
     {
         $this->setParams($params);
+    }
+    
+    /**
+     * Sets if scrollbar resize is enabled
+     * 
+     * @param boolean $enabled
+     * @return Scrollbar 
+     */
+    public function setResizeEnabled($enabled = false)
+    {
+        $this->resizeEnabled = (bool) $enabled;
+        
+        return $this;
+    }
+    
+    /**
+     * Returns true if scrollbar resize is enabled
+     * 
+     * @return boolean
+     */
+    public function isResizeEnabled()
+    {
+        return $this->resizeEnabled;
+    }
+
+    /**
+     * Sets height
+     * 
+     * @param string $height 
+     * @return AbstractChart
+     */
+    public function setHeight($height)
+    {
+        if (is_numeric($height)) {
+            $height .= 'px';
+        } elseif (!preg_match('/([\d].*)px/', $height)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
+                $height
+            ));
+        }
+        
+        $this->height = (string) $height;
+
+        return $this;
+    }
+    
+    /**
+     * Returns height
+     * 
+     * @return string
+     */
+    public function getHeight()
+    {
+        return $this->height;
     }
     
     /**
