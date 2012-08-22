@@ -1,7 +1,7 @@
 <?php
 /**
  * AmChartsPHP
- * 
+ *
  * @link      http://github.com/neeckeloo/AmChartsPHP
  * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
@@ -11,92 +11,92 @@ use AmCharts\Chart\Setting,
     AmCharts\Exception;
 
 abstract class AbstractAxis
-{    
+{
     /**
-     * @var Setting\Alpha 
+     * @var Setting\Alpha
      */
     protected $axisAlpha;
-    
+
     /**
-     * @var Setting\Color 
+     * @var Setting\Color
      */
     protected $axisColor;
-    
+
     /**
-     * @var integer 
+     * @var integer
      */
     protected $axisThickness;
-    
+
     /**
-     * @var integer 
+     * @var integer
      */
     protected $dashLength;
-    
+
     /**
-     * @var Setting\Alpha 
+     * @var Setting\Alpha
      */
     protected $fillAlpha;
-    
+
     /**
-     * @var Setting\Color 
+     * @var Setting\Color
      */
     protected $fillColor;
-    
+
     /**
-     * @var Setting\Alpha 
+     * @var Setting\Alpha
      */
     protected $gridAlpha;
-    
+
     /**
-     * @var Setting\Color 
+     * @var Setting\Color
      */
     protected $gridColor;
-    
+
     /**
-     * @var integer 
+     * @var integer
      */
     protected $gridThickness;
-    
+
     /**
-     * @var integer 
+     * @var integer
      */
     protected $labelRotation;
-    
+
     /**
      * Length of the tick marks.
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $tickLength;
-    
+
     /**
-     * @var Setting\Text 
+     * @var Setting\Text
      */
     protected $title;
-    
+
     /**
      * Sets axis alpha
-     * 
-     * @param integer $alpha 
+     *
+     * @param integer $alpha
      * @return AbstractAxis
      */
     public function setAxisAlpha($alpha)
     {
         $this->axisAlpha = new Setting\Alpha($alpha);
-        
+
         return $this;
     }
-    
+
     /**
      * Returns axis alpha
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getAxisAlpha()
     {
         return $this->axisAlpha->getOpacity();
     }
-    
+
     /**
      * Sets axis color
      *
@@ -115,21 +115,21 @@ abstract class AbstractAxis
 
         return $this;
     }
-    
+
     /**
      * Returns axis color
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getAxisColor()
     {
         return $this->axisColor;
     }
-    
+
     /**
      * Sets axis thickness
-     * 
-     * @param integer $thickness 
+     *
+     * @param integer $thickness
      * @return AbstractAxis
      */
     public function setAxisThickness($thickness)
@@ -137,74 +137,74 @@ abstract class AbstractAxis
         if ($thickness < 0) {
             throw new Exception\InvalidArgumentException('The thickness value must be positive.');
         }
-        
+
         $this->axisThickness = (int) $thickness;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns axis thickness
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getAxisThickness()
     {
         return $this->axisThickness;
     }
-    
+
     /**
      * Sets dash length
-     * 
-     * @param integer $length 
+     *
+     * @param integer $length
      * @return AbstractAxis
      */
     public function setDashLength($length)
     {
         $length = (int) $length;
-        
+
         if ($length < 0) {
             throw new Exception\InvalidArgumentException('The dash length value must be positive.');
         }
-        
+
         $this->dashLength = $length;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns dash length
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getDashLength()
     {
         return $this->dashLength;
     }
-    
+
     /**
      * Sets fill alpha
-     * 
-     * @param integer $alpha 
+     *
+     * @param integer $alpha
      * @return AbstractAxis
      */
     public function setFillAlpha($alpha)
     {
         $this->fillAlpha = new Setting\Alpha($alpha);
-        
+
         return $this;
     }
-    
+
     /**
      * Returns fill alpha
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getFillAlpha()
     {
         return $this->fillAlpha->getOpacity();
     }
-    
+
     /**
      * Sets fill color
      *
@@ -223,40 +223,40 @@ abstract class AbstractAxis
 
         return $this;
     }
-    
+
     /**
      * Returns fill color
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getFillColor()
     {
         return $this->fillColor;
     }
-    
+
     /**
      * Sets grid alpha
-     * 
-     * @param integer $alpha 
+     *
+     * @param integer $alpha
      * @return AbstractAxis
      */
     public function setGridAlpha($alpha)
     {
         $this->gridAlpha = new Setting\Alpha($alpha);
-        
+
         return $this;
     }
-    
+
     /**
      * Returns grid alpha
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getGridAlpha()
     {
         return $this->gridAlpha->getOpacity();
     }
-    
+
     /**
      * Sets grid color
      *
@@ -275,21 +275,21 @@ abstract class AbstractAxis
 
         return $this;
     }
-    
+
     /**
      * Returns grid color
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getGridColor()
     {
         return $this->gridColor;
     }
-    
+
     /**
      * Sets grid thickness
-     * 
-     * @param integer $thickness 
+     *
+     * @param integer $thickness
      * @return AbstractAxis
      */
     public function setGridThickness($thickness)
@@ -297,82 +297,82 @@ abstract class AbstractAxis
         if ($thickness < 0) {
             throw new Exception\InvalidArgumentException('The thickness value must be positive.');
         }
-        
+
         $this->gridThickness = (int) $thickness;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns grid thickness
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getGridThickness()
     {
         return $this->gridThickness;
     }
-    
+
     /**
      * Sets label rotation
-     * 
+     *
      * @param integer $angle
-     * @return AbstractAxis 
+     * @return AbstractAxis
      */
     public function setLabelRotation($angle)
     {
         if (!is_int($angle)) {
             throw new Exception\InvalidArgumentException("The label rotation value must be an integer.");
         }
-        
+
         if (!($angle > -360 && $angle < 360)) {
             throw new Exception\InvalidArgumentException("'$angle' is not a valid angle.");
         }
-        
+
         $this->labelRotation = (int) $angle;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns label rotation
-     * 
-     * @return AbstractAxis 
+     *
+     * @return AbstractAxis
      */
     public function getLabelRotation()
     {
         return $this->labelRotation;
     }
-    
+
     /**
      * Sets tick length
-     * 
-     * @param integer $length 
+     *
+     * @param integer $length
      * @return AbstractAxis
      */
     public function setTickLength($length)
     {
         $length = (int) $length;
-        
+
         if ($length < 0) {
             throw new Exception\InvalidArgumentException('The tick length value must be positive.');
         }
-        
+
         $this->tickLength = $length;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns tick length
-     * 
-     * @return integer 
+     *
+     * @return integer
      */
     public function getTickLength()
     {
         return $this->tickLength;
     }
-        
+
     /**
      * Sets and returns text object
      *
@@ -384,21 +384,21 @@ abstract class AbstractAxis
         if (!isset($this->title)) {
             $this->title = new Setting\Text();
         }
-        
+
         $this->title->setParams($params);
 
         return $this->title;
     }
-    
+
     /**
      * Returns object properties as array
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function toArray()
     {
         $options = array();
-        
+
         $fields = array_keys(get_object_vars($this));
         foreach ($fields as $field) {
             if (isset($this->{$field})) {
@@ -406,7 +406,7 @@ abstract class AbstractAxis
                     $options[$field] = $this->{$field}->getValue();
                 } elseif ($this->{$field} instanceof Setting\Text) {
                     $titleOptions = $this->{$field}->toArray();
-                    
+
                     $options = $options + array(
                         'title'         => $titleOptions['text'],
                         'titleColor'    => $titleOptions['color'],
@@ -417,7 +417,7 @@ abstract class AbstractAxis
                 }
             }
         }
-        
+
         return $options;
     }
 }
