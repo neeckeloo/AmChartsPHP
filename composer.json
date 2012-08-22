@@ -1,8 +1,8 @@
 {
     "name": "neeckeloo/amcharts-php",
     "type": "library",
-    "description": "PHP5 library to configure AmCharts charts.",
-    "keywords": ["chart", "line", "pie", "bar"],
+    "description": "PHP5 library to create AmCharts HTML5 charts.",
+    "keywords": ["amcharts", "chart", "line", "pie", "bar"],
     "authors": [
         {
             "name": "Nicolas Eeckeloo",
