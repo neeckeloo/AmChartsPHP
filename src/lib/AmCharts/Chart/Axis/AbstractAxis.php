@@ -409,8 +409,8 @@ abstract class AbstractAxis
 
                     $options = $options + array(
                         'title'         => $titleOptions['text'],
-                        'titleColor'    => $titleOptions['color'],
-                        'titleFontSize' => $titleOptions['fontSize']
+                        'titleColor'    => isset($titleOptions['color']) ? $titleOptions['color'] : null,
+                        'titleFontSize' => isset($titleOptions['fontSize']) ? $titleOptions['fontSize'] : null,
                     );
                 } else {
                     $options[$field] = $this->{$field};
