@@ -117,10 +117,13 @@ class Renderer
      */
     protected function formatObjectAdding($variable, $object, $properties = array())
     {
-        if (strpos($object, 'Am') == 0) {
-            $method = substr($object, 2);
+        $method = 'add';
+        if (strpos($object, 'Am') === 0) {
+            $method .= substr($object, 2);
         }
-        $method = 'add' . $method;
+        else {
+            $method .= $object;
+        }
 
         $code = '';
         $code .= sprintf('var %s = new AmCharts.%s();', $variable, $object) . "\n";
