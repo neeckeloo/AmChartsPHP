@@ -12,6 +12,11 @@ use AmCharts\Manager;
 class Renderer
 {
     /**
+     * @var AbstractChart
+     */
+    protected $chart;
+
+    /**
      * Returns the HTML code to insert on the page
      *
      * @param AbstractChart $chart
@@ -21,6 +26,8 @@ class Renderer
      */
     public function render(AbstractChart $chart, $params = array(), $attributes = array())
     {
+        $this->chart = $chart;
+
         $code = '';
         
         $manager = Manager::getInstance();
@@ -40,44 +47,6 @@ class Renderer
             $manager->setJsIncluded(true);
         }
         
-        $chartId = $chart->getId();
-        
-        $instructions = $chartId . ' = new AmCharts.Am' . ucfirst($chart->getType()) . 'Chart();' . "\n";        
-        $instructions .= $this->formatScriptVarProperties($chartId, $params);
-        
-        if (isset($attributes['legend'])) {
-            $instructions .= 'var legend = new AmCharts.AmLegend();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('legend', $attributes['legend']->toArray());
-            $instructions .= $chartId . '.addLegend(legend)' . "\n";
-        }
-        
-        if (isset($attributes['valueAxis'])) {
-            $instructions .= 'var valueAxis = new AmCharts.ValueAxis();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('valueAxis', $attributes['valueAxis']->toArray());
-            $instructions .= $chartId . '.addValueAxis(valueAxis)' . "\n";
-        }
-        
-        if (isset($attributes['cursor'])) {
-            $instructions .= 'var chartCursor = new AmCharts.ChartCursor();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('chartCursor', $attributes['cursor']->toArray());
-            $instructions .= $chartId . '.addChartCursor(chartCursor)' . "\n";
-        }
-        
-        if (isset($attributes['scrollbar'])) {
-            $instructions .= 'var chartScrollbar = new AmCharts.ChartScrollbar();' . "\n";
-            $instructions .= $this->formatScriptVarProperties('chartScrollbar', $attributes['scrollbar']->toArray());
-            $instructions .= $chartId . '.addChartScrollbar(chartScrollbar)' . "\n";
-        }
-        
-        if (isset($attributes['graphs']) && count($attributes['graphs']) > 0) {
-            foreach ($attributes['graphs'] as $key => $graph) {
-                $graphId = 'graph' . $key;
-                $instructions .= 'var ' . $graphId . ' = new AmCharts.AmGraph();' . "\n";
-                $instructions .= $this->formatScriptVarProperties($graphId, $graph->toArray());
-                $instructions .= $chartId . '.addGraph(' . $graphId . ');' . "\n";
-            }
-        }
-        
         $tpl = '<script type="text/javascript">' . "\n"
             . 'var %1$s;' . "\n"
             . 'AmCharts.ready(function () {' . "\n"
@@ -86,7 +55,77 @@ class Renderer
             . '});' . "\n"
             . '</script>' . "\n"
             . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
-        $code .= sprintf($tpl, $chartId, $instructions, $chart->getWidth(), $chart->getHeight());
+        
+        $code .= sprintf(
+            $tpl,
+            $this->chart->getId(),
+            $this->getInstructions($params, $attributes),
+            $chart->getWidth(),
+            $chart->getHeight()
+        );
+
+        return $code;
+    }
+
+    /**
+     * Returns instructions
+     *
+     * @param array $params
+     * @param array $attributes
+     * @return string
+     */
+    protected function getInstructions($params, $attributes)
+    {
+        $instructions = sprintf(
+            '%s = new AmCharts.Am%sChart();',
+            $this->chart->getId(),
+            ucfirst($this->chart->getType())
+        ) . "\n";
+        $instructions .= $this->formatVarProperties($this->chart->getId(), $params);
+
+        $objects = array(
+            array('legend', 'AmLegend'),
+            array('valueAxis', 'ValueAxis'),
+            array('cursor', 'ChartCursor'),
+            array('scrollbar', 'ChartScrollbar'),
+        );
+        foreach ($objects as $object) {
+            if (isset($attributes[$object[0]])) {
+                $instructions .= $this->formatObjectAdding(
+                    $object[0], $object[1], $attributes[$object[0]]->toArray()
+                );
+            }
+        }
+        
+        if (isset($attributes['graphs']) && is_array($attributes['graphs'])) {
+            foreach ($attributes['graphs'] as $key => $graph) {
+                $graphId = 'graph' . $key;
+                $instructions .= $this->formatObjectAdding($graphId, 'AmGraph', $graph->toArray());
+            }
+        }
+
+        return $instructions;
+    }
+
+    /**
+     * Format object adding
+     *
+     * @param string $variable
+     * @param string $object
+     * @param array $properties
+     * @return string
+     */
+    protected function formatObjectAdding($variable, $object, $properties = array())
+    {
+        if (strpos($object, 'Am') == 0) {
+            $method = substr($object, 2);
+        }
+        $method = 'add' . $method;
+
+        $code = '';
+        $code .= sprintf('var %s = new AmCharts.%s();', $variable, $object) . "\n";
+        $code .= $this->formatVarProperties($variable, $properties);
+        $code .= sprintf('%s.%s(%s);', $this->chart->getId(), $method, $variable) . "\n";
 
         return $code;
     }
@@ -98,7 +137,7 @@ class Renderer
      * @param array $params
      * @return string 
      */
-    protected function formatScriptVarProperties($var, array $params)
+    protected function formatVarProperties($var, array $params)
     {
         $output = '';
         $tpl = '%s.%s = %s;' . "\n";
