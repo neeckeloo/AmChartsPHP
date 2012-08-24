@@ -219,7 +219,7 @@ abstract class Coordinate extends AbstractChart
     /**
      * Sets and returns value axis
      *
-     * @return Axis
+     * @return Axis\Value
      */
     public function valueAxis()
     {
