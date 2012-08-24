@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
+        "zendframework/zend-json": "2.0.*",
         "zendframework/zend-servicemanager": "2.0.*"
     },
     "autoload": {
