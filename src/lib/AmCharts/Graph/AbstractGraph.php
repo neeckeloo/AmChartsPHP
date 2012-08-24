@@ -23,6 +23,11 @@ abstract class AbstractGraph
     protected $title;
 
     /**
+     * @var Bullet
+     */
+    protected $bullet;
+
+    /**
      * @var Fields
      */
     protected $fields;
@@ -107,6 +112,20 @@ abstract class AbstractGraph
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Sets and returns bullet
+     *
+     * @return Bullet
+     */
+    public function bullet()
+    {
+        if (!isset($this->bullet)) {
+            $this->bullet = new Bullet();
+        }
+
+        return $this->bullet;
     }
 
     /**
@@ -306,7 +325,9 @@ abstract class AbstractGraph
             }
         }
 
-        $options = $options + $this->fields()->toArray();
+        $options = $options
+            + $this->fields()->toArray()
+            + $this->bullet()->toArray();
 
         return $options;
     }
