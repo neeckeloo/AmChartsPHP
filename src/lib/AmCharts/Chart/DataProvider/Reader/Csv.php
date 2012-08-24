@@ -7,8 +7,32 @@
  */
 namespace AmCharts\Chart\DataProvider\Reader;
 
+use AmCharts\Exception,
+    XmlReader;
+
 class Xml extends AbstractReader
-{
+{    
+    /**
+     * Returns data from file.
+     *
+     * @param  string $filename
+     * @return array
+     * @throws Exception\RuntimeException
+     */
+    public function fromFile($filename)
+    {
+        if (!is_file($filename) || !is_readable($filename)) {
+            throw new Exception\RuntimeException(sprintf(
+                "File '%s' doesn't exist or not readable",
+                $filename
+            ));
+        }
+        
+        $content = file_get_contents($filename);
+        
+        return $this->fromString($content);
+    }
+
     /**
      * Returns data from string
      *
