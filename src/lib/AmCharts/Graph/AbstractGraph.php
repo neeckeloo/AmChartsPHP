@@ -8,6 +8,7 @@
 namespace AmCharts\Graph;
 
 use AmCharts\Chart\Setting;
+use AmCharts\Exception;
 
 abstract class AbstractGraph
 {
