@@ -10,7 +10,24 @@ namespace AmCharts\Chart;
 use AmCharts\Exception;
 
 class Scrollbar
-{    
+{
+    /**
+     * @var Setting\Alpha
+     */
+    protected $gridAlpha;
+
+    /**
+     * @var Setting\Color
+     */
+    protected $gridColor;
+
+    /**
+     * Number of grid lines
+     * 
+     * @var integer 
+     */
+    protected $gridCount;
+
     /**
      * Specifies whether scrollbar has a resize feature.
      * 
@@ -23,7 +40,7 @@ class Scrollbar
      * 
      * @var integer
      */
-    protected $height;
+    protected $scrollbarHeight;
     
     /**
      * Constructor
@@ -33,6 +50,79 @@ class Scrollbar
     public function __construct($params = array())
     {
         $this->setParams($params);
+    }
+
+    /**
+     * Sets grid alpha
+     *
+     * @param integer $alpha
+     * @return Scrollbar
+     */
+    public function setGridAlpha($alpha)
+    {
+        $this->gridAlpha = new Setting\Alpha($alpha);
+
+        return $this;
+    }
+
+    /**
+     * Returns grid alpha
+     *
+     * @return integer
+     */
+    public function getGridAlpha()
+    {
+        return $this->gridAlpha->getOpacity();
+    }
+
+    /**
+     * Sets grid color
+     *
+     * @param string|array|Color $color
+     * @return Scrollbar
+     */
+    public function setGridColor($color = null)
+    {
+        if (null !== $color) {
+            if ($color instanceof Setting\Color) {
+                $this->gridColor = $color;
+            } else {
+                $this->gridColor = new Setting\Color($color);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns grid color
+     *
+     * @return string
+     */
+    public function getGridColor()
+    {
+        return $this->gridColor;
+    }
+
+    /**
+     * Set grid count
+     *
+     * @param integer $count
+     * @return Scrollbar
+     */
+    public function setGridCount($count)
+    {
+        $this->gridCount = (int) $count;
+    }
+
+    /**
+     * Returns grid count
+     *
+     * @return integer
+     */
+    public function getGridCount()
+    {
+        return $this->gridCount;
     }
     
     /**
@@ -75,7 +165,7 @@ class Scrollbar
             ));
         }
         
-        $this->height = (string) $height;
+        $this->scrollbarHeight = (string) $height;
 
         return $this;
     }
@@ -87,7 +177,7 @@ class Scrollbar
      */
     public function getHeight()
     {
-        return $this->height;
+        return $this->scrollbarHeight;
     }
     
     /**

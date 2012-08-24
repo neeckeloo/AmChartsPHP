@@ -18,6 +18,25 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     {
         $this->scrollbar = new Scrollbar;
     }
+
+    public function testSetGridAlpha()
+    {
+        $this->scrollbar->setGridAlpha(30);
+        $this->assertEquals(30, $this->scrollbar->getGridAlpha());
+    }
+
+    public function testSetGridColor()
+    {
+        $this->scrollbar->setGridColor('#ff0000');
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getGridColor());
+    }
+
+    public function testSetGridCount()
+    {
+        $count = 5;
+        $this->scrollbar->setGridCount($count);
+        $this->assertEquals($count, $this->scrollbar->getGridCount());
+    }
     
     public function testSetResizeEnabled()
     {
