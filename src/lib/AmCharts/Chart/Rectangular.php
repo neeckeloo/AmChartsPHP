@@ -12,6 +12,14 @@ use AmCharts\Exception;
 abstract class Rectangular extends Coordinate
 {
     /**
+     * Specifies if margins of a chart should be calculated automatically so that labels of axes would fit.
+     * The chart will adjust only margins with axes. Other margins will use values set with margin properties.
+     *
+     * @var boolean
+     */
+    protected $autoMargins = true;
+
+    /**
      * Chart cursor
      * 
      * @var Cursor 
@@ -76,6 +84,29 @@ abstract class Rectangular extends Coordinate
      * @var integer 
      */
     protected $marginRight;
+
+    /**
+     * Sets auto margins
+     *
+     * @param boolean $auto
+     * @return Rectangular
+     */
+    public function setAutoMargins($auto = true)
+    {
+        $this->autoMargins = (bool) $auto;
+
+        return $this;
+    }
+
+    /**
+     * Returns auto margins
+     *
+     * @return boolean
+     */
+    public function getAutoMargins()
+    {
+        return $this->autoMargins;
+    }
     
     /**
      * Sets and returns chart cursor 
@@ -143,6 +174,8 @@ abstract class Rectangular extends Coordinate
     public function setMarginTop($margin)
     {
         $this->marginTop = (int) $margin;
+
+        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -166,6 +199,8 @@ abstract class Rectangular extends Coordinate
     public function setMarginBottom($margin)
     {
         $this->marginBottom = (int) $margin;
+
+        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -189,6 +224,8 @@ abstract class Rectangular extends Coordinate
     public function setMarginLeft($margin)
     {
         $this->marginLeft = (int) $margin;
+
+        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -212,6 +249,8 @@ abstract class Rectangular extends Coordinate
     public function setMarginRight($margin)
     {
         $this->marginRight = (int) $margin;
+
+        $this->setAutoMargins(false);
         
         return $this;
     }
