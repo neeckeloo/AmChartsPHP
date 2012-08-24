@@ -299,7 +299,7 @@ abstract class AbstractGraph
             if (isset($this->{$name})) {
                 if ($this->{$name} instanceof Setting\Alpha) {
                     $options[$name] = $this->{$name}->getValue();
-                } else {
+                } elseif (!is_object($this->{$name})) {
                     $options[$name] = $this->{$name};
                 }
             }
