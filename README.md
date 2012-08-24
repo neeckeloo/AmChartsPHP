@@ -12,6 +12,40 @@ Requirements
 
 AmChartsPHP works with PHP 5.3 or later.
 
+Installation via Composer
+-----------------------
+
+Create a `composer.json` file in your project root and use it to define your dependencies:
+
+    {
+	    "repositories": [
+	        {
+	            "type": "package",
+	            "package": {
+	                "version": "master",
+	                "name": "AmChartsPHP",
+	                "source": {
+	                    "type": "git",
+	                    "url": "https://github.com/neeckeloo/AmChartsPHP",
+	                    "reference": "master"
+	                } 
+	            }
+
+	        }
+	    ],
+		"require": {
+	        "neeckeloo/amcharts-php": "master"
+	    }
+    }
+
+Then install Composer in your project (or [download the composer.phar][1] directly):
+
+    curl -s http://getcomposer.org/installer | php
+
+And finally ask Composer to install the dependencies:
+
+    php composer.phar install
+
 Usage
 -----
 
@@ -57,3 +91,6 @@ AmCharts original documentation
 -------------------------------
 
 [http://www.amcharts.com/docs/v.2/javascript_reference](http://www.amcharts.com/docs/v.2/javascript_reference)
+
+
+ [1]: http://getcomposer.org/composer.phar
