@@ -18,24 +18,23 @@ Installation via Composer
 Create a `composer.json` file in your project root and use it to define your dependencies:
 
     {
-	    "repositories": [
-	        {
-	            "type": "package",
-	            "package": {
-	                "version": "master",
-	                "name": "AmChartsPHP",
-	                "source": {
-	                    "type": "git",
-	                    "url": "https://github.com/neeckeloo/AmChartsPHP",
-	                    "reference": "master"
-	                } 
-	            }
-
+        "repositories": [
+	    {
+	        "type": "package",
+	        "package": {
+	            "version": "master",
+	            "name": "AmChartsPHP",
+	            "source": {
+	                "type": "git",
+	                "url": "https://github.com/neeckeloo/AmChartsPHP",
+	                "reference": "master"
+	            } 
 	        }
-	    ],
-		"require": {
-	        "neeckeloo/amcharts-php": "master"
 	    }
+	],
+	"require": {
+            "neeckeloo/amcharts-php": "master"
+        }
     }
 
 Then install Composer in your project (or [download the composer.phar][1] directly):
