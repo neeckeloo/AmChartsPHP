@@ -303,7 +303,7 @@ abstract class Rectangular extends Coordinate
         
         $paramKeys = array(
             'angle', 'depth3D', 'marginTop', 'marginBottom', 'marginLeft',
-            'marginRight'
+            'marginRight', 'autoMargins',
         );
         foreach ($paramKeys as $key) {
             if (isset($this->{$key})) {
