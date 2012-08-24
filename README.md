@@ -20,7 +20,7 @@ Create a `composer.json` file in your project root and use it to define your dep
     {
         "repositories": [
 	    {
-	        "type": "package",
+                "type": "package",
 	        "package": {
 	            "version": "master",
 	            "name": "AmChartsPHP",
@@ -30,9 +30,9 @@ Create a `composer.json` file in your project root and use it to define your dep
 	                "reference": "master"
 	            } 
 	        }
-	    }
-	],
-	"require": {
+            }
+        ],
+        "require": {
             "neeckeloo/amcharts-php": "master"
         }
     }
