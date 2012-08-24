@@ -174,8 +174,6 @@ abstract class Rectangular extends Coordinate
     public function setMarginTop($margin)
     {
         $this->marginTop = (int) $margin;
-
-        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -199,8 +197,6 @@ abstract class Rectangular extends Coordinate
     public function setMarginBottom($margin)
     {
         $this->marginBottom = (int) $margin;
-
-        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -224,8 +220,6 @@ abstract class Rectangular extends Coordinate
     public function setMarginLeft($margin)
     {
         $this->marginLeft = (int) $margin;
-
-        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -249,8 +243,6 @@ abstract class Rectangular extends Coordinate
     public function setMarginRight($margin)
     {
         $this->marginRight = (int) $margin;
-
-        $this->setAutoMargins(false);
         
         return $this;
     }
@@ -288,6 +280,8 @@ abstract class Rectangular extends Coordinate
             ->setMarginBottom($margin[1])
             ->setMarginLeft($margin[2])
             ->setMarginRight($margin[3]);
+
+        $this->setAutoMargins(false);
         
         return $this;
     }
