@@ -27,6 +27,7 @@ class Factory
     protected static $extensions = array(
         'json' => 'json',
         'xml'  => 'xml',
+        'csv'  => 'csv',
     );
     
     /**

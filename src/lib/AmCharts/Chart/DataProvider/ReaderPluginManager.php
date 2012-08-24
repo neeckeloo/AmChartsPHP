@@ -20,6 +20,7 @@ class ReaderPluginManager extends AbstractPluginManager
     protected $invokableClasses = array(
         'json' => 'AmCharts\Chart\DataProvider\Reader\Json',
         'xml'  => 'AmCharts\Chart\DataProvider\Reader\Xml',
+        'csv'  => 'AmCharts\Chart\DataProvider\Reader\Csv',
     );
     
     /**

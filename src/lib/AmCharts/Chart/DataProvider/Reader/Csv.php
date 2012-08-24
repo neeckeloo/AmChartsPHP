@@ -1,38 +1,14 @@
 <?php
 /**
  * AmChartsPHP
- * 
+ *
  * @link      http://github.com/neeckeloo/AmChartsPHP
  * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart\DataProvider\Reader;
 
-use AmCharts\Exception,
-    XmlReader;
-
-class Xml extends AbstractReader
-{    
-    /**
-     * Returns data from file.
-     *
-     * @param  string $filename
-     * @return array
-     * @throws Exception\RuntimeException
-     */
-    public function fromFile($filename)
-    {
-        if (!is_file($filename) || !is_readable($filename)) {
-            throw new Exception\RuntimeException(sprintf(
-                "File '%s' doesn't exist or not readable",
-                $filename
-            ));
-        }
-        
-        $content = file_get_contents($filename);
-        
-        return $this->fromString($content);
-    }
-
+class Csv extends AbstractReader
+{
     /**
      * Returns data from string
      *
@@ -44,16 +20,23 @@ class Xml extends AbstractReader
         if (empty($string)) {
             return array();
         }
-        
-        $xml = new \SimpleXMLElement($string);
-        
-        $data = (array) $xml;
-        $items = reset($data);
-                
-        array_walk($items, function(&$item) { 
-            $item = (array) $item;
-        });
-        
+
+        $items = array();
+
+        $i = 0;
+        $lines = preg_split('/[\r\n|\n\r|\n|\r]/', $string);
+        foreach ($lines as $line) {
+            if ($line) {
+                $fields = explode(';', $line);
+                if ($i == 0) {
+                    $keys = $fields;
+                } else {
+                    $items[] = array_combine($keys, $fields);
+                }
+                $i++;
+            }
+        }
+
         return $items;
     }
 }
