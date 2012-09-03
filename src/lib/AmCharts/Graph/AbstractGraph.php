@@ -325,9 +325,13 @@ abstract class AbstractGraph
             }
         }
 
-        $options = $options
-            + $this->fields()->toArray()
-            + $this->bullet()->toArray();
+        $options += $this->fields()->toArray();
+
+        $bulletOptions = $this->bullet()->toArray();
+        if (isset($bulletOptions['type'])) {
+            $bulletOptions['bullet'] = $bulletOptions['type'];
+        }
+        $options += $bulletOptions;
 
         return $options;
     }
