@@ -1,0 +1,25 @@
+{
+    "hash": "853a039ba118dc3718a1dddea1e95493",
+    "packages": [
+        {
+            "package": "zendframework/zend-json",
+            "version": "2.0.0rc7"
+        },
+        {
+            "package": "zendframework/zend-servicemanager",
+            "version": "2.0.0rc7"
+        },
+        {
+            "package": "zendframework/zend-stdlib",
+            "version": "2.0.0rc7"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "beta",
+    "stability-flags": [
+
+    ]
+}
