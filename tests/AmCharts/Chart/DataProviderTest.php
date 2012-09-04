@@ -7,65 +7,20 @@
  */
 namespace AmCharts\Chart;
 
-class CoordinateTest extends \PHPUnit_Framework_TestCase
+class DataProviderTest extends \PHPUnit_Framework_TestCase
 {   
     /**
-     * @var Coordinate
+     * @var DataProvider
      */
-    protected $chart;
+    protected $provider;
     
     public function setUp()
     {
-        $this->chart = $this->getMockForAbstractClass('AmCharts\Chart\Coordinate');
+        $this->provider = new DataProvider(array('foo' => 123, 'bar' => 456));
     }
     
-    public function testSetSequencedAnimation()
-    {        
-        $this->chart->setSequencedAnimation(false);
-        $this->assertFalse($this->chart->isSequencedAnimation());
-    }
-    
-    public function testSetStartAlpha()
+    public function testGetData()
     {
-        $this->assertEquals(100, $this->chart->getStartAlpha());
-        
-        $alpha = 20;
-        $this->chart->setStartAlpha($alpha);
-        $this->assertEquals($alpha, $this->chart->getStartAlpha());
-    }
-    
-    public function testSetStartDuration()
-    {
-        $duration = 20;
-        $this->chart->setStartDuration($duration);
-        $this->assertEquals($duration, $this->chart->getStartDuration());
-    }
-    
-    public function testSetStartEffect()
-    {
-        $effect = Coordinate::EFFECT_ELASTIC;
-        $this->chart->setStartEffect($effect);
-        $this->assertEquals($effect, $this->chart->getStartEffect());
-    }
-    
-    /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
-     */
-    public function testSetStartEffectWithInvalidParam()
-    {
-        $this->chart->setStartEffect('foo');
-    }
-    
-    public function testSetUrlTarget()
-    {
-        $url = 'foo';
-        $this->chart->setUrlTarget($url);
-        $this->assertEquals($url, $this->chart->getUrlTarget());
-    }
-    
-    public function testGetValueAxis()
-    {
-        $valueAxis = $this->chart->valueAxis();
-        $this->assertInstanceOf('AmCharts\Chart\Axis\Value', $valueAxis);
+        $this->assertTrue(is_array($this->provider->getData()));
     }
 }
