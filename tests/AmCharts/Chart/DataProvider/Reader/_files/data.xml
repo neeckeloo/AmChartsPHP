@@ -1,0 +1,14 @@
+<root>
+    <item>
+        <name>Foo</name>
+        <value>1</value>
+    </item>
+    <item>
+        <name>Bar</name>
+        <value>2</value>
+    </item>
+    <item>
+        <name>Baz</name>
+        <value>3</value>
+    </item>
+</root>

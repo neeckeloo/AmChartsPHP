@@ -7,37 +7,23 @@
  */
 namespace AmCharts\Chart\DataProvider\Reader;
 
-class XmlTest extends \PHPUnit_Framework_TestCase
+class JsonTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Xml
+     * @var Json
      */
-    protected $object;
+    protected $reader;
     
     public function setUp()
     {
-        $this->object = new Xml;
+        $this->reader = new Json;
     }
     
     public function testFromString()
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8" ?>
-<root>
-    <item>
-        <name>Foo</name>
-        <value>1</value>
-    </item>
-    <item>
-        <name>Bar</name>
-        <value>2</value>
-    </item>
-    <item>
-        <name>Baz</name>
-        <value>3</value>
-    </item>
-</root>';
+        $data = '[{"name":"Foo","value":1},{"name":"Bar","value":2},{"name":"Baz","value":3}]';
         
-        $items = $this->object->fromString($xml);
+        $items = $this->reader->fromString($data);
         
         $this->assertCount(3, $items);
         

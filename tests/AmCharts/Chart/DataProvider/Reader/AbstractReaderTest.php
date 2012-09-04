@@ -7,41 +7,36 @@
  */
 namespace AmCharts\Chart\DataProvider\Reader;
 
-class XmlTest extends \PHPUnit_Framework_TestCase
+class AbstractReaderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Xml
+     * @var AbstractReader
      */
-    protected $object;
+    protected $reader;
     
     public function setUp()
     {
-        $this->object = new Xml;
+        $class = 'AmCharts\Chart\DataProvider\Reader\AbstractReader';
+        $this->reader = $this->getMockForAbstractClass(
+            $class, array(), '', true, true, true, array('fromString')
+        );
+
+        $this->reader->expects($this->any())
+            ->method('fromString')
+            ->will($this->returnArgument(0));
     }
-    
-    public function testFromString()
+
+    public function testFromFile()
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8" ?>
-<root>
-    <item>
-        <name>Foo</name>
-        <value>1</value>
-    </item>
-    <item>
-        <name>Bar</name>
-        <value>2</value>
-    </item>
-    <item>
-        <name>Baz</name>
-        <value>3</value>
-    </item>
-</root>';
-        
-        $items = $this->object->fromString($xml);
-        
-        $this->assertCount(3, $items);
-        
-        $this->assertEquals('Foo', $items[0]['name']);
-        $this->assertEquals(1, $items[0]['value']);
+        $data = $this->reader->fromFile(__DIR__ . '/_files/data.xml');
+        $this->assertStringStartsWith('<root>', $data);
+    }
+
+    /**
+     * @expectedException AmCharts\Exception\RuntimeException
+     */
+    public function testFromFileWithWrongFile()
+    {
+        $this->reader->fromFile('foo.xml');
     }
 }

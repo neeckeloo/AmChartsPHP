@@ -12,16 +12,16 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Xml
      */
-    protected $object;
+    protected $reader;
     
     public function setUp()
     {
-        $this->object = new Xml;
+        $this->reader = new Xml;
     }
     
     public function testFromString()
     {
-        $xml = '<?xml version="1.0" encoding="UTF-8" ?>
+        $data = '<?xml version="1.0" encoding="UTF-8" ?>
 <root>
     <item>
         <name>Foo</name>
@@ -37,7 +37,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     </item>
 </root>';
         
-        $items = $this->object->fromString($xml);
+        $items = $this->reader->fromString($data);
         
         $this->assertCount(3, $items);
         
