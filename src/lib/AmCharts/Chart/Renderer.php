@@ -38,22 +38,23 @@ class Renderer
         }
 
         if (!$manager->hasIncludedJs()) {
-            $code .= $this->renderScriptTag($manager->getAmChartsPath()) . "\n";
+            $code .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
             
             if ($manager->isLoadingJQuery()) {
-                $code .= $this->renderScriptTag($manager->getJQueryPath()) . "\n";
+                $code .= $this->renderScriptTag(null, array('src' => $manager->getJQueryPath())) . "\n";
             }
             
             $manager->setJsIncluded(true);
         }
         
-        $tpl = '<script type="text/javascript">' . "\n"
-            . 'var %1$s;' . "\n"
-            . 'AmCharts.ready(function () {' . "\n"
-            . '%2$s'
-            . '%1$s.write("%1$s");' . "\n"
-            . '});' . "\n"
-            . '</script>' . "\n"
+        $tpl = $this->renderScriptTag(
+                'var %1$s;' . "\n"
+                . 'AmCharts.ready(function () {' . "\n"
+                . '%2$s'
+                . '%1$s.write("%1$s");' . "\n"
+                . '});'
+            )
+            . "\n"
             . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
         
         $code .= sprintf(
@@ -175,8 +176,21 @@ class Renderer
      * @param string $source
      * @return string 
      */
-    protected function renderScriptTag($source)
-    {        
-        return sprintf('<script type="text/javascript" src="%s"></script>', $source);
+    protected function renderScriptTag($content, $attribs = array())
+    {
+        $attribs['type'] = 'text/javascript';
+
+        $attrString = '';
+        foreach ($attribs as $key => $value) {
+            $attrString .= sprintf(' %s="%s"', $key, $value);
+        }
+
+        $html = '<script' . $attrString . '>';
+        if ($content) {
+            $html .= PHP_EOL . $content . PHP_EOL;
+        }
+        $html .= '</script>';
+
+        return $html;
     }
 }
