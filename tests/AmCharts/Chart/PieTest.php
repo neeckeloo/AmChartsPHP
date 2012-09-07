@@ -18,6 +18,11 @@ class PieTest extends \PHPUnit_Framework_TestCase
     {
         $this->chart = new Pie;
     }
+
+    public function testGetType()
+    {
+        $this->assertEquals('pie', $this->chart->getType());
+    }
     
     public function testSetTitleField()
     {

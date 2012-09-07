@@ -18,6 +18,11 @@ class SerialTest extends \PHPUnit_Framework_TestCase
     {
         $this->chart = new Serial;
     }
+
+    public function testGetType()
+    {
+        $this->assertEquals('serial', $this->chart->getType());
+    }
     
     public function testGetCategoryAxis()
     {

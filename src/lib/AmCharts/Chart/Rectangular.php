@@ -263,7 +263,7 @@ abstract class Rectangular extends Coordinate
      * @param array $margin
      * @return Rectangular 
      */
-    public function setMargin(array $margin)
+    public function setMargin($margin)
     {
         if (!is_array($margin)) {
             throw new Exception\InvalidArgumentException(
