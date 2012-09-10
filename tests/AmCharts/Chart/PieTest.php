@@ -101,54 +101,9 @@ class PieTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->chart->getLabelText());
     }
 
-    public function testSetMarginSide()
+    public function testSetMargins()
     {
-        $this->chart->margin()->setTop(10);
-        $this->assertEquals(10, $this->chart->margin()->getTop());
-
-        $this->chart->margin()->setBottom(10);
-        $this->assertEquals(10, $this->chart->margin()->getBottom());
-
-        $this->chart->margin()->setLeft(10);
-        $this->assertEquals(10, $this->chart->margin()->getLeft());
-
-        $this->chart->margin()->setRight(10);
-        $this->assertEquals(10, $this->chart->margin()->getRight());
-    }
-
-    public function testSetMargin()
-    {
-        $this->chart->margin()->setValues(array(10, 10, 10, 10));
-
-        $this->assertEquals(10, $this->chart->margin()->getTop());
-        $this->assertEquals(10, $this->chart->margin()->getBottom());
-        $this->assertEquals(10, $this->chart->margin()->getLeft());
-        $this->assertEquals(10, $this->chart->margin()->getRight());
-    }
-
-    /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
-     */
-    public function testSetMarginWithNotArrayValue()
-    {
-        $this->chart->margin()->setValues('foo');
-    }
-
-    public function setMarginWithArrayDoesNotHaveFourValuesProvider()
-    {
-        return array(
-            array(array(10, 10, 10)),
-            array(array(10, 10, 10, 10, 10)),
-        );
-    }
-
-    /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
-     * @dataProvider setMarginWithArrayDoesNotHaveFourValuesProvider
-     */
-    public function testSetMarginWithArrayDoesNotHaveFourValues($values)
-    {
-        $this->chart->margin()->setValues($values);
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Margin', $this->chart->margin());
     }
     
     public function testSetOutlineAlpha()
