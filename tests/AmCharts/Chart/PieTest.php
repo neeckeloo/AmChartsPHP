@@ -41,7 +41,13 @@ class PieTest extends \PHPUnit_Framework_TestCase
         $this->chart->setBalloonText('foo');
         $this->assertEquals('foo', $this->chart->getBalloonText());
     }
-    
+
+    public function testSetGroupedTitle()
+    {
+        $this->chart->setGroupedTitle('foo');
+        $this->assertEquals('foo', $this->chart->getGroupedTitle());
+    }
+
     public function testSetGroupPercent()
     {
         $this->chart->setGroupPercent(123);

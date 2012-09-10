@@ -50,6 +50,13 @@ class Pie extends AbstractChart
      * @var integer 
      */
     protected $depth3D;
+
+    /**
+     * Title of the group slice.
+     *
+     * @var string
+     */
+    protected $groupedTitle;
     
     /**
      * @var integer 
@@ -283,6 +290,29 @@ class Pie extends AbstractChart
     public function getBalloonText()
     {
         return $this->balloonText;
+    }
+
+    /**
+     * Sets title of the group slice.
+     *
+     * @param string $title
+     * @return Pie
+     */
+    public function setGroupedTitle($title)
+    {
+        $this->groupedTitle = (string) $title;
+        
+        return $this;
+    }
+
+    /**
+     * Returns title of the group slice.
+     *
+     * @return string
+     */
+    public function getGroupedTitle()
+    {
+        return $this->groupedTitle;
     }
     
     /**
@@ -754,7 +784,7 @@ class Pie extends AbstractChart
         $params = parent::getParams();
         
         $paramKeys = array(
-            'titleField', 'valueField', 'angle', 'depth3D', 'balloonText', 'groupPercent',
+            'titleField', 'valueField', 'angle', 'depth3D', 'balloonText', 'groupedTitle', 'groupPercent',
             'innerRadius', 'labelRadius', 'labelText', 'marginTop', 'marginBottom', 'marginLeft',
             'marginRight', 'outlineColor', 'outlineThickness', 'pieBaseColor',
             'pieBrightnessStep', 'sequencedAnimation', 'startDuration', 'startEffect', 'urlTarget',
