@@ -8,7 +8,14 @@
 namespace AmCharts\Chart\Setting;
 
 class Legend
-{    
+{
+    /**
+     * Margins
+     *
+     * @var Margin
+     */
+    protected $margin;
+    
     /**
      * @var Text 
      */
@@ -43,6 +50,25 @@ class Legend
         
         return $this;
     }
+
+    /**
+     * Sets and returns chart margins
+     *
+     * @param array $margin
+     * @return Margin
+     */
+    public function margin($margin = null)
+    {
+        if (!isset($this->margin)) {
+            $this->margin = new Margin();
+        }
+
+        if (null !== $margin) {
+            $this->margin->setValues($margin);
+        }
+
+        return $this->margin;
+    }
         
     /**
      * Sets and returns text object
@@ -69,9 +95,12 @@ class Legend
     public function toArray()
     {
         $params = array();
-        
+
+        if (isset($this->margin)) {
+            $params += $this->margin->toArray();
+        }
         if (isset($this->text)) {
-            $params = $params + $this->text->toArray();
+            $params += $this->text->toArray();
         }
         
         return $params;

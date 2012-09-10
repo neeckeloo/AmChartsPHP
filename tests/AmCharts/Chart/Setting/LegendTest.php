@@ -27,6 +27,11 @@ class LegendTest extends \PHPUnit_Framework_TestCase
         ));
         $this->assertInstanceOf('AmCharts\Chart\Setting\Text', $this->legend->text());
     }
+
+    public function testSetMargins()
+    {
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Margin', $this->legend->margin());
+    }
     
     public function testSetText()
     {
