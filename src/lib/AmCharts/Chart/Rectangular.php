@@ -12,14 +12,6 @@ use AmCharts\Exception;
 abstract class Rectangular extends Coordinate
 {
     /**
-     * Specifies if margins of a chart should be calculated automatically so that labels of axes would fit.
-     * The chart will adjust only margins with axes. Other margins will use values set with margin properties.
-     *
-     * @var boolean
-     */
-    protected $autoMargins = true;
-
-    /**
      * Chart cursor
      * 
      * @var Cursor 
@@ -48,65 +40,13 @@ abstract class Rectangular extends Coordinate
      * @var integer 
      */
     protected $depth3D;
-    
-    /**
-     * Number of pixels between the container's top border and plot area.
-     * This space can be used for top axis' values.
-     * If autoMargin is true and top side has axis, this property is ignored.
-     * 
-     * @var integer 
-     */
-    protected $marginTop;
-    
-    /**
-     * Number of pixels between the container's bottom border and plot area.
-     * This space can be used for bottom axis' values.
-     * If autoMargin is true and bottom side has axis, this property is ignored.
-     * 
-     * @var integer 
-     */
-    protected $marginBottom;
-    
-    /**
-     * Number of pixels between the container's left border and plot area.
-     * This space can be used for left axis' values.
-     * If autoMargin is true and left side has axis, this property is ignored.
-     * 
-     * @var integer 
-     */
-    protected $marginLeft;
-    
-    /**
-     * Number of pixels between the container's right border and plot area.
-     * This space can be used for Right axis' values.
-     * If autoMargin is true and right side has axis, this property is ignored.
-     * 
-     * @var integer 
-     */
-    protected $marginRight;
 
     /**
-     * Sets auto margins
+     * Chart margins
      *
-     * @param boolean $auto
-     * @return Rectangular
+     * @var Setting\Margin
      */
-    public function setAutoMargins($auto = true)
-    {
-        $this->autoMargins = (bool) $auto;
-
-        return $this;
-    }
-
-    /**
-     * Returns auto margins
-     *
-     * @return boolean
-     */
-    public function getAutoMargins()
-    {
-        return $this->autoMargins;
-    }
+    protected $margin;
     
     /**
      * Sets and returns chart cursor 
@@ -164,126 +104,24 @@ abstract class Rectangular extends Coordinate
         
         return $this;
     }
-    
-    /**
-     * Sets margin top
-     * 
-     * @param integer $margin
-     * @return Rectangular 
-     */
-    public function setMarginTop($margin)
-    {
-        $this->marginTop = (int) $margin;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns margin top
-     * 
-     * @return integer 
-     */
-    public function getMarginTop()
-    {
-        return $this->marginTop;
-    }
-    
-    /**
-     * Sets margin bottom
-     * 
-     * @param integer $margin
-     * @return Rectangular 
-     */
-    public function setMarginBottom($margin)
-    {
-        $this->marginBottom = (int) $margin;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns margin bottom
-     * 
-     * @return integer 
-     */
-    public function getMarginBottom()
-    {
-        return $this->marginBottom;
-    }
-    
-    /**
-     * Sets margin left
-     * 
-     * @param integer $margin
-     * @return Rectangular 
-     */
-    public function setMarginLeft($margin)
-    {
-        $this->marginLeft = (int) $margin;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns margin left
-     * 
-     * @return integer 
-     */
-    public function getMarginLeft()
-    {
-        return $this->marginLeft;
-    }
-    
-    /**
-     * Sets margin right
-     * 
-     * @param integer $margin
-     * @return Rectangular 
-     */
-    public function setMarginRight($margin)
-    {
-        $this->marginRight = (int) $margin;
-        
-        return $this;
-    }
-    
-    /**
-     * Returns margin right
-     * 
-     * @return integer 
-     */
-    public function getMarginRight()
-    {
-        return $this->marginRight;
-    }
-    
-    /**
-     * Sets margin
-     * 
-     * @param array $margin
-     * @return Rectangular 
-     */
-    public function setMargin($margin)
-    {
-        if (!is_array($margin)) {
-            throw new Exception\InvalidArgumentException(
-                'The margin parameter must be an array.'
-            );
-        }
-        if (count($margin) != 4) {
-            throw new Exception\InvalidArgumentException(
-                'The margin parameter must contains top, bottom, left and right margin.'
-            );
-        }
-        
-        $this->setMarginTop($margin[0])
-            ->setMarginBottom($margin[1])
-            ->setMarginLeft($margin[2])
-            ->setMarginRight($margin[3]);
 
-        $this->setAutoMargins(false);
-        
-        return $this;
+    /**
+     * Sets and returns chart margins
+     *
+     * @param array $margin
+     * @return Setting\Margin
+     */
+    public function margin($margin = null)
+    {
+        if (!isset($this->margin)) {
+            $this->margin = new Setting\Margin();
+        }
+
+        if (null !== $margin) {
+            $this->margin->setValues($margin);
+        }
+
+        return $this->margin;
     }
     
     /**
@@ -296,8 +134,7 @@ abstract class Rectangular extends Coordinate
         $params = parent::getParams();
         
         $paramKeys = array(
-            'angle', 'depth3D', 'marginTop', 'marginBottom', 'marginLeft',
-            'marginRight', 'autoMargins',
+            'angle', 'depth3D',
         );
         foreach ($paramKeys as $key) {
             if (isset($this->{$key})) {
@@ -307,6 +144,13 @@ abstract class Rectangular extends Coordinate
                     $params[$key] = $this->{$key};
                 }
             }
+        }
+
+        if (isset($this->cursor)) {
+            $params += $this->cursor->toArray();
+        }
+        if (isset($this->margin)) {
+            $params += $this->margin->toArray();
         }
         
         return $params;

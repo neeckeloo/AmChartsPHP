@@ -103,27 +103,27 @@ class PieTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMarginSide()
     {
-        $this->chart->setMarginTop(10);
-        $this->assertEquals(10, $this->chart->getMarginTop());
+        $this->chart->margin()->setTop(10);
+        $this->assertEquals(10, $this->chart->margin()->getTop());
 
-        $this->chart->setMarginBottom(10);
-        $this->assertEquals(10, $this->chart->getMarginBottom());
+        $this->chart->margin()->setBottom(10);
+        $this->assertEquals(10, $this->chart->margin()->getBottom());
 
-        $this->chart->setMarginLeft(10);
-        $this->assertEquals(10, $this->chart->getMarginLeft());
+        $this->chart->margin()->setLeft(10);
+        $this->assertEquals(10, $this->chart->margin()->getLeft());
 
-        $this->chart->setMarginRight(10);
-        $this->assertEquals(10, $this->chart->getMarginRight());
+        $this->chart->margin()->setRight(10);
+        $this->assertEquals(10, $this->chart->margin()->getRight());
     }
 
     public function testSetMargin()
     {
-        $this->chart->setMargin(array(10, 10, 10, 10));
+        $this->chart->margin()->setValues(array(10, 10, 10, 10));
 
-        $this->assertEquals(10, $this->chart->getMarginTop());
-        $this->assertEquals(10, $this->chart->getMarginBottom());
-        $this->assertEquals(10, $this->chart->getMarginLeft());
-        $this->assertEquals(10, $this->chart->getMarginRight());
+        $this->assertEquals(10, $this->chart->margin()->getTop());
+        $this->assertEquals(10, $this->chart->margin()->getBottom());
+        $this->assertEquals(10, $this->chart->margin()->getLeft());
+        $this->assertEquals(10, $this->chart->margin()->getRight());
     }
 
     /**
@@ -131,7 +131,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMarginWithNotArrayValue()
     {
-        $this->chart->setMargin('foo');
+        $this->chart->margin()->setValues('foo');
     }
 
     public function setMarginWithArrayDoesNotHaveFourValuesProvider()
@@ -148,7 +148,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMarginWithArrayDoesNotHaveFourValues($values)
     {
-        $this->chart->setMargin($values);
+        $this->chart->margin()->setValues($values);
     }
     
     public function testSetOutlineAlpha()
