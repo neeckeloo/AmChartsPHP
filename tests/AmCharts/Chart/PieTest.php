@@ -67,6 +67,56 @@ class PieTest extends \PHPUnit_Framework_TestCase
         $this->chart->setLabelText('foo');
         $this->assertEquals('foo', $this->chart->getLabelText());
     }
+
+    public function testSetMarginSide()
+    {
+        $this->chart->setMarginTop(10);
+        $this->assertEquals(10, $this->chart->getMarginTop());
+
+        $this->chart->setMarginBottom(10);
+        $this->assertEquals(10, $this->chart->getMarginBottom());
+
+        $this->chart->setMarginLeft(10);
+        $this->assertEquals(10, $this->chart->getMarginLeft());
+
+        $this->chart->setMarginRight(10);
+        $this->assertEquals(10, $this->chart->getMarginRight());
+    }
+
+    public function testSetMargin()
+    {
+        $this->chart->setMargin(array(10, 10, 10, 10));
+
+        $this->assertEquals(10, $this->chart->getMarginTop());
+        $this->assertEquals(10, $this->chart->getMarginBottom());
+        $this->assertEquals(10, $this->chart->getMarginLeft());
+        $this->assertEquals(10, $this->chart->getMarginRight());
+    }
+
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetMarginWithNotArrayValue()
+    {
+        $this->chart->setMargin('foo');
+    }
+
+    public function setMarginWithArrayDoesNotHaveFourValuesProvider()
+    {
+        return array(
+            array(array(10, 10, 10)),
+            array(array(10, 10, 10, 10, 10)),
+        );
+    }
+
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @dataProvider setMarginWithArrayDoesNotHaveFourValuesProvider
+     */
+    public function testSetMarginWithArrayDoesNotHaveFourValues($values)
+    {
+        $this->chart->setMargin($values);
+    }
     
     public function testSetOutlineAlpha()
     {

@@ -76,6 +76,34 @@ class Pie extends AbstractChart
      * @var string 
      */
     protected $labelText = '[[title]]: [[percents]]%';
+
+    /**
+     * Top margin of the chart.
+     *
+     * @var integer
+     */
+    protected $marginTop;
+
+    /**
+     * Bottom margin of the chart.
+     *
+     * @var integer
+     */
+    protected $marginBottom;
+
+    /**
+     * Left margin of the chart.
+     *
+     * @var integer
+     */
+    protected $marginLeft;
+
+    /**
+     * Right margin of the chart.
+     *
+     * @var integer
+     */
+    protected $marginRight;
     
     /**
      * @var Setting\Alpha 
@@ -352,6 +380,125 @@ class Pie extends AbstractChart
     {
         return $this->labelText;
     }
+
+    /**
+     * Sets margin top
+     *
+     * @param integer $margin
+     * @return Rectangular
+     */
+    public function setMarginTop($margin)
+    {
+        $this->marginTop = (int) $margin;
+
+        return $this;
+    }
+
+    /**
+     * Returns margin top
+     *
+     * @return integer
+     */
+    public function getMarginTop()
+    {
+        return $this->marginTop;
+    }
+
+    /**
+     * Sets margin bottom
+     *
+     * @param integer $margin
+     * @return Rectangular
+     */
+    public function setMarginBottom($margin)
+    {
+        $this->marginBottom = (int) $margin;
+
+        return $this;
+    }
+
+    /**
+     * Returns margin bottom
+     *
+     * @return integer
+     */
+    public function getMarginBottom()
+    {
+        return $this->marginBottom;
+    }
+
+    /**
+     * Sets margin left
+     *
+     * @param integer $margin
+     * @return Rectangular
+     */
+    public function setMarginLeft($margin)
+    {
+        $this->marginLeft = (int) $margin;
+
+        return $this;
+    }
+
+    /**
+     * Returns margin left
+     *
+     * @return integer
+     */
+    public function getMarginLeft()
+    {
+        return $this->marginLeft;
+    }
+
+    /**
+     * Sets margin right
+     *
+     * @param integer $margin
+     * @return Rectangular
+     */
+    public function setMarginRight($margin)
+    {
+        $this->marginRight = (int) $margin;
+
+        return $this;
+    }
+
+    /**
+     * Returns margin right
+     *
+     * @return integer
+     */
+    public function getMarginRight()
+    {
+        return $this->marginRight;
+    }
+
+    /**
+     * Sets margin
+     *
+     * @param array $margin
+     * @return Rectangular
+     */
+    public function setMargin($margin)
+    {
+        if (!is_array($margin)) {
+            throw new Exception\InvalidArgumentException(
+                'The margin parameter must be an array.'
+            );
+        }
+        if (count($margin) != 4) {
+            throw new Exception\InvalidArgumentException(
+                'The margin parameter must contains top, bottom, left and right margin.'
+            );
+        }
+
+        $this->setMarginTop($margin[0])
+            ->setMarginBottom($margin[1])
+            ->setMarginLeft($margin[2])
+            ->setMarginRight($margin[3]);
+
+        return $this;
+    }
     
     /**
      * Sets outline alpha
@@ -608,9 +755,9 @@ class Pie extends AbstractChart
         
         $paramKeys = array(
             'titleField', 'valueField', 'angle', 'depth3D', 'balloonText', 'groupPercent',
-            'innerRadius', 'labelRadius', 'labelText', 'outlineColor', 'outlineThickness',
-            'pieBaseColor', 'pieBrightnessStep', 'sequencedAnimation', 'startDuration',
-            'startEffect', 'urlTarget'
+            'innerRadius', 'labelRadius', 'labelText', 'marginTop', 'marginBottom', 'marginLeft',
+            'marginRight', 'outlineColor', 'outlineThickness', 'pieBaseColor',
+            'pieBrightnessStep', 'sequencedAnimation', 'startDuration', 'startEffect', 'urlTarget',
         );
         foreach ($paramKeys as $key) {
             if (isset($this->{$key})) {
