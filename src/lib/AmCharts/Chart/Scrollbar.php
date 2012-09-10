@@ -155,17 +155,8 @@ class Scrollbar
      * @return AbstractChart
      */
     public function setHeight($height)
-    {
-        if (is_numeric($height)) {
-            $height .= 'px';
-        } elseif (!preg_match('/([\d].*)px/', $height)) {
-            throw new Exception\InvalidArgumentException(sprintf(
-                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
-                $height
-            ));
-        }
-        
-        $this->scrollbarHeight = (string) $height;
+    {        
+        $this->scrollbarHeight = (integer) $height;
 
         return $this;
     }

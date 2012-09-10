@@ -45,38 +45,11 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
         $this->scrollbar->setResizeEnabled(false);
         $this->assertFalse($this->scrollbar->isResizeEnabled());
     }
-    
-    public function setHeightProvider()
-    {
-        return array(
-            array(10, '10px'),
-            array('10px', '10px'),
-        );
-    }
-    
-    /**
-     * @dataProvider setHeightProvider
-     */
-    public function testHeight($provided, $expected)
+
+    public function testHeight()
     {        
-        $this->scrollbar->setHeight($provided);
-        $this->assertEquals($expected, $this->scrollbar->getHeight());
-    }
-    
-    public function setHeightWithInvalidParamProvider()
-    {
-        return array(
-            array('foo')
-        );
-    }
-    
-    /**
-     * @dataProvider setHeightWithInvalidParamProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException
-     */
-    public function testSetHeightWithInvalidParam($provided)
-    {
-        $this->scrollbar->setHeight($provided);
+        $this->scrollbar->setHeight(10);
+        $this->assertEquals(10, $this->scrollbar->getHeight());
     }
     
     public function testToArray()
