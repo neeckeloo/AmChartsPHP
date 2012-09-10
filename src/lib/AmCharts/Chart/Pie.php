@@ -140,6 +140,27 @@ class Pie extends AbstractChart
      * @var integer 
      */
     protected $pieBrightnessStep = 30;
+
+    /**
+     * Pull out duration, in seconds.
+     *
+     * @var integer
+     */
+    protected $pullOutDuration;
+
+    /**
+     * Pull out effect. Possible are "elastic" and "bounce".
+     *
+     * @var string
+     */
+    protected $pullOutEffect;
+
+    /**
+     * Pull out radius, in pixels or percents.
+     *
+     * @var string|integer
+     */
+    protected $pullOutRadius;
     
     /**
      * Specifies whether the animation should de sequenced or all objects should appear at once.
@@ -350,6 +371,15 @@ class Pie extends AbstractChart
      */
     public function setInnerRadius($radius)
     {
+        if (is_numeric($radius)) {
+            $radius .= 'px';
+        } elseif (!preg_match('/([\d].*)(px|\%)/', $radius)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
+                $radius
+            ));
+        }
+
         $this->innerRadius = (int) $radius;
         
         return $this;
@@ -654,6 +684,88 @@ class Pie extends AbstractChart
     {
         return $this->pieBrightnessStep;
     }
+
+    /**
+     * Sets pull out duration
+     * 
+     * @param integer $duration
+     * @return Pie
+     */
+    public function setPullOutDuration($duration)
+    {
+        $this->pullOutDuration = (int) $duration;
+
+        return $this;
+    }
+
+    /**
+     * Returns pull out duration
+     *
+     * @return integer
+     */
+    public function getPullOutDuration()
+    {
+        return $this->pullOutDuration;
+    }
+
+    /**
+     * Sets pull out effect
+     *
+     * @param integer $start
+     * @return Coordinate
+     */
+    public function setPullOutEffect($effect)
+    {
+        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+            throw new Exception\InvalidArgumentException('The pull out effect provided is not valid.');
+        }
+
+        $this->pullOutEffect = (string) $effect;
+
+        return $this;
+    }
+
+    /**
+     * Returns pull out effect
+     *
+     * @return integer
+     */
+    public function getPullOutEffect()
+    {
+        return $this->pullOutEffect;
+    }
+
+    /**
+     * Sets pull out radius radius
+     *
+     * @param integer $radius
+     * @return Pie
+     */
+    public function setPullOutRadius($radius)
+    {
+        if (is_numeric($radius)) {
+            $radius .= 'px';
+        } elseif (!preg_match('/([\d].*)(px|\%)/', $radius)) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Expected integer or value suffixed by pixel or percent unit; Received %s.',
+                $radius
+            ));
+        }
+
+        $this->pullOutRadius = (int) $radius;
+
+        return $this;
+    }
+
+    /**
+     * Returns pull out radius
+     *
+     * @return integer
+     */
+    public function getPullOutRadius()
+    {
+        return $this->pullOutRadius;
+    }
     
     /**
      * Sets true if animation is sequenced
@@ -786,8 +898,9 @@ class Pie extends AbstractChart
         $paramKeys = array(
             'titleField', 'valueField', 'angle', 'depth3D', 'balloonText', 'groupedTitle', 'groupPercent',
             'innerRadius', 'labelRadius', 'labelText', 'marginTop', 'marginBottom', 'marginLeft',
-            'marginRight', 'outlineColor', 'outlineThickness', 'pieBaseColor',
-            'pieBrightnessStep', 'sequencedAnimation', 'startDuration', 'startEffect', 'urlTarget',
+            'marginRight', 'outlineColor', 'outlineThickness', 'pieBaseColor', 'pieBrightnessStep',
+            'pullOutDuration', 'pullOutEffect', 'pullOutRadius', 'sequencedAnimation', 'startDuration',
+            'startEffect', 'urlTarget',
         );
         foreach ($paramKeys as $key) {
             if (isset($this->{$key})) {

@@ -53,12 +53,39 @@ class PieTest extends \PHPUnit_Framework_TestCase
         $this->chart->setGroupPercent(123);
         $this->assertEquals(123, $this->chart->getGroupPercent());
     }
-    
-    public function testSetInnerRadius()
+
+    public function setInnerRadiusProvider()
     {
-        $radius = 50;
-        $this->chart->setInnerRadius($radius);
-        $this->assertEquals($radius, $this->chart->getInnerRadius());
+        return array(
+            array(10, '10px'),
+            array('10px', '10px'),
+            array('10%', '10%'),
+        );
+    }
+
+    /**
+     * @dataProvider setInnerRadiusProvider
+     */
+    public function testSetInnerRadius($provided, $expected)
+    {
+        $this->chart->setWidth($provided);
+        $this->assertEquals($expected, $this->chart->getWidth());
+    }
+
+    public function setInnerRadiusWithInvalidParamProvider()
+    {
+        return array(
+            array('foo')
+        );
+    }
+
+    /**
+     * @dataProvider setInnerRadiusWithInvalidParamProvider
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetInnerRadiusWithInvalidParam($provided)
+    {
+        $this->chart->setInnerRadius($provided);
     }
     
     public function testSetLabelRadius()
@@ -194,6 +221,62 @@ class PieTest extends \PHPUnit_Framework_TestCase
     public function testSetPieBrightnessStepWithWrongParam($brightness)
     {
         $this->chart->setPieBrightnessStep($brightness);
+    }
+
+    public function testSetPullOutDuration()
+    {
+        $duration = 20;
+        $this->chart->setPullOutDuration($duration);
+        $this->assertEquals($duration, $this->chart->getPullOutDuration());
+    }
+
+    public function testSetPullOutEffect()
+    {
+        $effect = Pie::EFFECT_ELASTIC;
+        $this->chart->setPullOutEffect($effect);
+        $this->assertEquals($effect, $this->chart->getPullOutEffect());
+    }
+
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetPullOutEffectWithInvalidParam()
+    {
+        $this->chart->setPullOutEffect('foo');
+    }
+
+    public function setPullOutRadiusProvider()
+    {
+        return array(
+            array(10, '10px'),
+            array('10px', '10px'),
+            array('10%', '10%'),
+        );
+    }
+
+    /**
+     * @dataProvider setPullOutRadiusProvider
+     */
+    public function testSetPullOutRadius($provided, $expected)
+    {
+        $this->chart->setWidth($provided);
+        $this->assertEquals($expected, $this->chart->getWidth());
+    }
+
+    public function setPullOutRadiusWithInvalidParamProvider()
+    {
+        return array(
+            array('foo')
+        );
+    }
+
+    /**
+     * @dataProvider setPullOutRadiusWithInvalidParamProvider
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetPullOutRadiusWithInvalidParam($provided)
+    {
+        $this->chart->setPullOutRadius($provided);
     }
     
     public function testSetSequencedAnimation()
