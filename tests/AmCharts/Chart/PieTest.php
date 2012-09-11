@@ -7,6 +7,8 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Chart\Setting;
+
 class PieTest extends \PHPUnit_Framework_TestCase
 {   
     /**
@@ -187,7 +189,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPullOutEffect()
     {
-        $effect = Pie::EFFECT_ELASTIC;
+        $effect = Setting\Effect::ELASTIC;
         $this->chart->setPullOutEffect($effect);
         $this->assertEquals($effect, $this->chart->getPullOutEffect());
     }
@@ -258,7 +260,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
     
     public function testSetStartEffect()
     {
-        $effect = Coordinate::EFFECT_ELASTIC;
+        $effect = Setting\Effect::ELASTIC;
         $this->chart->setStartEffect($effect);
         $this->assertEquals($effect, $this->chart->getStartEffect());
     }

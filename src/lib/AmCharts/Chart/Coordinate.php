@@ -12,10 +12,7 @@ use AmCharts\Graph,
     AmCharts\Exception;
 
 abstract class Coordinate extends AbstractChart
-{    
-    const EFFECT_ELASTIC = 'elastic';
-    const EFFECT_BOUNCE = 'bounce';
-    
+{
     /**
      * @var array
      */
@@ -174,7 +171,7 @@ abstract class Coordinate extends AbstractChart
      */
     public function setStartEffect($effect)
     {
-        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+        if ($effect != Setting\Effect::ELASTIC && $effect != Setting\Effect::BOUNCE) {
             throw new Exception\InvalidArgumentException('The start effect provided is not valid.');
         }
         

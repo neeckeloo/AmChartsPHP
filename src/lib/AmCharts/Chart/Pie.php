@@ -12,9 +12,6 @@ use AmCharts\Chart\Setting,
 
 class Pie extends AbstractChart
 {
-    const EFFECT_ELASTIC = 'elastic';
-    const EFFECT_BOUNCE = 'bounce';
-    
     /**
      * @var string 
      */
@@ -595,7 +592,7 @@ class Pie extends AbstractChart
      */
     public function setPullOutEffect($effect)
     {
-        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+        if ($effect != Setting\Effect::ELASTIC && $effect != Setting\Effect::BOUNCE) {
             throw new Exception\InvalidArgumentException('The pull out effect provided is not valid.');
         }
 
@@ -723,7 +720,7 @@ class Pie extends AbstractChart
      */
     public function setStartEffect($effect)
     {
-        if ($effect != self::EFFECT_ELASTIC && $effect != self::EFFECT_BOUNCE) {
+        if ($effect != Setting\Effect::ELASTIC && $effect != Setting\Effect::BOUNCE) {
             throw new Exception\InvalidArgumentException('The start effect provided is not valid.');
         }
         

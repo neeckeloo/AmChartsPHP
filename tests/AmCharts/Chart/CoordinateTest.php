@@ -7,6 +7,8 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Chart\Setting;
+
 class CoordinateTest extends \PHPUnit_Framework_TestCase
 {   
     /**
@@ -43,7 +45,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
     
     public function testSetStartEffect()
     {
-        $effect = Coordinate::EFFECT_ELASTIC;
+        $effect = Setting\Effect::ELASTIC;
         $this->chart->setStartEffect($effect);
         $this->assertEquals($effect, $this->chart->getStartEffect());
     }
