@@ -36,6 +36,13 @@ class BorderTest extends \PHPUnit_Framework_TestCase
         $this->border->color(new Color($color));
         $this->assertInstanceOf('AmCharts\Chart\Setting\color', $this->border->color());
     }
+
+    public function testSetThickness()
+    {
+        $thickness = 2;
+        $this->border->setThickness($thickness);
+        $this->assertEquals($thickness, $this->border->getThickness());
+    }
     
     public function testToArray()
     {

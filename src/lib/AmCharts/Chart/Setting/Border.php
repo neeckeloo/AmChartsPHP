@@ -18,6 +18,11 @@ class Border
      * @var Alpha 
      */
     protected $alpha;
+
+    /**
+     * @var integer
+     */
+    protected $thickness;
     
     /**
      * Constructor
@@ -72,6 +77,33 @@ class Border
 
         return $this->color;
     }
+
+    /**
+     * Sets border thickness
+     *
+     * @param integer $thickness
+     * @return Border
+     */
+    public function setThickness($thickness)
+    {
+        if ($thickness < 0) {
+            throw new Exception\InvalidArgumentException('The thickness value must be positive.');
+        }
+
+        $this->thickness = (int) $thickness;
+
+        return $this;
+    }
+
+    /**
+     * Returns border thickness
+     *
+     * @return integer
+     */
+    public function getThickness()
+    {
+        return $this->thickness;
+    }
     
     /**
      * Returns object properties as array
@@ -80,12 +112,16 @@ class Border
      */
     public function toArray()
     {
-        $options = array(
-            'borderColor' => $this->color->toString(),
-        );
-        
+        $options = array();
+
         if (isset($this->alpha)) {
             $options['borderAlpha'] = $this->alpha->getValue();
+        }
+        if (isset($this->color)) {
+            $options['borderColor'] = $this->color->toString();
+        }
+        if (isset($this->thickness)) {
+            $options['borderThickness'] = $this->thickness;
         }
         
         return $options;
