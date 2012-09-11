@@ -80,12 +80,13 @@ class Background
      */
     public function toArray()
     {
-        $options = array(
-            'backgroundColor' => $this->color,
-        );
+        $options = array();
         
         if (isset($this->alpha)) {
             $options['backgroundAlpha'] = $this->alpha->getValue();
+        }
+        if (isset($this->color)) {
+            $options['backgroundColor'] = $this->color->toString();
         }
         
         return $options;
