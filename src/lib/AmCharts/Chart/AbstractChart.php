@@ -54,7 +54,7 @@ abstract class AbstractChart
     protected $labels = array();
     
     /**
-     * @var Setting\Legend 
+     * @var Legend 
      */
     protected $legend;
     
@@ -277,12 +277,12 @@ abstract class AbstractChart
      * Sets and returns legend
      * 
      * @param array $params
-     * @return Setting\Legend 
+     * @return Legend 
      */
     public function legend($params = array())
     {
         if (!isset($this->legend)) {
-            $this->legend = new Setting\Legend();
+            $this->legend = new Legend();
         }
         
         $this->legend->setParams($params);

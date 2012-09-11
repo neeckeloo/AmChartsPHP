@@ -115,7 +115,7 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     
     public function testSetLegend()
     {
-        $this->assertInstanceOf('AmCharts\Chart\Setting\Legend', $this->chart->legend());
+        $this->assertInstanceOf('AmCharts\Chart\Legend', $this->chart->legend());
     }
     
     public function testSetNumberFormatter()
