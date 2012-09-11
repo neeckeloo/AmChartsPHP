@@ -51,7 +51,7 @@ class Text
     }
     
     /**
-     * Sets legend parameters
+     * Sets text parameters
      * 
      * @param array $params
      * @return Font

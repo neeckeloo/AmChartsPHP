@@ -35,7 +35,7 @@ class AbstractFormatter
     }
     
     /**
-     * Sets legend parameters
+     * Sets formatter parameters
      * 
      * @param array $params
      * @return AbstractFormatter
