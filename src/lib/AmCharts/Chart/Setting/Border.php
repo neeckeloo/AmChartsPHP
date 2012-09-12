@@ -85,7 +85,7 @@ class Border
      * Sets and returns border color
      *
      * @param string|array|Color $color
-     * @return Border
+     * @return Color
      */
     public function color($color = null)
     {

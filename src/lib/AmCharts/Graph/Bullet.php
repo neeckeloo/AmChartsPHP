@@ -7,6 +7,8 @@
  */
 namespace AmCharts\Graph;
 
+use AmCharts\Exception;
+
 class Bullet
 {
     const NONE = 'none';
@@ -35,7 +37,7 @@ class Bullet
     /**
      * Sets type
      *
-     * @param string $field
+     * @param string $type
      * @return Bullet
      */
     public function setType($type)
