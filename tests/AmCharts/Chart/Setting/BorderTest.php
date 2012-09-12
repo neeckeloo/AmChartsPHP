@@ -33,10 +33,10 @@ class BorderTest extends \PHPUnit_Framework_TestCase
         $color = '#ff0000';
         
         $this->border->color($color);
-        $this->assertInstanceOf('AmCharts\Chart\Setting\color', $this->border->color());
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->border->color());
         
         $this->border->color(new Color($color));
-        $this->assertInstanceOf('AmCharts\Chart\Setting\color', $this->border->color());
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->border->color());
     }
 
     public function testSetThickness()
