@@ -83,7 +83,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider setInnerRadiusWithInvalidParamProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetInnerRadiusWithInvalidParam($provided)
     {
@@ -132,7 +132,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException 
      */
     public function testSetOutlineThicknessWithNegativeParam()
     {
@@ -173,7 +173,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setPieBrightnessStepProviderWithWrongParam
-     * @expectedException \AmCharts\Exception\InvalidArgumentException
+     * @expectedException \AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetPieBrightnessStepWithWrongParam($brightness)
     {
@@ -195,7 +195,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetPullOutEffectWithInvalidParam()
     {
@@ -229,7 +229,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider setPullOutRadiusWithInvalidParamProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetPullOutRadiusWithInvalidParam($provided)
     {
@@ -266,7 +266,7 @@ class PieTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException 
      */
     public function testSetStartEffectWithInvalidParam()
     {

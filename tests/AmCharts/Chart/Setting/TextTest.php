@@ -57,7 +57,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Setting\Exception\InvalidArgumentException 
      */
     public function testSetAlignWithWrongAlign()
     {

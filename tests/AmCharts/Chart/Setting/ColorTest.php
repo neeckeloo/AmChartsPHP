@@ -40,7 +40,7 @@ class ColorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider wrongColorProvider
-     * @expectedException \AmCharts\Exception\InvalidArgumentException
+     * @expectedException \AmCharts\Chart\Setting\Exception\InvalidArgumentException
      */
     public function testWrongColor($color)
     {

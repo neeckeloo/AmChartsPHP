@@ -51,7 +51,7 @@ class SerialTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException 
      */
     public function testSetColumnWidthWithInvalidParam()
     {

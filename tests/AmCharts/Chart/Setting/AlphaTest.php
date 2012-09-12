@@ -31,7 +31,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Setting\Exception\InvalidArgumentException 
      */
     public function testSetOpacityWithNotIntValue()
     {
@@ -47,7 +47,7 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setOpacityWithWrongValueProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Setting\Exception\InvalidArgumentException 
      */
     public function testSetOpacityWithWrongValue($opacity)
     {

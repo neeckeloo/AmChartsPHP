@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Chart\Setting;
 
-use AmCharts\Exception;
+use AmCharts\Chart\Setting\Exception;
 
 class Text
 {    

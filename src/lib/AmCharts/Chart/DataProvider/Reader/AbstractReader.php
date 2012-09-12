@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Chart\DataProvider\Reader;
 
-use AmCharts\Exception;
+use AmCharts\Chart\Exception;
 
 abstract class AbstractReader implements ReaderInterface
 {

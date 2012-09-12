@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Chart;
 
-use AmCharts\Exception;
+use AmCharts\Chart\Exception;
 
 class Scrollbar
 {

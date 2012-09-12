@@ -75,7 +75,7 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setWidthAndHeightWithInvalidParamProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetWidthWithInvalidParam($provided)
     {
@@ -84,7 +84,7 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setWidthAndHeightWithInvalidParamProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
      */
     public function testSetHeightWithInvalidParam($provided)
     {

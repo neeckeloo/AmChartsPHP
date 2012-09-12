@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Chart\Axis;
 
-use AmCharts\Exception;
+use AmCharts\Chart\Exception;
 
 class Category extends AbstractAxis
 {

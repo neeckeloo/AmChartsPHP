@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Graph;
 
-use AmCharts\Exception;
+use AmCharts\Graph\Exception;
 
 class Bullet
 {

@@ -26,7 +26,7 @@ class BulletTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Graph\Exception\InvalidArgumentException
      */
     public function testSetTypeWithInvalidValue()
     {

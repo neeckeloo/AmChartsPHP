@@ -81,7 +81,7 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException 
      */
     public function testSetLabelRotationWithNotIntValue()
     {
@@ -97,7 +97,7 @@ class AbstractAxisTest extends \PHPUnit_Framework_TestCase
     
     /**
      * @dataProvider setLabelRotationWithWrongValueProvider
-     * @expectedException AmCharts\Exception\InvalidArgumentException 
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException 
      */
     public function testSetLabelRotationWithWrongValue($angle)
     {

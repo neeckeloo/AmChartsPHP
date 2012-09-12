@@ -33,7 +33,7 @@ class AbstractReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException AmCharts\Exception\RuntimeException
+     * @expectedException AmCharts\Chart\Exception\RuntimeException
      */
     public function testFromFileWithWrongFile()
     {

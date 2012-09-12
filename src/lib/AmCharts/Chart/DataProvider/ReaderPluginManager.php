@@ -7,7 +7,7 @@
  */
 namespace AmCharts\Chart\DataProvider;
 
-use AmCharts\Exception,
+use AmCharts\Chart\Exception,
     Zend\ServiceManager\AbstractPluginManager;
 
 class ReaderPluginManager extends AbstractPluginManager

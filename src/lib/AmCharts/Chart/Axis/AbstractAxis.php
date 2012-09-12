@@ -8,7 +8,7 @@
 namespace AmCharts\Chart\Axis;
 
 use AmCharts\Chart\Setting,
-    AmCharts\Exception;
+    AmCharts\Chart\Exception;
 
 abstract class AbstractAxis
 {

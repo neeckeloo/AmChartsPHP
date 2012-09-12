@@ -9,7 +9,7 @@ namespace AmCharts\Chart\Legend;
 
 use AmCharts\Chart\Setting\Border;
 use AmCharts\Chart\Setting\Color;
-use AmCharts\Exception;
+use AmCharts\Chart\Exception;
 
 class Marker
 {

@@ -8,7 +8,7 @@
 namespace AmCharts\Chart;
 
 use AmCharts\Chart\Setting,
-    AmCharts\Exception;
+    AmCharts\Chart\Exception;
 
 class Pie extends AbstractChart
 {

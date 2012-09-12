@@ -56,7 +56,7 @@ class MarginTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Setting\Exception\InvalidArgumentException
      */
     public function testSetMarginWithNotArrayValue()
     {
@@ -72,7 +72,7 @@ class MarginTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException AmCharts\Exception\InvalidArgumentException
+     * @expectedException AmCharts\Chart\Setting\Exception\InvalidArgumentException
      * @dataProvider setMarginWithArrayDoesNotHaveFourValuesProvider
      */
     public function testSetMarginWithArrayDoesNotHaveFourValues($values)
