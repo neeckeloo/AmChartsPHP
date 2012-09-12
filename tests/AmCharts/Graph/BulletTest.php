@@ -25,6 +25,14 @@ class BulletTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Bullet::ROUND, $this->bullet->getType());
     }
 
+    /**
+     * @expectedException AmCharts\Exception\InvalidArgumentException
+     */
+    public function testSetTypeWithInvalidValue()
+    {
+        $this->bullet->setType('foo');
+    }
+
     public function testToArray()
     {
     	$this->assertTrue(is_array($this->bullet->toArray()));
