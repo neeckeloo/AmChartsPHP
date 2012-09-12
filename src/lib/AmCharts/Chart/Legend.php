@@ -7,17 +7,21 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Chart\Setting\Border;
 use AmCharts\Chart\Setting\Margin;
 use AmCharts\Chart\Setting\Text;
 
 class Legend
 {
     /**
-     * Margins
-     *
      * @var Margin
      */
     protected $margin;
+
+    /**
+     * @var Border
+     */
+    protected $border;
     
     /**
      * @var Text 
@@ -52,6 +56,25 @@ class Legend
         }
         
         return $this;
+    }
+
+    /**
+     * Sets and returns chart border
+     *
+     * @param array $border
+     * @return Border
+     */
+    public function border($border = null)
+    {
+        if (!isset($this->border)) {
+            $this->border = new Border();
+        }
+
+        if (null !== $border) {
+            $this->border->setParams($border);
+        }
+
+        return $this->border;
     }
 
     /**
@@ -99,6 +122,9 @@ class Legend
     {
         $params = array();
 
+        if (isset($this->border)) {
+            $params += $this->border->toArray();
+        }
         if (isset($this->margin)) {
             $params += $this->margin->toArray();
         }

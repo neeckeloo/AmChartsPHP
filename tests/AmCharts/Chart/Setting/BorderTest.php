@@ -16,7 +16,9 @@ class BorderTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->border = new Border('#ffffff');
+        $this->border = new Border(array(
+            'color' => '#ffffff',
+        ));
     }
     
     public function testSetAlpha()
@@ -43,9 +45,28 @@ class BorderTest extends \PHPUnit_Framework_TestCase
         $this->border->setThickness($thickness);
         $this->assertEquals($thickness, $this->border->getThickness());
     }
+
+    public function testSetParams()
+    {
+        $params = array(
+            'color' => '#ff0000',
+            'alpha' => 20,
+            'thickness' => 5,
+        );
+        $this->border->setParams($params);
+
+        $this->assertEquals($params['color'], $this->border->color()->toString());
+        $this->assertEquals($params['alpha'], $this->border->getAlpha());
+        $this->assertEquals($params['thickness'], $this->border->getThickness());
+
+        $values = $this->border->toArray();
+        $this->assertEquals($params['color'], $values['borderColor']);
+        $this->assertEquals($params['alpha'] / 100, $values['borderAlpha']);
+        $this->assertEquals($params['thickness'], $values['borderThickness']);
+    }
     
     public function testToArray()
     {
-        $this->assertCount(2, $this->border->toArray());
+        $this->assertCount(1, $this->border->toArray());
     }
 }

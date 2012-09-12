@@ -27,13 +27,35 @@ class Border
     /**
      * Constructor
      * 
-     * @param string|array|Color $color
-     * @param integer $alpha 
+     * @param array $params
      */
-    public function __construct($color, $alpha = 100)
+    public function __construct($params = array())
     {
-        $this->color($color);
-        $this->setAlpha($alpha);
+        $this->setParams($params);
+    }
+
+    /**
+     * Sets border parameters
+     *
+     * @param array $params
+     * @return Border
+     */
+    public function setParams(array $params = array())
+    {
+        foreach ($params as $name => $value) {
+            $method = 'set' . ucfirst($name);
+            if ($name == 'color') {
+                $method = $name;
+            }
+
+            if (!method_exists($this, $method)) {
+                continue;
+            }
+
+            call_user_func_array(array($this, $method), array($value));
+        }
+
+        return $this;
     }
     
     /**
