@@ -39,7 +39,7 @@ class Legend
     }
     
     /**
-     * Sets legend parameters
+     * Sets parameters
      * 
      * @param array $params
      * @return Legend
@@ -59,7 +59,7 @@ class Legend
     }
 
     /**
-     * Sets and returns chart border
+     * Sets and returns border
      *
      * @param array $border
      * @return Border
@@ -78,7 +78,7 @@ class Legend
     }
 
     /**
-     * Sets and returns chart margins
+     * Sets and returns margins
      *
      * @param array $margin
      * @return Margin
