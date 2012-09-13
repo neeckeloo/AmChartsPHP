@@ -7,8 +7,8 @@
  */
 namespace AmCharts\Chart\DataProvider;
 
-use AmCharts\Chart\DataProvider,
-    AmCharts\Chart\Exception;
+use AmCharts\Chart\DataProvider;
+use AmCharts\Chart\Exception;
 
 class Factory
 {

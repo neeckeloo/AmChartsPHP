@@ -7,9 +7,9 @@
  */
 namespace AmCharts\Chart;
 
-use AmCharts\Graph,
-    AmCharts\Chart\Setting,
-    AmCharts\Chart\Exception;
+use AmCharts\Graph;
+use AmCharts\Chart\Setting;
+use AmCharts\Chart\Exception;
 
 abstract class Coordinate extends AbstractChart
 {

@@ -7,9 +7,9 @@
  */
 namespace AmCharts\Chart;
 
-use AmCharts\Manager,
-    AmCharts\Chart\Setting,
-    AmCharts\Chart\Exception;
+use AmCharts\Manager;
+use AmCharts\Chart\Setting;
+use AmCharts\Chart\Exception;
 
 abstract class AbstractChart
 {
