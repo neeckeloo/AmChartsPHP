@@ -97,6 +97,18 @@ class Renderer
                 );
             }
         }
+
+        $formatters = array('numberFormatter', 'percentFormatter');
+        foreach ($formatters as $formatter) {
+            if (isset($attributes[$formatter])) {
+                $instructions .= sprintf(
+                    '%s.%s = %s;',
+                    $this->chart->getId(),
+                    $formatter,
+                    json_encode($attributes[$formatter]->toArray())
+                );
+            }
+        }
         
         if (isset($attributes['graphs']) && is_array($attributes['graphs'])) {
             foreach ($attributes['graphs'] as $key => $graph) {

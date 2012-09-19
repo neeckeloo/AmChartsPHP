@@ -382,7 +382,8 @@ abstract class AbstractChart
     protected function getAttributes()
     {        
         $attribProperties = array(
-            'legend', 'valueAxis', 'graphs', 'cursor', 'scrollbar'
+            'legend', 'valueAxis', 'graphs', 'cursor', 'scrollbar',
+            'numberFormatter', 'percentFormatter',
         );
         
         $attributes = array();
