@@ -63,6 +63,8 @@ class AbstractFormatter
     public function setPrecision($precision)
     {
         $this->precision = (integer) $precision;
+
+        return $this;
     }
     
     /**
@@ -129,9 +131,9 @@ class AbstractFormatter
     public function toArray()
     {
         return array(
-            'precision' => $this->precision,
-            'decimalSeparator' => $this->decimalSeparator,
-            'thousandsSeparator' => $this->thousandsSeparator
+            'precision'          => $this->precision,
+            'decimalSeparator'   => $this->decimalSeparator,
+            'thousandsSeparator' => $this->thousandsSeparator,
         );
     }
 }
