@@ -7,9 +7,10 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Chart\Renderer\AbstractRenderer;
 use AmCharts\Manager;
 
-class Renderer
+class Renderer extends AbstractRenderer
 {
     /**
      * @var AbstractChart

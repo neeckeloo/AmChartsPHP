@@ -9,6 +9,8 @@ namespace AmCharts\Chart;
 
 use AmCharts\Manager;
 use AmCharts\Chart\Setting;
+use AmCharts\Chart\Renderer\AbstractRenderer;
+use AmCharts\Chart\Renderer\RendererInterface;
 use AmCharts\Chart\Exception;
 
 abstract class AbstractChart
@@ -72,6 +74,11 @@ abstract class AbstractChart
      * @var DataProvider
      */
     protected $dataProvider;
+
+    /**
+     * @var AbstractRenderer
+     */
+    protected $renderer;
 
     /**
      * Constructor can only be called from derived class because AmChart
@@ -397,14 +404,40 @@ abstract class AbstractChart
     }
 
     /**
+     * Set renderer
+     *
+     * @param AbstractRenderer $renderer
+     * @return AbstractChart
+     */
+    public function setRenderer(RendererInterface $renderer)
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
+
+    /**
+     * Returns renderer
+     *
+     * @return AbstractRenderer
+     */
+    public function getRenderer()
+    {
+        if (!isset($this->renderer)) {
+            $this->setRenderer(new Renderer);
+        }
+
+        return $this->renderer;
+    }
+
+    /**
      * Returns the HTML code to insert on the page
      *
      * @return	string
      */
     public function render()
     {
-        $renderer = new Renderer();
-        
-        return $renderer->render($this, $this->getParams(), $this->getAttributes());
+        return $this->getRenderer()
+            ->render($this, $this->getParams(), $this->getAttributes());
     }
 }

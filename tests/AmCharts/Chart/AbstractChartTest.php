@@ -127,6 +127,12 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('AmCharts\Chart\Setting\Formatter\Percent', $this->chart->percentFormatter());
     }
+
+    public function testSetRenderer()
+    {
+        $this->chart->setRenderer(new Renderer);
+        $this->assertInstanceOf('AmCharts\Chart\Renderer\RendererInterface', $this->chart->getRenderer());
+    }
     
     public function testRender()
     {
