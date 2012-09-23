@@ -16,7 +16,7 @@ class BackgroundTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->background = new Background('#ffffff');
+        $this->background = new Background(array('color' => '#ffffff'));
     }
     
     public function testSetAlpha()
