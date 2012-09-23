@@ -1,17 +1,105 @@
 {
-    "hash": "853a039ba118dc3718a1dddea1e95493",
+    "hash": "0044cc9dbd7d6554a3a9f24abe3f153c",
     "packages": [
         {
-            "package": "zendframework/zend-json",
-            "version": "2.0.0rc7"
+            "name": "zendframework/zend-json",
+            "version": "2.0.2",
+            "target-dir": "Zend/Json",
+            "dist": {
+                "type": "zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Json-2.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-stdlib": "self.version"
+            },
+            "suggest": {
+                "zendframework/zend-server": "Zend\\Server component"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Json": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "provides convenience methods for serializing native PHP to JSON and decoding JSON to native PHP",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "zf2",
+                "json"
+            ]
         },
         {
-            "package": "zendframework/zend-servicemanager",
-            "version": "2.0.0rc7"
+            "name": "zendframework/zend-servicemanager",
+            "version": "2.0.2",
+            "target-dir": "Zend/ServiceManager",
+            "dist": {
+                "type": "zip",
+                "url": "http://packages.zendframework.com/composer/Zend_ServiceManager-2.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "zendframework/zend-di": "Zend\\Di component"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\ServiceManager": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": " ",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "zf2",
+                "servicemanager"
+            ]
         },
         {
-            "package": "zendframework/zend-stdlib",
-            "version": "2.0.0rc7"
+            "name": "zendframework/zend-stdlib",
+            "version": "2.0.2",
+            "target-dir": "Zend/Stdlib",
+            "dist": {
+                "type": "zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Stdlib-2.0.2.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "pecl-weakref": "Implementation of weak references for Stdlib\\CallbackHandler"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Zend\\Stdlib": ""
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": " ",
+            "homepage": "http://packages.zendframework.com/",
+            "keywords": [
+                "zf2",
+                "stdlib"
+            ]
         }
     ],
     "packages-dev": null,
