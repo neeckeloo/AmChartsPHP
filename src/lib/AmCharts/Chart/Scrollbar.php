@@ -7,17 +7,26 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Chart\Setting\Alpha;
+use AmCharts\Chart\Setting\Color;
+use AmCharts\Chart\Setting\Background;
+use AmCharts\Chart\Setting\Text;
 use AmCharts\Chart\Exception;
 
 class Scrollbar
 {
     /**
-     * @var Setting\Alpha
+     * @var Background
+     */
+    protected $background;
+
+    /**
+     * @var Alpha
      */
     protected $gridAlpha;
 
     /**
-     * @var Setting\Color
+     * @var Color
      */
     protected $gridColor;
 
@@ -53,6 +62,25 @@ class Scrollbar
     }
 
     /**
+     * Sets and returns background
+     *
+     * @param array $background
+     * @return Scrollbar
+     */
+    public function background($background = null)
+    {
+        if (!isset($this->background)) {
+            $this->background = new Background();
+        }
+
+        if (null !== $background) {
+            $this->background->setParams($background);
+        }
+
+        return $this->background;
+    }
+
+    /**
      * Sets grid alpha
      *
      * @param integer $alpha
@@ -60,7 +88,7 @@ class Scrollbar
      */
     public function setGridAlpha($alpha)
     {
-        $this->gridAlpha = new Setting\Alpha($alpha);
+        $this->gridAlpha = new Alpha($alpha);
 
         return $this;
     }
@@ -84,10 +112,10 @@ class Scrollbar
     public function setGridColor($color = null)
     {
         if (null !== $color) {
-            if ($color instanceof Setting\Color) {
+            if ($color instanceof Color) {
                 $this->gridColor = $color;
             } else {
-                $this->gridColor = new Setting\Color($color);
+                $this->gridColor = new Color($color);
             }
         }
 
@@ -203,9 +231,9 @@ class Scrollbar
         $fields = array_keys(get_object_vars($this));
         foreach ($fields as $field) {
             if (isset($this->{$field})) {
-                if ($this->{$field} instanceof Setting\Alpha) {
+                if ($this->{$field} instanceof Alpha) {
                     $options[$field] = $this->{$field}->getValue();
-                } elseif ($this->{$field} instanceof Setting\Text) {
+                } elseif ($this->{$field} instanceof Text) {
                     $color = $this->{$field}->getColor();
                     if ($color) {
                         $options['color'] = $color->toString();
@@ -214,6 +242,10 @@ class Scrollbar
                     $options[$field] = $this->{$field};
                 }
             }
+        }
+
+        if (isset($this->background)) {
+            $options += $this->background->toArray();
         }
         
         return $options;
