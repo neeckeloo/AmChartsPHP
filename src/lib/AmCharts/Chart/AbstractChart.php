@@ -1,13 +1,12 @@
 <?php
 /**
  * AmChartsPHP
- * 
+ *
  * @link      http://github.com/neeckeloo/AmChartsPHP
  * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
 namespace AmCharts\Chart;
 
-use AmCharts\Manager;
 use AmCharts\Chart\Setting;
 use AmCharts\Chart\Renderer\AbstractRenderer;
 use AmCharts\Chart\Renderer\RendererInterface;
@@ -19,9 +18,9 @@ abstract class AbstractChart
      * @var string
      */
     private $id;
-    
+
     /**
-     * @var string 
+     * @var string
      */
     protected $type;
 
@@ -29,22 +28,22 @@ abstract class AbstractChart
      * @var string
      */
     protected $title;
-    
+
     /**
      * @var integer|string
      */
     protected $width = '100%';
-    
+
     /**
      * @var integer|string
      */
     protected $height = '400px';
-    
+
     /**
-     * @var Setting\Text 
+     * @var Setting\Text
      */
     protected $text;
-    
+
     /**
      * @var array
      */
@@ -54,22 +53,22 @@ abstract class AbstractChart
      * @var array
      */
     protected $labels = array();
-    
+
     /**
-     * @var Legend 
+     * @var Legend
      */
     protected $legend;
-    
+
     /**
-     * @var Setting\Formatter\AbstractFormatter 
+     * @var Setting\Formatter\AbstractFormatter
      */
     protected $numberFormatter;
-    
+
     /**
-     * @var Setting\Formatter\AbstractFormatter 
+     * @var Setting\Formatter\AbstractFormatter
      */
     protected $percentFormatter;
-    
+
     /**
      * @var DataProvider
      */
@@ -93,32 +92,32 @@ abstract class AbstractChart
         } else {
             $this->id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
         }
-        
+
         $this->init();
     }
-    
+
     /**
-     * Initialize chart 
+     * Initialize chart
      */
     public function init()
     {
-        
+
     }
-    
+
     /**
      * Returns chart id
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getId()
     {
         return $this->id;
     }
-    
+
     /**
      * Returns chart type
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getType()
     {
@@ -127,8 +126,8 @@ abstract class AbstractChart
 
     /**
      * Sets chart title
-     * 
-     * @param string $title 
+     *
+     * @param string $title
      * @return AbstractChart
      */
     public function setTitle($title)
@@ -137,11 +136,11 @@ abstract class AbstractChart
 
         return $this;
     }
-    
+
     /**
      * Returns chart title
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getTitle()
     {
@@ -150,8 +149,8 @@ abstract class AbstractChart
 
     /**
      * Sets width
-     * 
-     * @param string $width 
+     *
+     * @param string $width
      * @return AbstractChart
      */
     public function setWidth($width)
@@ -164,16 +163,16 @@ abstract class AbstractChart
                 $width
             ));
         }
-        
+
         $this->width = (string) $width;
 
         return $this;
     }
-    
+
     /**
      * Returns width
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function getWidth()
     {
@@ -182,8 +181,8 @@ abstract class AbstractChart
 
     /**
      * Sets height
-     * 
-     * @param string $height 
+     *
+     * @param string $height
      * @return AbstractChart
      */
     public function setHeight($height)
@@ -196,22 +195,22 @@ abstract class AbstractChart
                 $height
             ));
         }
-        
+
         $this->height = (string) $height;
 
         return $this;
     }
-    
+
     /**
      * Returns height
-     * 
+     *
      * @return string
      */
     public function getHeight()
     {
         return $this->height;
     }
-        
+
     /**
      * Sets and returns text object
      *
@@ -223,15 +222,15 @@ abstract class AbstractChart
         if (!isset($this->text)) {
             $this->text = new Setting\Text();
         }
-        
+
         $this->text->setParams($params);
 
         return $this->text;
     }
-    
+
     /**
      * Sets colors
-     * 
+     *
      * @param array $colors
      * @return AbstractChart
      */
@@ -241,15 +240,15 @@ abstract class AbstractChart
         foreach ($colors as $color) {
             $this->addColor($color);
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add color
-     * 
+     *
      * @param string|array|Setting\Color $color
-     * @return AbstractChart 
+     * @return AbstractChart
      */
     public function addColor($color)
     {
@@ -258,13 +257,13 @@ abstract class AbstractChart
         } else {
             $this->colors[] = new Setting\Color($color);
         }
-        
+
         return $this;
     }
 
     /**
      * Add label
-     * 
+     *
      * @param string|Setting\Label $label
      * @param array $params
      * @return AbstractChart
@@ -279,24 +278,24 @@ abstract class AbstractChart
 
         return $this;
     }
-    
+
     /**
      * Sets and returns legend
-     * 
+     *
      * @param array $params
-     * @return Legend 
+     * @return Legend
      */
     public function legend($params = array())
     {
         if (!isset($this->legend)) {
             $this->legend = new Legend();
         }
-        
+
         $this->legend->setParams($params);
 
         return $this->legend;
     }
-        
+
     /**
      * Sets and returns number formatter
      *
@@ -308,12 +307,12 @@ abstract class AbstractChart
         if (!isset($this->numberFormatter)) {
             $this->numberFormatter = new Setting\Formatter\Number();
         }
-        
+
         $this->numberFormatter->setParams($params);
 
         return $this->numberFormatter;
     }
-        
+
     /**
      * Sets and returns percent formatter
      *
@@ -325,7 +324,7 @@ abstract class AbstractChart
         if (!isset($this->percentFormatter)) {
             $this->percentFormatter = new Setting\Formatter\Percent();
         }
-        
+
         $this->percentFormatter->setParams($params);
 
         return $this->percentFormatter;
@@ -333,8 +332,8 @@ abstract class AbstractChart
 
     /**
      * Sets data provider
-     * 
-     * @param array|DataProvider $provider 
+     *
+     * @param array|DataProvider $provider
      * @return AbstractChart
      */
     public function setDataProvider($provider)
@@ -348,58 +347,58 @@ abstract class AbstractChart
                 . 'AmCharts\Chart\DataProvider class.'
             );
         }
-        
+
         $this->dataProvider = $provider;
 
         return $this;
     }
-    
+
     /**
      * Returns data provider
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getDataProvider()
     {
         return $this->dataProvider;
     }
-    
+
     /**
      * Returns params
-     * 
-     * @return array 
+     *
+     * @return array
      */
     protected function getParams()
     {
         $params = array();
-        
+
         $dataProvider = $this->getDataProvider();
         if (null !== $dataProvider) {
             $params['dataProvider'] = json_encode($dataProvider->getData());
         }
-        
+
         return $params;
     }
-    
+
     /**
      * Returns attributes
-     * 
-     * @return array 
+     *
+     * @return array
      */
     protected function getAttributes()
-    {        
+    {
         $attribProperties = array(
             'legend', 'valueAxis', 'graphs', 'cursor', 'scrollbar',
             'numberFormatter', 'percentFormatter',
         );
-        
+
         $attributes = array();
         foreach ($attribProperties as $property) {
             if (isset($this->{$property})) {
                 $attributes[$property] = $this->{$property};
             }
         }
-        
+
         return $attributes;
     }
 
