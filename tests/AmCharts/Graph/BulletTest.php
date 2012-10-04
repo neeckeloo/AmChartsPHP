@@ -33,6 +33,13 @@ class BulletTest extends \PHPUnit_Framework_TestCase
         $this->bullet->setType('foo');
     }
 
+    public function testSetSize()
+    {
+        $size = 5;
+        $this->bullet->setSize($size);
+        $this->assertEquals($size, $this->bullet->getSize());
+    }
+
     public function testToArray()
     {
     	$this->assertTrue(is_array($this->bullet->toArray()));
