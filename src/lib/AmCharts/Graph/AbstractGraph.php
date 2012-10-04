@@ -328,8 +328,9 @@ abstract class AbstractGraph
         $options += $this->fields()->toArray();
 
         $bulletOptions = $this->bullet()->toArray();
-        if (isset($bulletOptions['type'])) {
-            $bulletOptions['bullet'] = $bulletOptions['type'];
+        if (isset($bulletOptions['bulletType'])) {
+            $bulletOptions['bullet'] = $bulletOptions['bulletType'];
+            unset($bulletOptions['bulletType']);
         }
         $options += $bulletOptions;
 
