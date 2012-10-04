@@ -48,14 +48,19 @@ class Renderer extends AbstractRenderer
             $manager->setJsIncluded(true);
         }
         
-        $tpl = $this->renderScriptTag(
-                'var %1$s;' . "\n"
-                . 'AmCharts.ready(function () {' . "\n"
-                . '%2$s'
-                . '%1$s.write("%1$s");' . "\n"
-                . '});'
-            )
-            . "\n"
+        $script = 'var %1$s;' . "\n";
+        if(
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+        ) {
+            $loader = 'setTimeout(function() {%s}, 1);';
+        }
+        else {
+            $loader = 'AmCharts.ready(function() {%s});';
+        }
+        $script .= sprintf($loader, "\n" . '%2$s%1$s.write("%1$s");' . "\n");
+
+        $tpl = $this->renderScriptTag($script) . "\n"
             . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
         
         $code .= sprintf(
