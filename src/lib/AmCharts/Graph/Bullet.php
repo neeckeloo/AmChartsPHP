@@ -35,6 +35,13 @@ class Bullet
     );
 
     /**
+     * Bullet size
+     *
+     * @var integer
+     */
+    protected $size;
+
+    /**
      * Sets type
      *
      * @param string $type
@@ -65,6 +72,29 @@ class Bullet
     }
 
     /**
+     * Sets size
+     *
+     * @param integer $size
+     * @return Bullet
+     */
+    public function setSize($size)
+    {
+        $this->size = (int) $size;
+
+        return $this;
+    }
+
+    /**
+     * Returns size
+     *
+     * @return integer
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
      * Returns object properties as array
      *
      * @return array
@@ -81,7 +111,7 @@ class Bullet
                 continue;
             }
 
-            $options[$key] = $value;
+            $options['bullet' . ucfirst($key)] = $value;
         }
 
         return $options;
