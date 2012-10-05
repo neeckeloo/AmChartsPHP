@@ -24,6 +24,19 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AmCharts\Chart\Setting\Background', $this->scrollbar->background());
     }
 
+    public function testSetGraph()
+    {
+        $graphClass = 'AmCharts\Graph\AbstractGraph';
+        $graph = $this->getMockForAbstractClass($graphClass);
+
+        $this->scrollbar->setGraph($graph);
+        $this->assertInstanceOf($graphClass, $this->scrollbar->getGraph());
+
+        $options = $this->scrollbar->toArray();
+        $this->assertArrayHasKey('graph', $options);
+        $this->assertTrue(is_string($options['graph']));
+    }
+
     public function testSetGridAlpha()
     {
         $this->scrollbar->setGridAlpha(30);

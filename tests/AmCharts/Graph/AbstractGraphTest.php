@@ -32,6 +32,13 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $this->graph->getType());
     }
 
+    public function testGetId()
+    {
+        $id = $this->graph->getId();
+        $this->assertEquals(11, strlen($id));
+        $this->assertStringStartsWith('graph', $id);
+    }
+
     public function testGetFields()
     {
         $this->assertInstanceOf('AmCharts\Graph\Fields', $this->graph->fields());

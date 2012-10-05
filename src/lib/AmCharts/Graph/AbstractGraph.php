@@ -10,12 +10,17 @@ namespace AmCharts\Graph;
 use AmCharts\Chart\Setting;
 use AmCharts\Graph\Exception;
 
-abstract class AbstractGraph
+abstract class AbstractGraph implements GraphInterface
 {
     /**
      * @var string
      */
     protected $type;
+
+    /**
+     * @var string
+     */
+    protected $id;
 
     /**
      * @var string
@@ -89,6 +94,20 @@ abstract class AbstractGraph
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Returns id
+     * 
+     * @return string
+     */
+    public function getId()
+    {
+        if (!isset($this->id)) {
+            $this->id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
+        }
+
+        return $this->id;
     }
 
     /**

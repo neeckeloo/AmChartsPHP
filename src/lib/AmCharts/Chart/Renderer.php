@@ -117,9 +117,9 @@ class Renderer extends AbstractRenderer
         }
         
         if (isset($attributes['graphs']) && is_array($attributes['graphs'])) {
-            foreach ($attributes['graphs'] as $key => $graph) {
-                $graphId = 'graph' . $key;
-                $instructions .= $this->formatObjectAdding($graphId, 'AmGraph', $graph->toArray());
+            foreach ($attributes['graphs'] as $graph) {
+                /* @var $graph \AmCharts\Graph\AbstractGraph */
+                $instructions .= $this->formatObjectAdding($graph->getId(), 'AmGraph', $graph->toArray());
             }
         }
 

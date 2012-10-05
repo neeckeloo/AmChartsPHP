@@ -11,6 +11,8 @@ use AmCharts\Chart\Setting\Alpha;
 use AmCharts\Chart\Setting\Color;
 use AmCharts\Chart\Setting\Background;
 use AmCharts\Chart\Setting\Text;
+use AmCharts\Graph\AbstractGraph;
+use AmCharts\Graph\GraphInterface;
 
 class Scrollbar
 {
@@ -23,6 +25,13 @@ class Scrollbar
      * @var Alpha
      */
     protected $gridAlpha;
+
+    /**
+     * Graph will be displayed in the scrollbar.
+     *
+     * @var AbstractGraph
+     */
+    protected $graph;
 
     /**
      * @var Color
@@ -77,6 +86,29 @@ class Scrollbar
         }
 
         return $this->background;
+    }
+
+    /**
+     * Sets graph
+     *
+     * @param AbstractGraph $graph
+     * @return Scrollbar
+     */
+    public function setGraph(GraphInterface $graph)
+    {
+        $this->graph = $graph;
+
+        return $this;
+    }
+
+    /**
+     * Returns graph
+     *
+     * @return AbstractGraph
+     */
+    public function getGraph()
+    {
+        return $this->graph;
     }
 
     /**
@@ -237,6 +269,8 @@ class Scrollbar
                     if ($color) {
                         $options['color'] = $color->toString();
                     }
+                } elseif ($this->{$field} instanceof AbstractGraph) {
+                    $options['graph'] = $this->{$field}->getId();
                 } else {
                     $options[$field] = $this->{$field};
                 }
