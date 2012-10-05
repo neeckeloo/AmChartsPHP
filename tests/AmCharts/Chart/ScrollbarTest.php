@@ -57,9 +57,7 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     }
     
     public function testSetResizeEnabled()
-    {
-        $this->assertTrue($this->scrollbar->isResizeEnabled());
-        
+    {        
         $this->scrollbar->setResizeEnabled(false);
         $this->assertFalse($this->scrollbar->isResizeEnabled());
     }
