@@ -90,6 +90,13 @@ class Renderer extends AbstractRenderer
         ) . "\n";
         $instructions .= $this->formatVarProperties($this->chart->getId(), $params);
 
+        if (isset($attributes['graphs']) && is_array($attributes['graphs'])) {
+            foreach ($attributes['graphs'] as $graph) {
+                /* @var $graph \AmCharts\Graph\AbstractGraph */
+                $instructions .= $this->formatObjectAdding($graph->getId(), 'AmGraph', $graph->toArray());
+            }
+        }
+
         $objects = array(
             array('legend', 'AmLegend'),
             array('valueAxis', 'ValueAxis'),
@@ -113,13 +120,6 @@ class Renderer extends AbstractRenderer
                     $formatter,
                     json_encode($attributes[$formatter]->toArray())
                 );
-            }
-        }
-        
-        if (isset($attributes['graphs']) && is_array($attributes['graphs'])) {
-            foreach ($attributes['graphs'] as $graph) {
-                /* @var $graph \AmCharts\Graph\AbstractGraph */
-                $instructions .= $this->formatObjectAdding($graph->getId(), 'AmGraph', $graph->toArray());
             }
         }
 
@@ -178,7 +178,7 @@ class Renderer extends AbstractRenderer
                 $value = '[' . implode(',', $value) . ']';
             } elseif (is_bool($value)) {
                 $value = true === $value ? 'true' : 'false';
-            } elseif (!is_numeric($value) && $name != 'dataProvider') {
+            } elseif (!is_numeric($value) && $name != 'dataProvider' && $name != 'graph') {
                 $value = "'" . $value . "'";
             }
             

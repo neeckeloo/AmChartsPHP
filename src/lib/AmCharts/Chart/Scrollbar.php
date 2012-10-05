@@ -50,7 +50,7 @@ class Scrollbar
      *
      * @var boolean
      */
-    protected $resizeEnabled = true;
+    protected $resizeEnabled;
 
     /**
      * Height of scrollbar
