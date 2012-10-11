@@ -1,79 +1,3 @@
-<<<<<<< HEAD
-<?php
-/**
- * AmChartsPHP
- * 
- * @link      http://github.com/neeckeloo/AmChartsPHP
- * @copyright Copyright (c) 2012 Nicolas Eeckeloo
- */
-namespace AmCharts\Chart;
-
-class ScrollbarTest extends \PHPUnit_Framework_TestCase
-{   
-    /**
-     * @var Scrollbar
-     */
-    protected $scrollbar;
-    
-    public function setUp()
-    {
-        $this->scrollbar = new Scrollbar;
-    }
-
-    public function testSetBackground()
-    {
-        $this->assertInstanceOf('AmCharts\Chart\Setting\Background', $this->scrollbar->background());
-    }
-
-    public function testSetGraph()
-    {
-        $graphClass = 'AmCharts\Graph\AbstractGraph';
-        $graph = $this->getMockForAbstractClass($graphClass);
-
-        $this->scrollbar->setGraph($graph);
-        $this->assertInstanceOf($graphClass, $this->scrollbar->getGraph());
-
-        $options = $this->scrollbar->toArray();
-        $this->assertArrayHasKey('graph', $options);
-        $this->assertTrue(is_string($options['graph']));
-    }
-
-    public function testSetGridAlpha()
-    {
-        $this->scrollbar->setGridAlpha(30);
-        $this->assertEquals(30, $this->scrollbar->getGridAlpha());
-    }
-
-    public function testSetGridColor()
-    {
-        $this->scrollbar->setGridColor('#ff0000');
-        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getGridColor());
-    }
-
-    public function testSetGridCount()
-    {
-        $count = 5;
-        $this->scrollbar->setGridCount($count);
-        $this->assertEquals($count, $this->scrollbar->getGridCount());
-    }
-    
-    public function testSetResizeEnabled()
-    {        
-        $this->scrollbar->setResizeEnabled(false);
-        $this->assertFalse($this->scrollbar->isResizeEnabled());
-    }
-
-    public function testHeight()
-    {        
-        $this->scrollbar->setHeight(10);
-        $this->assertEquals(10, $this->scrollbar->getHeight());
-    }
-    
-    public function testToArray()
-    {
-        $this->assertTrue(is_array($this->scrollbar->toArray()));
-    }
-=======
 <?php
 /**
  * AmChartsPHP
@@ -161,5 +85,4 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(is_array($this->scrollbar->toArray()));
     }
->>>>>>> Add scrollbar features
 }
