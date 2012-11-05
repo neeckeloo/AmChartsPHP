@@ -10,7 +10,7 @@ namespace AmCharts;
 class ManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var AmCharts\Manager 
+     * @var Manager 
      */
     protected $manager;
     
@@ -44,27 +44,23 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     
     public function testSetLoadJQuery()
     {
-        $this->assertEquals(false, $this->manager->isLoadingJQuery());
+        $this->assertFalse($this->manager->isLoadingJQuery());
         
-        $bool = true;
-        $this->manager->setLoadJQuery($bool);
-        $this->assertEquals($bool, $this->manager->isLoadingJQuery());
+        $this->manager->setLoadJQuery(true);
+        $this->assertTrue($this->manager->isLoadingJQuery());
         
-        $bool = false;
-        $this->manager->setLoadJQuery($bool);
-        $this->assertEquals($bool, $this->manager->isLoadingJQuery());
+        $this->manager->setLoadJQuery(false);
+        $this->assertFalse($this->manager->isLoadingJQuery());
     }
     
     public function testSetJsIncluded()
     {
-        $this->assertEquals(false, $this->manager->hasIncludedJs());
+        $this->assertFalse($this->manager->hasIncludedJs());
         
-        $bool = true;
-        $this->manager->setJsIncluded($bool);
-        $this->assertEquals($bool, $this->manager->hasIncludedJs());
+        $this->manager->setJsIncluded(true);
+        $this->assertTrue($this->manager->hasIncludedJs());
         
-        $bool = false;
-        $this->manager->setJsIncluded($bool);
-        $this->assertEquals($bool, $this->manager->hasIncludedJs());
+        $this->manager->setJsIncluded(false);
+        $this->assertFalse($this->manager->hasIncludedJs());
     }
 }
