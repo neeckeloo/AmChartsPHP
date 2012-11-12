@@ -11,6 +11,7 @@ use AmCharts\Chart\Setting;
 use AmCharts\Chart\Renderer\AbstractRenderer;
 use AmCharts\Chart\Renderer\RendererInterface;
 use AmCharts\Chart\Exception;
+use AmCharts\Manager;
 
 abstract class AbstractChart
 {
@@ -368,9 +369,16 @@ abstract class AbstractChart
      *
      * @return array
      */
-    protected function getParams()
+    public function getParams()
     {
         $params = array();
+        
+        $manager = Manager::getInstance();
+
+        $imagesPath = $manager->getImagesPath();
+        if ($imagesPath) {
+            $params['pathToImages'] = $imagesPath;
+        }
 
         $dataProvider = $this->getDataProvider();
         if (null !== $dataProvider) {
@@ -385,7 +393,7 @@ abstract class AbstractChart
      *
      * @return array
      */
-    protected function getAttributes()
+    public function getAttributes()
     {
         $attribProperties = array(
             'legend', 'valueAxis', 'graphs', 'cursor', 'scrollbar',

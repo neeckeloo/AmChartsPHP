@@ -25,19 +25,13 @@ class Renderer extends AbstractRenderer
      * @param array $attributes
      * @return	string
      */
-    public function render(AbstractChart $chart, $params = array(), $attributes = array())
+    public function render(AbstractChart $chart)
     {
         $this->chart = $chart;
 
         $code = '';
         
-        $manager = Manager::getInstance();
-        
-        $imagesPath = $manager->getImagesPath();
-        if ($imagesPath) {
-            $params['pathToImages'] = $imagesPath;
-        }
-
+        $manager = Manager::getInstance();        
         if (!$manager->hasIncludedJs()) {
             $code .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
             
@@ -58,7 +52,13 @@ class Renderer extends AbstractRenderer
         else {
             $loader = 'AmCharts.ready(function() {%s});';
         }
-        $script .= sprintf($loader, "\n" . '%2$s%1$s.write("%1$s");' . "\n");
+
+        $initCode = "\n" . 'var %1$s_init = function() {' . "\n"
+            . '%2$s' . "\n"
+            . '%1$s.write("%1$s");' . "\n"
+            . '}' . "\n"
+            . '%1$s_init();' . "\n";
+        $script .= sprintf($loader, $initCode);
 
         $tpl = $this->renderScriptTag($script) . "\n"
             . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
@@ -66,7 +66,7 @@ class Renderer extends AbstractRenderer
         $code .= sprintf(
             $tpl,
             $this->chart->getId(),
-            $this->getInstructions($params, $attributes),
+            $this->getInstructions($chart->getParams(), $chart->getAttributes()),
             $chart->getWidth(),
             $chart->getHeight()
         );

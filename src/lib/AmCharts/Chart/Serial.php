@@ -134,11 +134,11 @@ class Serial extends Rectangular
      * 
      * @return array 
      */
-    protected function getParams()
+    public function getParams()
     {
         $params = parent::getParams();
         
-        $params = $params + array(
+        $params += array(
             'categoryField' => $this->categoryField,
             'columnSpacing' => $this->columnSpacing,
             'columnWidth'   => $this->columnWidth

@@ -767,7 +767,7 @@ class Pie extends AbstractChart
      * 
      * @return array 
      */
-    protected function getParams()
+    public function getParams()
     {
         $params = parent::getParams();
         
