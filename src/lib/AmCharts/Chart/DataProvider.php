@@ -7,7 +7,9 @@
  */
 namespace AmCharts\Chart;
 
-class DataProvider
+use AmCharts\Chart\DataProvider\DataProviderInterface;
+
+class DataProvider implements DataProviderInterface
 {    
     /**
      * @var array 
@@ -19,15 +21,28 @@ class DataProvider
      * 
      * @param array $data 
      */
-    public function __construct(array $data)
+    public function __construct($data)
+    {
+        $this->setData($data);
+    }
+
+    /**
+     * Sets data
+     *
+     * @param array $data
+     * @return DataProvider
+     */
+    public function setData(array $data)
     {
         $this->data = (array) $data;
+
+        return $this;
     }
-    
+
     /**
      * Returns data
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function getData()
     {
