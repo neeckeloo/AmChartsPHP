@@ -236,17 +236,15 @@ class Legend
                 continue;
             }
 
-            if ($field == 'valueText') {
-                if ($this->getValueTextEnabled()) {
-                    $params[$field] = $this->getValueText();
-                } else {
-                    $params[$field] = '';
-                }
-            } elseif ($field == 'border' || $field == 'margin' || $field == 'text') {
+            if ($field == 'border' || $field == 'margin' || $field == 'text') {
                 $params += $this->{$field}->toArray();
             } else {
                 $params[$field] = $this->{$field};
             }
+        }
+
+        if (!$this->getValueTextEnabled()) {
+            $params['valueText'] = '';
         }
         
         return $params;

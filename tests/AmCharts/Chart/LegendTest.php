@@ -79,6 +79,9 @@ class LegendTest extends \PHPUnit_Framework_TestCase
 
     public function testSetValueTextEnabled()
     {
+        $params = $this->legend->toArray();
+        $this->assertArrayNotHasKey('valueText', $params);
+
         $tag = '[[value]]';
         $this->legend->setValueText($tag);
         
@@ -91,6 +94,7 @@ class LegendTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->legend->getValueTextEnabled());
 
         $params = $this->legend->toArray();
+        $this->assertArrayHasKey('valueText', $params);
         $this->assertEquals('', $params['valueText']);
     }
     
