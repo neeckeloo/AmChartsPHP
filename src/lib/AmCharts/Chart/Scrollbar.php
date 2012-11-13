@@ -11,7 +11,6 @@ use AmCharts\Chart\Setting\Alpha;
 use AmCharts\Chart\Setting\Color;
 use AmCharts\Chart\Setting\Background;
 use AmCharts\Chart\Setting\Text;
-use AmCharts\Chart\Exception;
 
 class Scrollbar
 {
