@@ -17,12 +17,12 @@ class Manager
     /**
      * @var string
      */
-    protected $amChartsPath = 'amcharts.js';
+    protected $amChartsPath = 'http://www.amcharts.com/lib/amcharts.js';
     
     /**
      * @var string 
      */
-    protected $imagesPath;
+    protected $imagesPath = 'http://www.amcharts.com/lib/images/';
 
     /**
      * @var boolean
