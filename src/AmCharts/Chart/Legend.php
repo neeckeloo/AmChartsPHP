@@ -46,6 +46,11 @@ class Legend
      * @var string
      */
     protected $valueText;
+
+    /**
+     * @var boolean
+     */
+    protected $valueTextEnabled = true;
     
     /**
      * Constructor
@@ -190,6 +195,29 @@ class Legend
     {
         return $this->valueText;
     }
+
+    /**
+     * Sets true if value text is enabled
+     *
+     * @param boolean $enabled
+     * @return Legend
+     */
+    public function setValueTextEnabled($enabled = true)
+    {
+        $this->valueTextEnabled = (bool) $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Returns true if value text is enabled
+     *
+     * @return boolean
+     */
+    public function getValueTextEnabled()
+    {
+        return $this->valueTextEnabled;
+    }
     
     /**
      * Returns legend as array
@@ -200,13 +228,21 @@ class Legend
     {
         $params = array();
 
+        $forbidden = array('valueTextEnabled');
+
         $fields = array_keys(get_object_vars($this));
         foreach ($fields as $field) {
-            if (!isset($this->{$field})) {
+            if (!isset($this->{$field}) || in_array($field, $forbidden)) {
                 continue;
             }
 
-            if ($field == 'border' || $field == 'margin' || $field == 'text') {
+            if ($field == 'valueText') {
+                if ($this->getValueTextEnabled()) {
+                    $params[$field] = $this->getValueText();
+                } else {
+                    $params[$field] = '';
+                }
+            } elseif ($field == 'border' || $field == 'margin' || $field == 'text') {
                 $params += $this->{$field}->toArray();
             } else {
                 $params[$field] = $this->{$field};

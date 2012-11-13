@@ -76,6 +76,23 @@ class LegendTest extends \PHPUnit_Framework_TestCase
     {
         $this->legend->setValueText('foo');
     }
+
+    public function testSetValueTextEnabled()
+    {
+        $tag = '[[value]]';
+        $this->legend->setValueText($tag);
+        
+        $this->assertTrue($this->legend->getValueTextEnabled());
+
+        $params = $this->legend->toArray();
+        $this->assertEquals($tag, $params['valueText']);
+
+        $this->legend->setValueTextEnabled(false);
+        $this->assertFalse($this->legend->getValueTextEnabled());
+
+        $params = $this->legend->toArray();
+        $this->assertEquals('', $params['valueText']);
+    }
     
     public function testToArray()
     {
