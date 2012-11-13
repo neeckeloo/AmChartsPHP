@@ -42,6 +42,40 @@ class LegendTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('AmCharts\Chart\Setting\Text', $this->legend->text());
     }
+
+    public function testSetLabelText()
+    {
+        $this->assertCount(0, $this->legend->toArray());
+
+        $this->legend->setLabelText('[[title]]');
+        $this->assertEquals('[[title]]', $this->legend->getLabelText());
+        $this->assertCount(1, $this->legend->toArray());
+    }
+
+    /**
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
+     */
+    public function testSetLabelTextThatNotContainsTitleTag()
+    {
+        $this->legend->setLabelText('foo');
+    }
+
+    public function testSetValueText()
+    {
+        $this->assertCount(0, $this->legend->toArray());
+        
+        $this->legend->setValueText('[[value]]');
+        $this->assertEquals('[[value]]', $this->legend->getValueText());
+        $this->assertCount(1, $this->legend->toArray());
+    }
+
+    /**
+     * @expectedException AmCharts\Chart\Exception\InvalidArgumentException
+     */
+    public function testSetValueTextThatNotContainsTags()
+    {
+        $this->legend->setValueText('foo');
+    }
     
     public function testToArray()
     {

@@ -10,6 +10,7 @@ namespace AmCharts\Chart;
 use AmCharts\Chart\Setting\Border;
 use AmCharts\Chart\Setting\Margin;
 use AmCharts\Chart\Setting\Text;
+use AmCharts\Chart\Exception;
 
 class Legend
 {
@@ -27,6 +28,24 @@ class Legend
      * @var Text 
      */
     protected $text;
+
+    /**
+     * The text which will be displayed in the legend
+     *
+     * (default value: [[title]])
+     *
+     * @var string
+     */
+    protected $labelText;
+
+    /**
+     * The text which will be displayed in the value portion of the legend
+     * 
+     * (default value: [[value]])
+     *
+     * @var string
+     */
+    protected $valueText;
     
     /**
      * Constructor
@@ -112,6 +131,65 @@ class Legend
 
         return $this->text;
     }
+
+    /**
+     * Sets label text
+     *
+     * @param string $text
+     * @return Legend
+     */
+    public function setLabelText($text)
+    {
+        if (!preg_match('/\[\[title\]\]/', $text)) {
+            throw new Exception\InvalidArgumentException(
+                'Label text must contains tag [[title]].'
+            );
+        }
+
+        $this->labelText = (string) $text;
+
+        return $this;
+    }
+
+    /**
+     * Returns label text
+     *
+     * @return string
+     */
+    public function getLabelText()
+    {
+        return $this->labelText;
+    }
+
+    /**
+     * Sets value text
+     *
+     * @param string $text
+     * @return Legend
+     */
+    public function setValueText($text)
+    {
+        if (!preg_match('/\[\[(value|open|high|low|close|percents|description)\]\]/', $text)) {
+            throw new Exception\InvalidArgumentException(
+                'Value text must contains tags like'
+                . ' [[value]], [[open]], [[high]], [[low]], [[close]], [[percents]], [[description]].'
+            );
+        }
+        
+        $this->valueText = (string) $text;
+
+        return $this;
+    }
+
+    /**
+     * Returns value text
+     *
+     * @return string
+     */
+    public function getValueText()
+    {
+        return $this->valueText;
+    }
     
     /**
      * Returns legend as array
@@ -122,14 +200,17 @@ class Legend
     {
         $params = array();
 
-        if (isset($this->border)) {
-            $params += $this->border->toArray();
-        }
-        if (isset($this->margin)) {
-            $params += $this->margin->toArray();
-        }
-        if (isset($this->text)) {
-            $params += $this->text->toArray();
+        $fields = array_keys(get_object_vars($this));
+        foreach ($fields as $field) {
+            if (!isset($this->{$field})) {
+                continue;
+            }
+
+            if ($field == 'border' || $field == 'margin' || $field == 'text') {
+                $params += $this->{$field}->toArray();
+            } else {
+                $params[$field] = $this->{$field};
+            }
         }
         
         return $params;
