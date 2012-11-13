@@ -1,13 +1,13 @@
 {
-    "hash": "fe5857faa0504d7dd2f3a3b681404c19",
+    "hash": "983957c1ea73a2c9986eaa359df48be8",
     "packages": [
         {
             "name": "zendframework/zend-json",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "target-dir": "Zend/Json",
             "dist": {
                 "type": "zip",
-                "url": "http://packages.zendframework.com/composer/Zend_Json-2.0.2.zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Json-2.0.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -22,7 +22,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
-                    "Zend\\Json": ""
+                    "Zend\\Json\\": ""
                 }
             },
             "license": [
@@ -33,15 +33,21 @@
             "keywords": [
                 "zf2",
                 "json"
-            ]
+            ],
+            "support": {
+                "email": "fw-general-subscribe@lists.zend.com",
+                "irc": "irc://irc.freenode.net/zftalk",
+                "issues": "https://github.com/zendframework/zf2/issues",
+                "source": "https://github.com/zendframework/zf2"
+            }
         },
         {
             "name": "zendframework/zend-servicemanager",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "target-dir": "Zend/ServiceManager",
             "dist": {
                 "type": "zip",
-                "url": "http://packages.zendframework.com/composer/Zend_ServiceManager-2.0.2.zip",
+                "url": "http://packages.zendframework.com/composer/Zend_ServiceManager-2.0.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -55,7 +61,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
-                    "Zend\\ServiceManager": ""
+                    "Zend\\ServiceManager\\": ""
                 }
             },
             "license": [
@@ -66,15 +72,21 @@
             "keywords": [
                 "zf2",
                 "servicemanager"
-            ]
+            ],
+            "support": {
+                "email": "fw-general-subscribe@lists.zend.com",
+                "irc": "irc://irc.freenode.net/zftalk",
+                "issues": "https://github.com/zendframework/zf2/issues",
+                "source": "https://github.com/zendframework/zf2"
+            }
         },
         {
             "name": "zendframework/zend-stdlib",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "target-dir": "Zend/Stdlib",
             "dist": {
                 "type": "zip",
-                "url": "http://packages.zendframework.com/composer/Zend_Stdlib-2.0.2.zip",
+                "url": "http://packages.zendframework.com/composer/Zend_Stdlib-2.0.3.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -88,7 +100,7 @@
             "installation-source": "dist",
             "autoload": {
                 "psr-0": {
-                    "Zend\\Stdlib": ""
+                    "Zend\\Stdlib\\": ""
                 }
             },
             "license": [
@@ -99,7 +111,13 @@
             "keywords": [
                 "zf2",
                 "stdlib"
-            ]
+            ],
+            "support": {
+                "email": "fw-general-subscribe@lists.zend.com",
+                "irc": "irc://irc.freenode.net/zftalk",
+                "issues": "https://github.com/zendframework/zf2/issues",
+                "source": "https://github.com/zendframework/zf2"
+            }
         }
     ],
     "packages-dev": null,
