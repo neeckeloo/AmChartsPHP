@@ -5,6 +5,9 @@ AmChartsPHP is a library of PHP classes to generate AmCharts HTML5 charts.
 
 AmChartsPHP provide an API to create easily different charts in your application from your data.
 
+AmCharts web site : [http://www.amcharts.com](http://www.amcharts.com)
+AmCharts examples : [http://www.amcharts.com/javascript-charts](http://www.amcharts.com/javascript-charts)
+
 [![Build Status](https://secure.travis-ci.org/neeckeloo/AmChartsPHP.png?branch=master)](http://travis-ci.org/neeckeloo/AmChartsPHP)
 
 Requirements
@@ -75,7 +78,7 @@ The tests use PHPUnit
 AmCharts original documentation
 -------------------------------
 
-[http://www.amcharts.com/docs/v.2/javascript_reference](http://www.amcharts.com/docs/v.2/javascript_reference)
+[http://docs.amcharts.com/javascriptcharts](http://docs.amcharts.com/javascriptcharts)
 
 
  [1]: http://getcomposer.org/composer.phar
