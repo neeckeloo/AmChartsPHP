@@ -81,8 +81,7 @@ abstract class AbstractChart
     protected $renderer;
 
     /**
-     * Constructor can only be called from derived class because AmChart
-     * is abstract.
+     * Constructor
      *
      * @param string $id
      */
