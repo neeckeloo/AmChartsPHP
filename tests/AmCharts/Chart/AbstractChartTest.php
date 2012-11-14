@@ -22,9 +22,12 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
         $this->chart = $this->getMockForAbstractClass($class);
     }
     
-    public function testGetId()
+    public function testSetId()
     {
         $this->assertContains('chart_', $this->chart->getId());
+
+        $this->chart->setId('foo');
+        $this->assertEquals('foo', $this->chart->getId());
     }
     
     public function testGetType()

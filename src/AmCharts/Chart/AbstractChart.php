@@ -89,9 +89,7 @@ abstract class AbstractChart
     public function __construct($id = null)
     {
         if (null !== $id) {
-            $this->id = (string) $id;
-        } else {
-            $this->id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
+            $this->setId($id);
         }
 
         $this->init();
@@ -106,12 +104,30 @@ abstract class AbstractChart
     }
 
     /**
+     * Sets chart id
+     *
+     * @param string $id
+     * @return AbstractChart
+     */
+    public function setId($id)
+    {
+        $this->id = (string) $id;
+
+        return $this;
+    }
+
+    /**
      * Returns chart id
      *
      * @return string
      */
     public function getId()
     {
+        if (!isset($this->id)) {
+            $id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
+            $this->setId($id);
+        }
+        
         return $this->id;
     }
 

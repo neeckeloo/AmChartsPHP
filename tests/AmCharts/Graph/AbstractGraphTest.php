@@ -20,23 +20,26 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
         $this->graph = $this->getMockForAbstractClass($class);
     }
 
-    public function testSetTitle()
-    {
-        $this->graph->setTitle('Foo');
-        $this->assertEquals('Foo', $this->graph->getTitle());
-    }
-
     public function testSetType()
     {
         $this->graph->setType('Foo');
         $this->assertEquals('Foo', $this->graph->getType());
     }
 
-    public function testGetId()
+    public function testSetId()
     {
         $id = $this->graph->getId();
         $this->assertEquals(11, strlen($id));
         $this->assertStringStartsWith('graph', $id);
+
+        $this->graph->setId('foo');
+        $this->assertEquals('foo', $this->graph->getId());
+    }
+
+    public function testSetTitle()
+    {
+        $this->graph->setTitle('Foo');
+        $this->assertEquals('Foo', $this->graph->getTitle());
     }
 
     public function testGetFields()

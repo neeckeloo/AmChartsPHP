@@ -97,6 +97,19 @@ abstract class AbstractGraph implements GraphInterface
     }
 
     /**
+     * Sets id
+     *
+     * @param string $id
+     * @return AbstractGraph
+     */
+    public function setId($id)
+    {
+        $this->id = (string) $id;
+
+        return $this;
+    }
+
+    /**
      * Returns id
      * 
      * @return string
@@ -104,7 +117,8 @@ abstract class AbstractGraph implements GraphInterface
     public function getId()
     {
         if (!isset($this->id)) {
-            $this->id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
+            $id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
+            $this->setId($id);
         }
 
         return $this->id;
