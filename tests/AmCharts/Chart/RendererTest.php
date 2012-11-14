@@ -22,6 +22,8 @@ class RendererTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $chart = $this->getMockForAbstractClass('AmCharts\Chart\AbstractChart');
-        $this->assertTrue(is_string($this->renderer->render($chart)));
+        $this->renderer->setChart($chart);
+        
+        $this->assertTrue(is_string($this->renderer->render()));
     }
 }

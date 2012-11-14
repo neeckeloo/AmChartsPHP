@@ -445,6 +445,7 @@ abstract class AbstractChart
     public function render()
     {
         return $this->getRenderer()
-            ->render($this, $this->getParams(), $this->getAttributes());
+            ->setChart($this)
+            ->render();
     }
 }

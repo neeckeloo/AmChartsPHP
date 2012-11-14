@@ -11,5 +11,7 @@ use AmCharts\Chart\AbstractChart;
 
 interface RendererInterface
 {
-    public function render(AbstractChart $chart);
+    public function setChart(AbstractChart $chart);
+
+    public function render();
 }

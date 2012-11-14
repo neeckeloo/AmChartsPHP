@@ -13,25 +13,15 @@ use AmCharts\Manager;
 class Renderer extends AbstractRenderer
 {
     /**
-     * @var AbstractChart
-     */
-    protected $chart;
-
-    /**
      * Returns the HTML code to insert on the page
      *
-     * @param AbstractChart $chart
-     * @param array $params
-     * @param array $attributes
      * @return	string
      */
-    public function render(AbstractChart $chart)
+    public function render()
     {
-        $this->chart = $chart;
-
         $code = '';
         
-        $manager = Manager::getInstance();        
+        $manager = Manager::getInstance();
         if (!$manager->hasIncludedJs()) {
             $code .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
             
@@ -66,9 +56,9 @@ class Renderer extends AbstractRenderer
         $code .= sprintf(
             $tpl,
             $this->chart->getId(),
-            $this->getInstructions($chart->getParams(), $chart->getAttributes()),
-            $chart->getWidth(),
-            $chart->getHeight()
+            $this->getInstructions($this->chart->getParams(), $this->chart->getAttributes()),
+            $this->chart->getWidth(),
+            $this->chart->getHeight()
         );
 
         return $code;
