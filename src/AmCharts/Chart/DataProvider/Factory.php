@@ -8,33 +8,46 @@
 namespace AmCharts\Chart\DataProvider;
 
 use AmCharts\Chart\DataProvider;
+use AmCharts\Chart\DataProvider\Reader\ReaderInterface;
 use AmCharts\Chart\Exception;
+use Zend\Http\Client as HttpClient;
 
 class Factory
 {
+    const JSON = 'json';
+    const XML  = 'xml';
+    const CSV  = 'csv';
+
     /**
-     * Plugin manager for loading readers.
-     * 
-     * @var null|ReaderPluginManager 
+     * Plugin manager for loading readers
+     *
+     * @var null|ReaderPluginManager
      */
     public static $readers = null;
+
+    /**
+     * HTTP client
+     *
+     * @var null|HttpClient
+     */
+    public static $httpClient = null;
     
     /**
-     * Registered data file extensions.
+     * Registered data file extensions
      * 
      * @var array 
      */
     protected static $extensions = array(
-        'json' => 'json',
-        'xml'  => 'xml',
-        'csv'  => 'csv',
+        self::JSON => self::JSON,
+        self::XML  => self::XML,
+        self::CSV  => self::CSV,
     );
     
     /**
-     * Read data from a file.
+     * Read data from a file
      * 
      * @param string $filename
-     * @return array|DataProvider
+     * @return DataProvider
      */
     public static function fromFile($filename)
     {
@@ -60,7 +73,7 @@ class Factory
             $data = include $filename;
         } else if (isset(self::$extensions[$extension])) {
             $reader = self::$extensions[$extension];
-            if (!($reader instanceof Reader\ReaderInterface)) {
+            if (!($reader instanceof ReaderInterface)) {
                 $reader = self::getReaderPluginManager()->get($reader);
                 self::$extensions[$extension] = $reader;
             }
@@ -75,6 +88,48 @@ class Factory
         
         return new DataProvider($data);
     }
+    
+    /**
+     * Read data from an url
+     *
+     * @param string $url
+     * @param string $format
+     * @return DataProvider
+     */
+    public static function fromUrl($url, $format = null)
+    {
+        $client = self::getHttpClient();
+        $client->setUri($url);
+
+        $response = $client->send();
+        $content = $response->getBody();
+
+        if (null === $format) {
+            $contentTypeHeader = $response->getHeaders()->get('content-type');
+            $contentType = $contentTypeHeader->getFieldValue();
+            $parts = explode('/', $contentType);
+            $extension = $parts[1];
+        } else {
+            $extension = strtolower($format);
+        }
+
+        if (isset(self::$extensions[$extension])) {
+            $reader = self::$extensions[$extension];
+            if (!($reader instanceof ReaderInterface)) {
+                $reader = self::getReaderPluginManager()->get($reader);
+                self::$extensions[$extension] = $reader;
+            }
+
+            $data = $reader->fromString($content);
+        } else {
+            throw new Exception\RuntimeException(sprintf(
+                'Unsupported data file format: %s',
+                $extension
+            ));
+        }
+
+        return new DataProvider($data);
+    }
 
     /**
      * Set reader plugin manager
@@ -87,7 +142,7 @@ class Factory
     }
 
     /**
-     * Get the reader plugin manager
+     * Returns the reader plugin manager
      *
      * @return ReaderPluginManager
      */
@@ -96,22 +151,46 @@ class Factory
         if (static::$readers === null) {
             static::$readers = new ReaderPluginManager();
         }
-        
+
         return static::$readers;
+    }
+
+    /**
+     * Sets HTTP client
+     *
+     * @param HttpClient $client
+     */
+    public static function setHttpClient(HttpClient $client)
+    {
+        self::$httpClient = $client;
+    }
+
+    /**
+     * Returns HTTP client
+     *
+     * @return HttpClient
+     */
+    public static function getHttpClient()
+    {
+        if (static::$httpClient === null) {
+            static::$httpClient = new HttpClient();
+        }
+
+        return static::$httpClient;
     }
 
     /**
      * Sets config reader for file extension
      *
      * @param  string $extension
-     * @param  string|Reader\ReaderInterface $reader
+     * @param  string|ReaderInterface $reader
      * @throws Exception\InvalidArgumentException
      */
     public static function registerReader($extension, $reader)
     {
         $extension = strtolower($extension);
 
-        if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
+        if (!is_string($reader) && !$reader instanceof ReaderInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Reader should be plugin name, class name or ' .
                 'instance of %s\Reader\ReaderInterface; received "%s"',
