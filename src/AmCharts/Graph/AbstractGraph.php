@@ -9,6 +9,7 @@ namespace AmCharts\Graph;
 
 use AmCharts\Chart\Setting;
 use AmCharts\Graph\Exception;
+use AmCharts\Utils;
 
 abstract class AbstractGraph implements GraphInterface
 {
@@ -128,7 +129,7 @@ abstract class AbstractGraph implements GraphInterface
      */
     protected function generateId()
     {
-        $id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
+        $id = 'graph_' . Utils::generateRandomKey();
         $this->setId($id);
     }
 

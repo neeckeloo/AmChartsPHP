@@ -12,6 +12,7 @@ use AmCharts\Chart\Renderer\AbstractRenderer;
 use AmCharts\Chart\Renderer\RendererInterface;
 use AmCharts\Chart\Exception;
 use AmCharts\Manager;
+use AmCharts\Utils;
 
 abstract class AbstractChart
 {
@@ -134,7 +135,7 @@ abstract class AbstractChart
      */
     protected function generateId()
     {
-        $id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
+        $id = 'chart_' . Utils::generateRandomKey();
         $this->setId($id);
     }
 
