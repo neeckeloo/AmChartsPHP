@@ -144,4 +144,14 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
         $output = $this->chart->render();
         $this->assertNotEquals(false, strpos($output, 'script'));
     }
+
+    public function testClone()
+    {
+        $id = $this->chart->getId();
+
+        $chart = clone $this->chart;
+
+        $this->assertEquals($id, $this->chart->getId());
+        $this->assertNotEquals($id, $chart->getId());
+    }
 }

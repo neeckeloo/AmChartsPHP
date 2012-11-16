@@ -123,11 +123,19 @@ abstract class AbstractChart
     public function getId()
     {
         if (!isset($this->id)) {
-            $id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
-            $this->setId($id);
+            $this->generateId();
         }
         
         return $this->id;
+    }
+
+    /**
+     * Generate id
+     */
+    protected function generateId()
+    {
+        $id = 'chart_' . substr(md5(uniqid() . microtime()), 3, 5);
+        $this->setId($id);
     }
 
     /**
@@ -462,5 +470,10 @@ abstract class AbstractChart
         return $this->getRenderer()
             ->setChart($this)
             ->render();
+    }
+
+    public function __clone()
+    {
+        $this->generateId();
     }
 }

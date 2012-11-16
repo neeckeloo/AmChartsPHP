@@ -100,4 +100,14 @@ class AbstractGraphTest extends \PHPUnit_Framework_TestCase
         $options = $this->graph->toArray();
         $this->assertCount(1, $options);
     }
+
+    public function testClone()
+    {
+        $id = $this->graph->getId();
+
+        $graph = clone $this->graph;
+
+        $this->assertEquals($id, $this->graph->getId());
+        $this->assertNotEquals($id, $graph->getId());
+    }
 }

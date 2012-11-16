@@ -117,11 +117,19 @@ abstract class AbstractGraph implements GraphInterface
     public function getId()
     {
         if (!isset($this->id)) {
-            $id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
-            $this->setId($id);
+            $this->generateId();
         }
 
         return $this->id;
+    }
+
+    /**
+     * Generate id
+     */
+    protected function generateId()
+    {
+        $id = 'graph_' . substr(md5(uniqid() . microtime()), 3, 5);
+        $this->setId($id);
     }
 
     /**
@@ -368,5 +376,10 @@ abstract class AbstractGraph implements GraphInterface
         $options += $bulletOptions;
 
         return $options;
+    }
+
+    public function __clone()
+    {
+        $this->generateId();
     }
 }
