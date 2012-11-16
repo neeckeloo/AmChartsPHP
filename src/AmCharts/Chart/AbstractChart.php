@@ -364,8 +364,7 @@ abstract class AbstractChart
     {
         if (is_array($provider)) {
             $provider = new DataProvider($provider);
-        }
-        else if (!($provider instanceof DataProvider)) {
+        } elseif (!($provider instanceof DataProvider)) {
             throw new Exception\InvalidArgumentException(
                 'Data provider must be an instance of '
                 . 'AmCharts\Chart\DataProvider class.'

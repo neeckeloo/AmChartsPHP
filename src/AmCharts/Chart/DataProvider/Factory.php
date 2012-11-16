@@ -71,7 +71,7 @@ class Factory
             }
             
             $data = include $filename;
-        } else if (isset(self::$extensions[$extension])) {
+        } elseif (isset(self::$extensions[$extension])) {
             $reader = self::$extensions[$extension];
             if (!($reader instanceof ReaderInterface)) {
                 $reader = self::getReaderPluginManager()->get($reader);
