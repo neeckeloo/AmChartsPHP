@@ -24,6 +24,18 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AmCharts\Chart\Setting\Background', $this->scrollbar->background());
     }
 
+    public function testSetGraph()
+    {
+        $class = 'AmCharts\Graph\AbstractGraph';
+        $graph = $this->getMockForAbstractClass($class);
+
+        $this->scrollbar->setGraph($graph);
+        $this->assertInstanceOf($class, $this->scrollbar->getGraph());
+
+        $params = $this->scrollbar->toArray();
+        $this->assertArrayHasKey('graph', $params);
+    }
+
     public function testSetFillAlpha()
     {
         $this->scrollbar->setFillAlpha(30);
@@ -68,9 +80,7 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
     }
     
     public function testSetResizeEnabled()
-    {
-        $this->assertTrue($this->scrollbar->isResizeEnabled());
-        
+    {        
         $this->scrollbar->setResizeEnabled(false);
         $this->assertFalse($this->scrollbar->isResizeEnabled());
     }

@@ -1,7 +1,7 @@
 <?php
 /**
  * AmChartsPHP
- * 
+ *
  * @link      http://github.com/neeckeloo/AmChartsPHP
  * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
@@ -11,6 +11,8 @@ use AmCharts\Chart\Setting\Alpha;
 use AmCharts\Chart\Setting\Color;
 use AmCharts\Chart\Setting\Background;
 use AmCharts\Chart\Setting\Text;
+use AmCharts\Graph\AbstractGraph;
+use AmCharts\Graph\GraphInterface;
 
 class Scrollbar
 {
@@ -18,6 +20,13 @@ class Scrollbar
      * @var Background
      */
     protected $background;
+
+    /**
+     * Graph will be displayed in the scrollbar
+     *
+     * @var AbstractGraph
+     */
+    protected $graph;
 
     /**
      * @var Alpha
@@ -51,29 +60,29 @@ class Scrollbar
 
     /**
      * Number of grid lines
-     * 
-     * @var integer 
+     *
+     * @var integer
      */
     protected $gridCount;
 
     /**
-     * Specifies whether scrollbar has a resize feature.
-     * 
-     * @var boolean 
+     * Specifies whether scrollbar has a resize feature
+     *
+     * @var boolean
      */
-    protected $resizeEnabled = true;
-    
+    protected $resizeEnabled;
+
     /**
      * Height of scrollbar
-     * 
+     *
      * @var integer
      */
     protected $scrollbarHeight;
-    
+
     /**
      * Constructor
-     * 
-     * @param array $params 
+     *
+     * @param array $params
      */
     public function __construct($params = array())
     {
@@ -97,6 +106,29 @@ class Scrollbar
         }
 
         return $this->background;
+    }
+
+    /**
+     * Sets graph
+     *
+     * @param AbstractGraph $graph
+     * @return Scrollbar
+     */
+    public function setGraph(GraphInterface $graph)
+    {
+        $this->graph = $graph;
+
+        return $this;
+    }
+
+    /**
+     * Returns graph
+     *
+     * @return AbstractGraph
+     */
+    public function getGraph()
+    {
+        return $this->graph;
     }
 
     /**
@@ -275,23 +307,23 @@ class Scrollbar
     {
         return $this->lineColor;
     }
-    
+
     /**
      * Sets if scrollbar resize is enabled
-     * 
+     *
      * @param boolean $enabled
-     * @return Scrollbar 
+     * @return Scrollbar
      */
     public function setResizeEnabled($enabled = false)
     {
         $this->resizeEnabled = (bool) $enabled;
-        
+
         return $this;
     }
-    
+
     /**
      * Returns true if scrollbar resize is enabled
-     * 
+     *
      * @return boolean
      */
     public function isResizeEnabled()
@@ -301,30 +333,30 @@ class Scrollbar
 
     /**
      * Sets height
-     * 
-     * @param string $height 
+     *
+     * @param string $height
      * @return AbstractChart
      */
     public function setHeight($height)
-    {        
+    {
         $this->scrollbarHeight = (integer) $height;
 
         return $this;
     }
-    
+
     /**
      * Returns height
-     * 
+     *
      * @return string
      */
     public function getHeight()
     {
         return $this->scrollbarHeight;
     }
-    
+
     /**
      * Sets scrollbar parameters
-     * 
+     *
      * @param array $params
      * @return Scrollbar
      */
@@ -335,22 +367,22 @@ class Scrollbar
             if (!method_exists($this, $method)) {
                 continue;
             }
-            
+
             call_user_func_array(array($this, $method), array($value));
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Returns object properties as array
-     * 
-     * @return array 
+     *
+     * @return array
      */
     public function toArray()
     {
         $options = array();
-        
+
         $fields = array_keys(get_object_vars($this));
         foreach ($fields as $field) {
             if (isset($this->{$field})) {
@@ -361,6 +393,8 @@ class Scrollbar
                     if ($color) {
                         $options['color'] = $color->toString();
                     }
+                } elseif ($this->{$field} instanceof AbstractGraph) {
+                    $options['graph'] = $this->{$field}->getId();
                 } else {
                     $options[$field] = $this->{$field};
                 }
@@ -370,7 +404,7 @@ class Scrollbar
         if (isset($this->background)) {
             $options += $this->background->toArray();
         }
-        
+
         return $options;
     }
 }
