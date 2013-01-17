@@ -20,7 +20,7 @@ abstract class AbstractRenderer implements RendererInterface
      * Sets chart instance
      *
      * @param AbstractChart $chart
-     * @return string
+     * @return AbstractRenderer
      */
     public function setChart(AbstractChart $chart)
     {

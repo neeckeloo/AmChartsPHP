@@ -11,7 +11,16 @@ use AmCharts\Chart\AbstractChart;
 
 interface RendererInterface
 {
+    /**
+     * Sets chart instance
+     *
+     * @param AbstractChart $chart
+     * @return AbstractRenderer
+     */
     public function setChart(AbstractChart $chart);
 
+    /**
+     * @return void
+     */
     public function render();
 }
