@@ -405,7 +405,7 @@ abstract class AbstractChart
 
         $dataProvider = $this->getDataProvider();
         if (null !== $dataProvider) {
-            $params['dataProvider'] = json_encode($dataProvider->getData());
+            $params['dataProvider'] = json_encode($dataProvider->toArray());
         }
 
         return $params;

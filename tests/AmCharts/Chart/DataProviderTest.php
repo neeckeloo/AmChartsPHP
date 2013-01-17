@@ -21,6 +21,6 @@ class DataProviderTest extends \PHPUnit_Framework_TestCase
     
     public function testGetData()
     {
-        $this->assertTrue(is_array($this->provider->getData()));
+        $this->assertTrue(is_array($this->provider->toArray()));
     }
 }

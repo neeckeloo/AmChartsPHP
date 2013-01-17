@@ -45,7 +45,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('AmCharts\Chart\DataProvider', $dataProvider);
 
-        $data = $dataProvider->getData();
+        $data = $dataProvider->toArray();
         $this->assertCount(3, $data);
     }
     

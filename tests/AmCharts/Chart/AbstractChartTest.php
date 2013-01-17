@@ -108,7 +108,7 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
             'AmCharts\Chart\DataProvider',
             $dataProvider
         );
-        $this->assertCount(3, $dataProvider->getData());
+        $this->assertCount(3, $dataProvider->toArray());
     }
     
     public function testSetText()

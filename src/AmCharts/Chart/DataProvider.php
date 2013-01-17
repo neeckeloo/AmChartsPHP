@@ -23,20 +23,18 @@ class DataProvider implements DataProviderInterface
      */
     public function __construct($data)
     {
-        $this->setData($data);
+        $this->setFromArray($data);
     }
 
     /**
-     * Sets data
+     * Sets data from array
      *
      * @param array $data
      * @return DataProvider
      */
-    public function setData(array $data)
+    public function setFromArray(array $data)
     {
-        $this->data = (array) $data;
-
-        return $this;
+        $this->data = $data;
     }
 
     /**
@@ -44,7 +42,7 @@ class DataProvider implements DataProviderInterface
      *
      * @return array
      */
-    public function getData()
+    public function toArray()
     {
         return $this->data;
     }
