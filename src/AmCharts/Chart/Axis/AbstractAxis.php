@@ -326,7 +326,10 @@ abstract class AbstractAxis
         }
 
         if (!($angle > -360 && $angle < 360)) {
-            throw new Exception\InvalidArgumentException("'$angle' is not a valid angle.");
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%" is not a valid angle.',
+                $angle
+            ));
         }
 
         $this->labelRotation = (int) $angle;

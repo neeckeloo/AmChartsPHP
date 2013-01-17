@@ -96,7 +96,10 @@ abstract class Rectangular extends Coordinate
         }
         
         if (!($angle > -360 && $angle < 360)) {
-            throw new Exception\InvalidArgumentException("'$angle' is not a valid angle.");
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" is not a valid angle.',
+                $angle
+            ));
         }
         
         $this->angle = (integer) $angle;

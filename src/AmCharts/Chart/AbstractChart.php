@@ -367,8 +367,8 @@ abstract class AbstractChart
             $provider = new DataProvider($provider);
         } elseif (!($provider instanceof DataProvider)) {
             throw new Exception\InvalidArgumentException(
-                'Data provider must be an instance of '
-                . 'AmCharts\Chart\DataProvider class.'
+                'Data provider must be an instance of %s\DataProvider class.',
+                __NAMESPACE__
             );
         }
 

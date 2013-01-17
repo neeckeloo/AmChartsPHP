@@ -35,11 +35,14 @@ class Alpha
     public function setOpacity($opacity)
     {
         if (!is_int($opacity)) {
-            throw new Exception\InvalidArgumentException("Opacity value must be an integer.");
+            throw new Exception\InvalidArgumentException('Opacity value must be an integer.');
         }
         
         if (!($opacity >= 0 && $opacity <= 100)) {
-            throw new Exception\InvalidArgumentException("'$opacity' is not between 0 and 100.");
+            throw new Exception\InvalidArgumentException(sprintf(
+                '"%s" is not between 0 and 100.',
+                $opacity
+            ));
         }
         
         $this->opacity = (int) $opacity;
