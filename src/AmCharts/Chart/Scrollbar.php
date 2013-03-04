@@ -137,7 +137,7 @@ class Scrollbar
      * @param integer $alpha
      * @return Scrollbar
      */
-    public function setFillAlpha($alpha)
+    public function setGraphFillAlpha($alpha)
     {
         $this->graphFillAlpha = new Alpha($alpha);
 
@@ -149,7 +149,7 @@ class Scrollbar
      *
      * @return integer
      */
-    public function getFillAlpha()
+    public function getGraphFillAlpha()
     {
         return $this->graphFillAlpha->getOpacity();
     }
@@ -160,7 +160,7 @@ class Scrollbar
      * @param string|array|Color $color
      * @return Scrollbar
      */
-    public function setFillColor($color = null)
+    public function setGraphFillColor($color = null)
     {
         if (null !== $color) {
             if ($color instanceof Color) {
@@ -178,9 +178,61 @@ class Scrollbar
      *
      * @return string
      */
-    public function getFillColor()
+    public function getGraphFillColor()
     {
         return $this->graphFillColor;
+    }
+
+    /**
+     * Sets line alpha
+     *
+     * @param integer $alpha
+     * @return Scrollbar
+     */
+    public function setGraphLineAlpha($alpha)
+    {
+        $this->graphLineAlpha = new Alpha($alpha);
+
+        return $this;
+    }
+
+    /**
+     * Returns line alpha
+     *
+     * @return integer
+     */
+    public function getGraphLineAlpha()
+    {
+        return $this->graphLineAlpha->getOpacity();
+    }
+
+    /**
+     * Sets line color
+     *
+     * @param string|array|Color $color
+     * @return Scrollbar
+     */
+    public function setGraphLineColor($color = null)
+    {
+        if (null !== $color) {
+            if ($color instanceof Color) {
+                $this->graphLineColor = $color;
+            } else {
+                $this->graphLineColor = new Color($color);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns line color
+     *
+     * @return string
+     */
+    public function getGraphLineColor()
+    {
+        return $this->graphLineColor;
     }
 
     /**
@@ -254,58 +306,6 @@ class Scrollbar
     public function getGridCount()
     {
         return $this->gridCount;
-    }
-
-    /**
-     * Sets line alpha
-     *
-     * @param integer $alpha
-     * @return Scrollbar
-     */
-    public function setLineAlpha($alpha)
-    {
-        $this->lineAlpha = new Alpha($alpha);
-
-        return $this;
-    }
-
-    /**
-     * Returns line alpha
-     *
-     * @return integer
-     */
-    public function getLineAlpha()
-    {
-        return $this->lineAlpha->getOpacity();
-    }
-
-    /**
-     * Sets line color
-     *
-     * @param string|array|Color $color
-     * @return Scrollbar
-     */
-    public function setLineColor($color = null)
-    {
-        if (null !== $color) {
-            if ($color instanceof Color) {
-                $this->lineColor = $color;
-            } else {
-                $this->lineColor = new Color($color);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns line color
-     *
-     * @return string
-     */
-    public function getLineColor()
-    {
-        return $this->lineColor;
     }
 
     /**

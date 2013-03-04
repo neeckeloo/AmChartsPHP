@@ -36,16 +36,16 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('graph', $params);
     }
 
-    public function testSetFillAlpha()
+    public function testSetGraphFillAlpha()
     {
-        $this->scrollbar->setFillAlpha(30);
-        $this->assertEquals(30, $this->scrollbar->getFillAlpha());
+        $this->scrollbar->setGraphFillAlpha(30);
+        $this->assertEquals(30, $this->scrollbar->getGraphFillAlpha());
     }
 
-    public function testSetFillColor()
+    public function testSetGraphFillColor()
     {
-        $this->scrollbar->setFillColor('#ff0000');
-        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getFillColor());
+        $this->scrollbar->setGraphFillColor('#ff0000');
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getGraphFillColor());
     }
 
     public function testSetGridAlpha()
@@ -67,16 +67,16 @@ class ScrollbarTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($count, $this->scrollbar->getGridCount());
     }
 
-    public function testSetLineAlpha()
+    public function testSetGraphLineAlpha()
     {
-        $this->scrollbar->setLineAlpha(30);
-        $this->assertEquals(30, $this->scrollbar->getLineAlpha());
+        $this->scrollbar->setGraphLineAlpha(30);
+        $this->assertEquals(30, $this->scrollbar->getGraphLineAlpha());
     }
 
-    public function testSetLineColor()
+    public function testSetGraphLineColor()
     {
-        $this->scrollbar->setLineColor('#ff0000');
-        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getLineColor());
+        $this->scrollbar->setGraphLineColor('#ff0000');
+        $this->assertInstanceOf('AmCharts\Chart\Setting\Color', $this->scrollbar->getGraphLineColor());
     }
     
     public function testSetResizeEnabled()
