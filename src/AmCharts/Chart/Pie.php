@@ -253,12 +253,15 @@ class Pie extends AbstractChart
     public function set3D($angle, $depth)
     {
         if (!is_int($angle)) {
-            throw new Exception\InvalidArgumentException("The angle value must be an integer.");
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The angle value must be an integer; Received %s.',
+                $angle
+            ));
         }
         
         if (!($angle > -360 && $angle < 360)) {
             throw new Exception\InvalidArgumentException(sprintf(
-                '"%s" is not a valid angle.',
+                'The angle must be between -360 and 360; Received %s.',
                 $angle
             ));
         }
@@ -500,7 +503,10 @@ class Pie extends AbstractChart
     public function setOutlineThickness($thickness)
     {
         if ($thickness < 0) {
-            throw new Exception\InvalidArgumentException('The thickness value must be positive.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The thickness value must be positive; Received %s.',
+                $thickness
+            ));
         }
         
         $this->outlineThickness = (int) $thickness;
@@ -546,7 +552,10 @@ class Pie extends AbstractChart
     public function setPieBrightnessStep($step)
     {
         if (!($step >= -255 && $step <= 255)) {
-            throw new Exception\InvalidArgumentException('The pie brightness step value must be between -255 and 255.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The pie brightness step value must be between -255 and 255; Received %s.',
+                $step
+            ));
         }
         
         $this->pieBrightnessStep = (int) $step;
@@ -596,7 +605,10 @@ class Pie extends AbstractChart
     public function setPullOutEffect($effect)
     {
         if ($effect != Setting\Effect::ELASTIC && $effect != Setting\Effect::BOUNCE) {
-            throw new Exception\InvalidArgumentException('The pull out effect provided is not valid.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The pull out effect provided is not valid; Received %s.',
+                $effect
+            ));
         }
 
         $this->pullOutEffect = (string) $effect;
@@ -724,7 +736,10 @@ class Pie extends AbstractChart
     public function setStartEffect($effect)
     {
         if ($effect != Setting\Effect::ELASTIC && $effect != Setting\Effect::BOUNCE) {
-            throw new Exception\InvalidArgumentException('The start effect provided is not valid.');
+            throw new Exception\InvalidArgumentException(sprintf(
+                'The start effect provided is not valid; Received %s.',
+                $effect
+            ));
         }
         
         $this->startEffect = (string) $effect;
