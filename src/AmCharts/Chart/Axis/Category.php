@@ -23,7 +23,7 @@ class Category extends AbstractAxis
     /**
      * Sets grid position
      *
-     * @param type $position
+     * @param string $position
      * @return Category
      */
     public function setGridPosition($position)
