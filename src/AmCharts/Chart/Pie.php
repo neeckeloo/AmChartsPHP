@@ -248,7 +248,7 @@ class Pie extends AbstractChart
      * 
      * @param integer $angle
      * @param integer $depth
-     * @return Rectangular 
+     * @return Pie
      */
     public function set3D($angle, $depth)
     {
