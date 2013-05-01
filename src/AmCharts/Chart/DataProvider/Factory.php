@@ -93,7 +93,7 @@ class Factory
      * Read data from an url
      *
      * @param string $url
-     * @param string $format
+     * @param null|string $format
      * @return DataProvider
      */
     public static function fromUrl($url, $format = null)

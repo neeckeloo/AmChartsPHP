@@ -100,7 +100,7 @@ abstract class AbstractAxis
     /**
      * Sets axis color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return AbstractAxis
      */
     public function setAxisColor($color = null)
@@ -208,7 +208,7 @@ abstract class AbstractAxis
     /**
      * Sets fill color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return AbstractAxis
      */
     public function setFillColor($color = null)
@@ -260,7 +260,7 @@ abstract class AbstractAxis
     /**
      * Sets grid color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return AbstractAxis
      */
     public function setGridColor($color = null)

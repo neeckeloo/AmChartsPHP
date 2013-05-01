@@ -37,7 +37,7 @@ class Manager
     /**
      * Singleton instance
      *
-     * @var Manager
+     * @var null|Manager
      */
     protected static $instance = null;
 

@@ -188,7 +188,7 @@ class Pie extends AbstractChart
     /**
      * Constructor
      *
-     * @param string $id
+     * @param null|string $id
      */
     public function __construct($id = null)
     {
@@ -426,7 +426,7 @@ class Pie extends AbstractChart
     /**
      * Sets and returns chart margins
      *
-     * @param array $margin
+     * @param null|array $margin
      * @return Setting\Margin
      */
     public function margin($margin = null)
@@ -468,7 +468,7 @@ class Pie extends AbstractChart
     /**
      * Sets outline color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return AbstractAxis
      */
     public function setOutlineColor($color = null)
@@ -527,7 +527,7 @@ class Pie extends AbstractChart
     /**
      * Sets and returns pie base color
      *
-     * @param string|array|Setting\Color $color
+     * @param null|string|array|Setting\Color $color
      * @return Pie
      */
     public function pieBaseColor($color = null)

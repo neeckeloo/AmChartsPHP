@@ -294,7 +294,7 @@ abstract class AbstractGraph implements GraphInterface
     /**
      * Sets line color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return AbstractGraph
      */
     public function setLineColor($color = null)

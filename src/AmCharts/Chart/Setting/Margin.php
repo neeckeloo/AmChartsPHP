@@ -39,7 +39,7 @@ class Margin
     /**
      * Constructor
      *
-     * @param array $margin
+     * @param null|array $margin
      */
     public function __construct($margin = null)
     {

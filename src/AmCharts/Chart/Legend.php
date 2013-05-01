@@ -85,7 +85,7 @@ class Legend
     /**
      * Sets and returns border
      *
-     * @param array $border
+     * @param null|array $border
      * @return Border
      */
     public function border($border = null)
@@ -104,7 +104,7 @@ class Legend
     /**
      * Sets and returns margins
      *
-     * @param array $margin
+     * @param null|array $margin
      * @return Margin
      */
     public function margin($margin = null)

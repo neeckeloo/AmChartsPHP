@@ -92,7 +92,7 @@ class Scrollbar
     /**
      * Sets and returns background
      *
-     * @param array $background
+     * @param null|array $background
      * @return Scrollbar
      */
     public function background($background = null)
@@ -157,7 +157,7 @@ class Scrollbar
     /**
      * Sets fill color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return Scrollbar
      */
     public function setGraphFillColor($color = null)
@@ -209,7 +209,7 @@ class Scrollbar
     /**
      * Sets line color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return Scrollbar
      */
     public function setGraphLineColor($color = null)
@@ -261,7 +261,7 @@ class Scrollbar
     /**
      * Sets grid color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return Scrollbar
      */
     public function setGridColor($color = null)

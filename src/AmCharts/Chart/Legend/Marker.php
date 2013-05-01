@@ -69,7 +69,7 @@ class Marker
     /**
      * Sets and returns border
      *
-     * @param array $border
+     * @param null|array $border
      * @return Border
      */
     public function border($border = null)
@@ -88,7 +88,7 @@ class Marker
     /**
      * Sets and returns disabled color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return Color
      */
     public function disabledColor($color = null)

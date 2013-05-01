@@ -201,7 +201,7 @@ class Cursor
     /**
      * Sets category balloon color
      *
-     * @param string|array|Setting\Color $color
+     * @param null|string|array|Setting\Color $color
      * @return Cursor
      */
     public function setCategoryBalloonColor($color = null)
@@ -316,7 +316,7 @@ class Cursor
     /**
      * Sets cursor color
      *
-     * @param string|array|Setting\Color $color
+     * @param null|string|array|Setting\Color $color
      * @return Cursor
      */
     public function setCursorColor($color = null)

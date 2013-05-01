@@ -79,7 +79,7 @@ class Background
     /**
      * Sets and returns background color
      *
-     * @param string|array|Color $color
+     * @param null|string|array|Color $color
      * @return Background
      */
     public function color($color = null)

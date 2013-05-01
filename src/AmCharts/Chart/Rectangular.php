@@ -111,7 +111,7 @@ abstract class Rectangular extends Coordinate
     /**
      * Sets and returns chart margins
      *
-     * @param array $margin
+     * @param null|array $margin
      * @return Setting\Margin
      */
     public function margin($margin = null)

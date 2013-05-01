@@ -84,7 +84,7 @@ abstract class AbstractChart
     /**
      * Constructor
      *
-     * @param string $id
+     * @param null|string $id
      */
     public function __construct($id = null)
     {
