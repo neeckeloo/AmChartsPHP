@@ -16,6 +16,9 @@
         "zendframework/zend-json": "2.*",
         "zendframework/zend-servicemanager": "2.*"
     },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
     "autoload": {
         "psr-0": {
             "AmCharts": "src/"
