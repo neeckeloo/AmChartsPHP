@@ -9,6 +9,7 @@ AmCharts web site : [http://www.amcharts.com](http://www.amcharts.com)
 AmCharts examples : [http://www.amcharts.com/javascript-charts](http://www.amcharts.com/javascript-charts)
 
 [![Build Status](https://secure.travis-ci.org/neeckeloo/AmChartsPHP.png?branch=master)](http://travis-ci.org/neeckeloo/AmChartsPHP)
+[![Coverage Status](https://coveralls.io/repos/neeckeloo/AmChartsPHP/badge.png?branch=master)](https://coveralls.io/r/neeckeloo/AmChartsPHP)
 
 Requirements
 ------------
