@@ -126,7 +126,7 @@ abstract class AbstractChart
         if (!isset($this->id)) {
             $this->generateId();
         }
-        
+
         return $this->id;
     }
 
@@ -395,7 +395,7 @@ abstract class AbstractChart
     public function getParams()
     {
         $params = array();
-        
+
         $manager = Manager::getInstance();
 
         $imagesPath = $manager->getImagesPath();
@@ -443,7 +443,7 @@ abstract class AbstractChart
     public function setRenderer(RendererInterface $renderer)
     {
         $this->renderer = $renderer;
-
+        $this->renderer->setChart($this);
         return $this;
     }
 
@@ -468,9 +468,7 @@ abstract class AbstractChart
      */
     public function render()
     {
-        return $this->getRenderer()
-            ->setChart($this)
-            ->render();
+        return $this->getRenderer()->render();
     }
 
     public function __clone()

@@ -1,7 +1,7 @@
 <?php
 /**
  * AmChartsPHP
- * 
+ *
  * @link      http://github.com/neeckeloo/AmChartsPHP
  * @copyright Copyright (c) 2012 Nicolas Eeckeloo
  */
@@ -13,55 +13,78 @@ use AmCharts\Manager;
 class Renderer extends AbstractRenderer
 {
     /**
+     * @param  bool $onLoad
+     * @return string
+     */
+    public function renderScript($onLoad = true)
+    {
+        $script = 'var %1$s;' . "\n";
+
+        $initScript = "\n" . 'var %1$s_init = function() {' . "\n"
+            . '%2$s' . "\n"
+            . '%1$s.write("%1$s");' . "\n"
+            . '}' . "\n"
+            . '%1$s_init();' . "\n";
+
+        if ($onLoad) {
+            if(
+                !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+                && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+            ) {
+                $loader = 'setTimeout(function() {%s}, 1);';
+            } else {
+                $loader = 'AmCharts.ready(function() {%s});';
+            }
+
+            $script .= sprintf($loader, $initScript);
+        } else {
+            $script .= $initScript;
+        }
+
+        return sprintf(
+            $script,
+            $this->chart->getId(),
+            $this->getInstructions($this->chart->getParams(), $this->chart->getAttributes())
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function renderHtml()
+    {
+        $html = '';
+
+        $manager = Manager::getInstance();
+        if (!$manager->hasIncludedJs()) {
+            $html .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
+
+            if ($manager->isLoadingJQuery()) {
+                $html .= $this->renderScriptTag(null, array('src' => $manager->getJQueryPath())) . "\n";
+            }
+
+            $manager->setJsIncluded(true);
+        }
+
+        $html .= sprintf(
+            '<div id="%s" style="width:%s;height:%s;"></div>',
+            $this->chart->getId(),
+            $this->chart->getWidth(),
+            $this->chart->getHeight()
+        );
+
+        return $html;
+    }
+
+    /**
      * Returns the HTML code to insert on the page
      *
      * @return	string
      */
     public function render()
     {
-        $code = '';
-        
-        $manager = Manager::getInstance();
-        if (!$manager->hasIncludedJs()) {
-            $code .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
-            
-            if ($manager->isLoadingJQuery()) {
-                $code .= $this->renderScriptTag(null, array('src' => $manager->getJQueryPath())) . "\n";
-            }
-            
-            $manager->setJsIncluded(true);
-        }
-
-        $script = 'var %1$s;' . "\n";
-        if(
-            !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
-            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
-        ) {
-            $loader = 'setTimeout(function() {%s}, 1);';
-        }
-        else {
-            $loader = 'AmCharts.ready(function() {%s});';
-        }
-
-        $initCode = "\n" . 'var %1$s_init = function() {' . "\n"
-            . '%2$s' . "\n"
-            . '%1$s.write("%1$s");' . "\n"
-            . '}' . "\n"
-            . '%1$s_init();' . "\n";
-        $script .= sprintf($loader, $initCode);
-
-        $tpl = $this->renderScriptTag($script) . "\n"
-            . '<div id="%1$s" style="width:%3$s;height:%4$s;"></div>';
-        
-        $code .= sprintf(
-            $tpl,
-            $this->chart->getId(),
-            $this->getInstructions($this->chart->getParams(), $this->chart->getAttributes()),
-            $this->chart->getWidth(),
-            $this->chart->getHeight()
-        );
-
-        return $code;
+        return $this->renderHtml() . "\n"
+            . $this->renderScriptTag($this->renderScript());
     }
 
     /**
@@ -129,36 +152,35 @@ class Renderer extends AbstractRenderer
         $method = 'add';
         if (strpos($object, 'Am') === 0) {
             $method .= substr($object, 2);
-        }
-        else {
+        } else {
             $method .= $object;
         }
 
-        $code = '';
-        $code .= sprintf('var %s = new AmCharts.%s();', $variable, $object) . "\n";
-        $code .= $this->formatVarProperties($variable, $properties);
-        $code .= sprintf('%s.%s(%s);', $this->chart->getId(), $method, $variable) . "\n";
+        $output = '';
+        $output .= sprintf('var %s = new AmCharts.%s();', $variable, $object) . "\n";
+        $output .= $this->formatVarProperties($variable, $properties);
+        $output .= sprintf('%s.%s(%s);', $this->chart->getId(), $method, $variable) . "\n";
 
-        return $code;
+        return $output;
     }
-    
+
     /**
      * Format object properties of script
-     * 
+     *
      * @param string $var
      * @param array $params
-     * @return string 
+     * @return string
      */
     protected function formatVarProperties($var, array $params)
     {
         $output = '';
         $tpl = '%s.%s = %s;' . "\n";
-                
+
         foreach ($params as $name => $value) {
             if (is_null($value)) {
                 continue;
             }
-            
+
             if (is_array($value)) {
                 array_walk($value, function (&$val, $key) {
                     if (!is_numeric($val)) {
@@ -171,18 +193,18 @@ class Renderer extends AbstractRenderer
             } elseif (!is_numeric($value) && $name != 'dataProvider' && $name != 'graph') {
                 $value = "'" . $value . "'";
             }
-            
+
             $output .= sprintf($tpl, $var, $name, $value);
         }
-        
+
         return $output;
     }
-    
+
     /**
      * Render script tag
-     * 
+     *
      * @param string $source
-     * @return string 
+     * @return string
      */
     protected function renderScriptTag($content, $attribs = array())
     {
