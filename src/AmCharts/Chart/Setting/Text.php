@@ -207,8 +207,7 @@ class Text
             if (isset($this->{$field})) {
                 if ($field == 'value') {
                     $options['text'] = $this->{$field};
-                }
-                else {
+                } else {
                     $options[$field] = $this->{$field};
                 }
             }
