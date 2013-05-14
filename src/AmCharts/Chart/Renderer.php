@@ -56,14 +56,14 @@ class Renderer extends AbstractRenderer
         $html = '';
 
         $manager = Manager::getInstance();
-        if (!$manager->hasIncludedJs()) {
+        if ($manager->hasIncludedJs()) {
             $html .= $this->renderScriptTag(null, array('src' => $manager->getAmChartsPath())) . "\n";
 
             if ($manager->isLoadingJQuery()) {
                 $html .= $this->renderScriptTag(null, array('src' => $manager->getJQueryPath())) . "\n";
             }
 
-            $manager->setJsIncluded(true);
+            $manager->setJsIncluded(false);
         }
 
         $html .= sprintf(

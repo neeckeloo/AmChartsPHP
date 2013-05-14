@@ -7,6 +7,8 @@
  */
 namespace AmCharts\Chart;
 
+use AmCharts\Manager;
+
 class RendererTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -16,6 +18,7 @@ class RendererTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        Manager::resetInstance();
         $this->renderer = $this->getMockForAbstractClass('AmCharts\Chart\Renderer');
     }
 
@@ -25,5 +28,19 @@ class RendererTest extends \PHPUnit_Framework_TestCase
         $this->renderer->setChart($chart);
         
         $this->assertTrue(is_string($this->renderer->render()));
+    }
+
+    public function testChangeJsIncludedAfterWhenRendering()
+    {
+        $manager = Manager::getInstance();
+        $manager->setJsIncluded(true);
+
+        $chart = $this->getMockForAbstractClass('AmCharts\Chart\AbstractChart');
+        $this->renderer->setChart($chart);
+
+        $output = $this->renderer->renderHtml();
+        $this->assertRegExp('/<script(.*?)>(.*?)<\/script>/', $output);
+
+        $this->assertFalse($manager->hasIncludedJs());
     }
 }

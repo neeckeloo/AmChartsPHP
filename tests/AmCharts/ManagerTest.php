@@ -16,9 +16,8 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
+        Manager::resetInstance();
         $this->manager = Manager::getInstance();
-        $this->manager->setJsIncluded(false)
-            ->setLoadJQuery(false);
     }
     
     public function testSetJQueryPath()

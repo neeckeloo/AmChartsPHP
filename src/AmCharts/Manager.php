@@ -62,6 +62,14 @@ class Manager
 
         return self::$instance;
     }
+
+    /**
+     * @return void
+     */
+    public static function resetInstance()
+    {
+        self::$instance = null;
+    }
     
     /**
      * Set jQuery path
