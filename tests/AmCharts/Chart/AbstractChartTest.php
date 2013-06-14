@@ -10,7 +10,7 @@ namespace AmCharts\Chart;
 use AmCharts\Manager;
 
 class AbstractChartTest extends \PHPUnit_Framework_TestCase
-{   
+{
     /**
      * @var AmCharts\Chart\AbstractChart
      */
@@ -18,16 +18,21 @@ class AbstractChartTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $class = 'AmCharts\Chart\AbstractChart';
-        $this->chart = $this->getMockForAbstractClass($class);
+        $this->chart = $this->getMockForAbstractClass('AmCharts\Chart\AbstractChart');
     }
-    
+
     public function testSetId()
     {
         $this->assertContains('chart_', $this->chart->getId());
 
         $this->chart->setId('foo');
         $this->assertEquals('foo', $this->chart->getId());
+    }
+
+    public function testSetAttribsToConstructor()
+    {
+        $chart = new TestAsset\ChartWithAttribs(null, array('foo' => 123));
+        $this->assertEquals(123, $chart->getFoo());
     }
     
     public function testGetType()

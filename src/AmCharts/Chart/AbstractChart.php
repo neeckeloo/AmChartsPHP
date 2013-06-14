@@ -85,11 +85,19 @@ abstract class AbstractChart
      * Constructor
      *
      * @param null|string $id
+     * @param array $attribs
      */
-    public function __construct($id = null)
+    public function __construct($id = null, array $attribs = array())
     {
         if (null !== $id) {
             $this->setId($id);
+        }
+        
+        foreach ($attribs as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
         }
 
         $this->init();
