@@ -58,7 +58,7 @@ class Category extends AbstractAxis
 
         if ($options) {
             $keys = array_keys($options);
-            array_walk($keys, function (&$value, $key) {
+            array_walk($keys, function (&$value) {
                 $value = 'categoryAxis.' . $value;
             });
             $options = array_combine($keys, array_values($options));
