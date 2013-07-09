@@ -182,7 +182,7 @@ class Renderer extends AbstractRenderer
             }
 
             if (is_array($value)) {
-                array_walk($value, function (&$val, $key) {
+                array_walk($value, function (&$val) {
                     if (!is_numeric($val)) {
                         $val = "'" . $val . "'";
                     }
