@@ -9,7 +9,6 @@
 require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
 use AmCharts\Chart,
-    AmCharts\Graph,
     AmCharts\Manager as ChartManager;
 
 $manager = ChartManager::getInstance();
