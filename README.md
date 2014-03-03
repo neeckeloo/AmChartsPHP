@@ -1,5 +1,5 @@
-AmChartsPHP, a library to create AmCharts HTML5 charts.
-========================================================
+AmChartsPHP
+===========
 
 AmChartsPHP is a library of PHP classes to generate AmCharts HTML5 charts.
 
