@@ -59,4 +59,10 @@ class SerialTest extends \PHPUnit_Framework_TestCase
         $this->chart->setColumnWidth($width);
         $this->assertEquals($width, $this->chart->getColumnWidth());
     }
+
+    public function testSetRotate()
+    {
+        $this->chart->setRotate(true);
+        $this->assertTrue($this->chart->getRotate());
+    }
 }
