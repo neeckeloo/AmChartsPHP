@@ -25,6 +25,12 @@ class ValueTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->axis->isLabelsEnabled());
     }
 
+    public function testSetStackType()
+    {
+        $this->axis->setStackType('regular');
+        $this->assertEquals('regular', $this->axis->getStackType());
+    }
+
     public function testToArray()
     {
         $this->assertCount(0, $this->axis->toArray());

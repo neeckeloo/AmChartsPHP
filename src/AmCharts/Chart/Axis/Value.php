@@ -17,6 +17,13 @@ class Value extends AbstractAxis
     protected $labelsEnabled;
 
     /**
+     * Stacking mode of the axis. Possible values are: "none", "regular", "100%", "3d".
+     *
+     * @var string
+     */
+    protected $stackType;
+
+    /**
      * Sets true if labels are enabled
      *
      * @param boolean $enabled
@@ -37,5 +44,24 @@ class Value extends AbstractAxis
     public function isLabelsEnabled()
     {
         return $this->labelsEnabled;
+    }
+
+    /**
+     * @param string $type
+     * @return Value
+     */
+    public function setStackType($type)
+    {
+        $this->stackType = (string) $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStackType()
+    {
+        return $this->stackType;
     }
 }
